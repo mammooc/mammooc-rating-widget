@@ -5,18 +5,14 @@
 <dom-module id="rating-widget">
     <template>
         <style>
-            :host {
-
+            :host {   
+                --star-fill-color: var(--rating-stars-fill-color, rgba(0,255,0,255));
+                --star-stroke-color: var(--rating-stars-stroke-color, rgba(0,0,0,255)); 
             }
-            iron-icon{
-                fill: rgba(255,255,0,255);
-                stroke: rgba(0,0,0,255);
-            }
-            
         </style> 
         
         <!-- local DOM goes here -->
-        <h1>Bewertungen:</h1>
+        <h1>Bewertungen: [[ratingStarsFillColor]]</h1>
         <rating-stars></rating-stars>
     </template>
 
