@@ -1,8 +1,9 @@
 <link rel="import" href="bower_components/polymer/polymer.html"> 
-<link rel="import" href="components/rating-stars.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 
 
-<dom-module id="rating-widget">
+<dom-module id="rating-stars">
     <template>
         <style>
             :host {
@@ -16,13 +17,16 @@
         </style> 
         
         <!-- local DOM goes here -->
-        <h1>Bewertungen:</h1>
-        <rating-stars></rating-stars>
+        <iron-icon icon="star"></iron-icon>
+        <iron-icon icon="star"></iron-icon>
+        <iron-icon icon="star"></iron-icon>
+        <iron-icon icon="star"></iron-icon>
+        <iron-icon icon="star"></iron-icon>
     </template>
 
     <script>
     Polymer({
-        is: 'rating-widget',
+        is: 'rating-stars',
         properties: {
 
         },
