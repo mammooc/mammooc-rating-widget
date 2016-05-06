@@ -1,0 +1,39 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="components/rating-stars.html">
+
+<!--
+An element providing a form for evaluation for users.
+
+Example:
+
+    <user-evaluation></user-evaluation>
+
+
+-->
+<dom-module id="user-evaluation">
+    <template> 
+        <style>
+            :host {   
+                --star-fill-color: var(--rating-stars-fill-color, rgba(0,255,0,255));
+                --star-stroke-color: var(--rating-stars-stroke-color, rgba(0,0,0,255)); 
+            }
+        </style> 
+        
+        <!-- local DOM goes here -->
+        <h1>Your rating:</h1>
+        <rating-stars></rating-stars>
+        <input type="text" placeholder="Evaluate the course"></input>
+    </template>
+
+    <script>
+    Polymer({
+        is: 'user-evaluation',
+        properties: {
+
+        },
+        listeners: {
+
+        },
+    });
+    </script>
+<dom-module>

@@ -1,5 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="components/rating-stars.html">
+<link rel="import" href="overall-rating.html">
+<link rel="import" href="user-ratings.html">
+<link rel="import" href="user-evaluation.html">
 
 <!--
 An element providing a rating widget for mammooc.
@@ -12,16 +14,9 @@ Example:
 -->
 <dom-module id="rating-widget">
     <template>
-        <style>
-            :host {   
-                --star-fill-color: var(--rating-stars-fill-color, rgba(0,255,0,255));
-                --star-stroke-color: var(--rating-stars-stroke-color, rgba(0,0,0,255)); 
-            }
-        </style> 
-        
-        <!-- local DOM goes here -->
-        <h1>Bewertungen: [[ratingStarsFillColor]]</h1>
-        <rating-stars></rating-stars>
+        <overall-rating></overall-rating>
+        <user-ratings></user-ratings>
+        <user-evaluation></user-evaluation>
     </template>
 
     <script>
