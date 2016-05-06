@@ -17,13 +17,21 @@ Example:
                 --star-fill-color: var(--rating-stars-fill-color, rgba(0,255,0,255));
                 --star-stroke-color: var(--rating-stars-stroke-color, rgba(0,0,0,255)); 
             }
+            .rating-card img {
+                float: left;
+            }
         </style> 
         
         <!-- local DOM goes here -->
         <h1>User Ratings:</h1>
-        <rating-stars></rating-stars>
-        <rating-stars></rating-stars>
-        <rating-stars></rating-stars>
+        <template is="dom-repeat" items="{{ratings}}">
+            <div class="rating-card">
+            <img src={{item.image}} />
+            <div><b>{{item.name}}</b> <rating-stars></rating-stars></div>
+            <div>{{item.evaluation}}</div>
+            </div>
+            <br />
+        </template>
     </template>
 
     <script>
@@ -35,6 +43,15 @@ Example:
         listeners: {
 
         },
+        ready: function() {
+            // To be replaced by Ajax calls to mammooc.org
+            this.ratings = [
+                {image: "http://placehold.it/50x50", name: "Max Mustermann", rating: "4", evaluation: "The course was quite good."},
+                {image: "http://placehold.it/50x50", name: "Maria Müller", rating: "3", evaluation: "I think it was a bit boring."},
+                {image: "http://placehold.it/50x50", name: "Peter Meier ", rating: "5", evaluation: "It was fantastic!"},
+            ];
+            
+        }
     });
     </script>
 <dom-module>
