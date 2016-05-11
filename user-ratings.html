@@ -27,7 +27,7 @@ Example:
         <template is="dom-repeat" items="{{ratings}}">
             <div class="rating-card">
             <img src={{item.image}} />
-            <div><b>{{item.name}}</b> <rating-stars></rating-stars></div>
+            <div><b>{{item.name}}</b> <rating-stars value="{{item.rating}}"></rating-stars></div>
             <div>{{item.evaluation}}</div>
             </div>
             <br />

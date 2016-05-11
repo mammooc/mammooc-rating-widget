@@ -1,38 +1,98 @@
-<link rel="import" href="../../polymer/polymer.html"> 
-<link rel="import" href="../../iron-icon/iron-icon.html">
-<link rel="import" href="../../iron-icons/iron-icons.html">
+<link rel="import" href="../../polymer/polymer.html">
 
+<!--
+An element providing a star rating that allows fractions.
 
+Example:
+
+    <rating-stars value="3.6">
+    </rating-stars>
+
+@demo demo/rating-stars.html
+-->
 <dom-module id="rating-stars">
     <template>
         <style>
             :host {
-
+              cursor: default;
+              -webkit-touch-callout: none;
+              -webkit-user-select: none;
+              -khtml-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
             }
-            iron-icon{
-                fill: var(--star-fill-color, rgba(255,255,0,255));
-                stroke: var(--star_stroke-color, rgba(0,0,0,255));
+            span {
+              display: inline-block;
+              position: relative;
+              color: #ccd6dd;
+            }
+            span > span {
+              display: block;
+              position: absolute;
+              top: 0px;
+              bottom: 0px;
+              overflow: hidden;
+              color: #ffac33;
             }
             
         </style> 
         
         <!-- local DOM goes here -->
-        <iron-icon icon="star"></iron-icon>
-        <iron-icon icon="star"></iron-icon>
-        <iron-icon icon="star"></iron-icon>
-        <iron-icon icon="star"></iron-icon>
-        <iron-icon icon="star"></iron-icon>
+        
     </template>
 
     <script>
     Polymer({
         is: 'rating-stars',
         properties: {
-
+            /**
+            *   The maximum number of stars possible.
+            */
+            max: {
+                type: Number,
+                value: 5
+            },
+            /**
+            *   The number of stars that are marked. Can be a float and will partially show stars.
+            */
+            value: {
+                type: Number,
+                value: 0,
+                notify: true,
+                reflectToAttribute: true,
+                observer: '_valueChanged'
+            }
         },
         listeners: {
 
         },
+        ready: function() {
+        },
+        _valueChanged: function(newValue) {
+            var value = newValue;
+            var stars = Polymer.dom(this.root);
+            stars.innerHTML = "";
+            for (var i = 0; i < this.max; i++) {
+                var star = document.createElement('span');
+                star.innerHTML = '&#x2605;';
+                
+                var innerStar = document.createElement('span');
+                innerStar.innerHTML = '&#x2605;';
+                
+                if (value >= 1) {
+                    innerStar.style.width = "100%";
+                    value -= 1;
+                }
+                else {
+                    innerStar.style.width = value * 100 + "%";
+                    value = 0;
+                }
+                star.appendChild(innerStar);
+                stars.appendChild(star);
+            }
+        }
+        
     });
     </script>
 <dom-module>
