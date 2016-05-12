@@ -3,9 +3,13 @@
 <!--
 An element providing a star rating that allows fractions.
 
-Example:
+Example 1:
 
-    <rating-stars value="3.6">
+    <rating-stars value="3.6" read-only="true">
+    </rating-stars>
+
+Example 2:
+    <rating-stars value="4">
     </rating-stars>
 
 @demo demo/rating-stars.html
@@ -22,12 +26,18 @@ Example:
               -ms-user-select: none;
               user-select: none;
             }
-            span {
+
+            .star-wrapper {
+                display: inline-block;
+            }
+
+            .star-wrapper ::content > span {
               display: inline-block;
               position: relative;
               color: #ccd6dd;
             }
-            span > span {
+
+            .star-wrapper ::content > span > span {
               display: block;
               position: absolute;
               top: 0px;
@@ -35,17 +45,46 @@ Example:
               overflow: hidden;
               color: #ffac33;
             }
-            
-        </style> 
-        
+
+            /* Select all stars up to the hovered one */
+
+            .star-wrapper[data-read-only=false] ::content > span {
+                cursor: pointer;
+            }
+
+            /* Show all stars */
+            .star-wrapper:hover[data-read-only=false] ::content > span > span {
+                width: 100% !important;
+            }
+
+            /* Hide all after the hovered one */
+            .star-wrapper:hover[data-read-only=false] ::content > span:hover ~ span > span {
+                width: 0% !important;
+            }
+
+        </style>
         <!-- local DOM goes here -->
-        
+        <div class="star-wrapper" data-read-only$="[[_boolToString(readOnly)]]">
+        <template is="dom-repeat" items="{{_possibleValues}}">
+            <span on-tap="_starClicked" data-star-id$="{{index}}">&#x2605;
+                <span style$="width:[[_calculateWidth(index, value)]]">&#x2605;</span>
+            </span>
+        </template>
+        </div>
     </template>
 
     <script>
     Polymer({
         is: 'rating-stars',
         properties: {
+            /**
+            *   Whether the rating should be read-only or clickable.
+            */
+            readOnly: {
+                type: Boolean,
+                value: false,
+            },
+
             /**
             *   The maximum number of stars possible.
             */
@@ -54,14 +93,18 @@ Example:
                 value: 5
             },
             /**
-            *   The number of stars that are marked. Can be a float and will partially show stars.
+            *   The number of stars that are marked. Can be a float and can show partial stars.
             */
             value: {
                 type: Number,
                 value: 0,
                 notify: true,
                 reflectToAttribute: true,
-                observer: '_valueChanged'
+            },
+
+            _possibleValues: {
+              type: Array,
+              computed: '_computePossibleValues(max)',
             }
         },
         listeners: {
@@ -69,30 +112,35 @@ Example:
         },
         ready: function() {
         },
-        _valueChanged: function(newValue) {
-            var value = newValue;
-            var stars = Polymer.dom(this.root);
-            stars.innerHTML = "";
-            for (var i = 0; i < this.max; i++) {
-                var star = document.createElement('span');
-                star.innerHTML = '&#x2605;';
-                
-                var innerStar = document.createElement('span');
-                innerStar.innerHTML = '&#x2605;';
-                
-                if (value >= 1) {
-                    innerStar.style.width = "100%";
-                    value -= 1;
-                }
-                else {
-                    innerStar.style.width = value * 100 + "%";
-                    value = 0;
-                }
-                star.appendChild(innerStar);
-                stars.appendChild(star);
+        _computePossibleValues: function(max) {
+            values = [];
+            for (var i = 1; i <= max; i++) {
+                values.push(i);
             }
-        }
-        
+            return values;
+        },
+
+        _calculateWidth: function(star, value) {
+            if (value >= star + 1){
+                return "100%";
+            }
+            else if (value - star >= 0) {
+                return (value-star) * 100 + "%";
+            }
+            else return "0%";
+        },
+        _starClicked: function(e) {
+            if (this.readOnly)
+                return;
+
+            var star = parseInt(e.currentTarget.dataset.starId);
+            this.setAttribute('value', star + 1);
+        },
+
+        _boolToString: function(bool) {
+            return bool ? "true" : "false";
+        },
+
     });
     </script>
 <dom-module>
