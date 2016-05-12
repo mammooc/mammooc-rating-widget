@@ -65,11 +65,11 @@ Example 2:
         </style>
         <!-- local DOM goes here -->
         <div class="star-wrapper" data-read-only$="[[_boolToString(readOnly)]]">
-        <template is="dom-repeat" items="{{_possibleValues}}">
-            <span on-tap="_starClicked" data-star-id$="{{index}}">&#x2605;
-                <span style$="width:[[_calculateWidth(index, value)]]">&#x2605;</span>
-            </span>
-        </template>
+        <template is="dom-repeat" items="{{_possibleValues}}"><!--
+        --><span on-tap="_starClicked" data-star-id$="{{index}}">&#x2605;<!--
+            --><span style$="width:[[_calculateWidth(index, value)]]">&#x2605;</span><!--
+            --></span><!--
+        --></template>
         </div>
     </template>
 
