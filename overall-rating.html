@@ -11,17 +11,17 @@ Example:
 
 -->
 <dom-module id="overall-rating">
-    <template> 
+    <template>
         <style>
-            :host {   
+            :host {
                 --star-fill-color: var(--rating-stars-fill-color, rgba(0,255,0,255));
-                --star-stroke-color: var(--rating-stars-stroke-color, rgba(0,0,0,255)); 
+                --star-stroke-color: var(--rating-stars-stroke-color, rgba(0,0,0,255));
             }
-        </style> 
-        
+        </style>
+
         <!-- local DOM goes here -->
         <h1>Ratings:</h1>
-        <rating-stars value={{rating}}></rating-stars> ({{count}})
+        <rating-stars value="{{rating}}" read-only="true"></rating-stars> ({{count}})
     </template>
 
     <script>
