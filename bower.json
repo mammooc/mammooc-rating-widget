@@ -1,7 +1,7 @@
 {
-  "name": "rating-widget",
+  "name": "mammooc-rating-widget",
   "description": "",
-  "main": "rating-widget.html",
+  "main": "mammooc-rating-widget.html",
   "license": "MIT",
   "homepage": "",
   "ignore": [
@@ -12,10 +12,10 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0",
-    "web-component-tester": "Polymer/web-component-tester#^4.2.2"
+    "polymer": "Polymer/polymer#^1.4.0"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0"
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^4.2.2"
   }
 }

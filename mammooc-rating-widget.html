@@ -8,12 +8,12 @@ An element providing a rating widget for mammooc.
 
 Example:
 
-    <rating-widget provider="openHPI" course-id="2">
-    </rating-widget>
+    <mammooc-rating-widget provider="openHPI" course-id="2">
+    </mammooc-rating-widget>
 
 @demo demo/index.html
 -->
-<dom-module id="rating-widget">
+<dom-module id="mammooc-rating-widget">
     <template>
         <overall-rating></overall-rating>
         <user-ratings></user-ratings>
@@ -22,7 +22,7 @@ Example:
 
     <script>
     Polymer({
-        is: 'rating-widget',
+        is: 'mammooc-rating-widget',
         properties: {
             /**
             *    The provider of the course, e.g. "openHPI"
