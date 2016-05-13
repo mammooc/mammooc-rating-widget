@@ -9,10 +9,8 @@ addons:
     - google-chrome
     packages:
     - google-chrome-stable
-before_install:
-- chmod +x .travis/setup.sh
 before_script:
 - npm install -g bower polylint web-component-tester
 - bower install
-- .travis/setup.sh
+- if [ "${TRAVIS_PULL_REQUEST}" != "false" ] || [ "${TRAVIS_BRANCH}" = "master" ]; then polylint; fi
 script: xvfb-run wct
