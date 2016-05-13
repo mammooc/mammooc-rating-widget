@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <!-- import the element to test -->
+    <link rel="import" href="../overall-rating.html">
+  </head>
+  <body>
+    <!-- use the document as a place to set up your fixtures -->
+    <test-fixture id="overall-rating-fixture">
+      <template>
+        <overall-rating>
+          <h2>overall-rating</h2>
+        </overall-rating>
+      </template>
+    </test-fixture>
+    <script>
+      suite('<overall-rating>', function() {
+        var myEl;
+        setup(function() {
+          myEl = fixture('overall-rating-fixture');
+        });
+        test('defines the "author" property', function() {
+          assert.equal(myEl.rating, 3.6);
+        });
+      });
+    </script>
+  </body>
+</html>
