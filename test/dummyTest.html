@@ -5,22 +5,22 @@
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../bower_components/web-component-tester/browser.js"></script>
     <!-- import the element to test -->
-    <link rel="import" href="../overall-rating.html">
+    <link rel="import" href="../mammooc-cumulative-rating.html">
   </head>
   <body>
     <!-- use the document as a place to set up your fixtures -->
-    <test-fixture id="overall-rating-fixture">
+    <test-fixture id="mammooc-cumulative-rating-fixture">
       <template>
-        <overall-rating>
+        <mammooc-cumulative-rating>
           <h2>overall-rating</h2>
-        </overall-rating>
+        </mammooc-cumulative-rating>
       </template>
     </test-fixture>
     <script>
-      suite('<overall-rating>', function() {
+      suite('<mammooc-cumulative-rating>', function() {
         var myEl;
         setup(function() {
-          myEl = fixture('overall-rating-fixture');
+          myEl = fixture('mammooc-cumulative-rating-fixture');
         });
         test('defines the "author" property', function() {
           assert.equal(myEl.rating, 3.6);

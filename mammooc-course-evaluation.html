@@ -2,15 +2,15 @@
 <link rel="import" href="components/rating-stars.html">
 
 <!--
-An element providing user ratings.
+An element providing course ratings.
 
 Example:
 
-    <user-ratings></user-ratings>
+    <mammooc-course-evaluation></mammooc-course-evaluation>
 
 
 -->
-<dom-module id="user-ratings">
+<dom-module id="mammooc-course-evaluation">
     <template>
         <style>
             :host {
@@ -23,7 +23,7 @@ Example:
         </style>
 
         <!-- local DOM goes here -->
-        <h1>User Ratings:</h1>
+        <h1>Course Evaluations:</h1>
         <template is="dom-repeat" items="{{ratings}}">
             <div class="rating-card">
             <img src={{item.image}} />
@@ -36,7 +36,7 @@ Example:
 
     <script>
     Polymer({
-        is: 'user-ratings',
+        is: 'mammooc-course-evaluation',
         properties: {
 
         },
