@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="components/rating-stars.html">
+<link rel="import" href="../flexible-rating/flexible-rating.html">
 
 <!--
 An element providing course ratings.
@@ -27,7 +27,7 @@ Example:
         <template is="dom-repeat" items="{{ratings}}">
             <div class="rating-card">
             <img src={{item.image}} />
-            <div><b>{{item.name}}</b> <rating-stars value="{{item.rating}}" read-only="true"></rating-stars></div>
+            <div><b>{{item.name}}</b> <flexible-rating value="{{item.rating}}" read-only="true"></flexible-rating></div>
             <div>{{item.evaluation}}</div>
             </div>
             <br />
