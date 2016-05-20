@@ -6,15 +6,21 @@
 
         <style is="custom-style">
         :root {
-            --rating-stars-fill-color: red;
-            --rating-stars-stroke-color: black;
-        };
+
+          --rating-filled-color: #5F8C1C;
+          --rating-unfilled-color:  #999;
+          --mammooc-rating-widget-background-color: #eee;
+        }
+        #demo{
+          width: 400px;
+          height: auto;
+        }
         </style>
 
     </head>
     <body>
 
-        <mammooc-rating-widget class="mammoocStandard"></mammooc-rating-widget>
+        <mammooc-rating-widget id="demo" ></mammooc-rating-widget>
 
     </body>
 

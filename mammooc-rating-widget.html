@@ -11,13 +11,35 @@ Example:
     <mammooc-rating-widget provider="openHPI" course-id="2">
     </mammooc-rating-widget>
 
+### Styling
+
+`<mammooc-rating-widget>` provides the following custom properties and mixins
+for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--rating-filled-color` | Fill color of the selected rating shapes | #ffac33
+`--rating-unfilled-color` | Fill color of remaining rating shapes | #ccd6dd
+`--mammooc-rating-widget-background-color` | Background color of the entire widget | #eee
+
+
+
 @demo demo/index.html
 -->
 <dom-module id="mammooc-rating-widget">
     <template>
-        <mammooc-cumulative-rating></mammooc-cumulative-rating>
-        <mammooc-course-evaluation></mammooc-course-evaluation>
-        <mammooc-course-evaluation-form></mammooc-course-evaluation-form>
+        <style>
+          div {
+            background-color: var(--mammooc-rating-widget-background-color, #eee);
+            width: inherit;
+            height: auto;
+          }
+        </style>
+        <div style="border-radius: 10px; padding: 5px">
+          <mammooc-cumulative-rating></mammooc-cumulative-rating>
+          <mammooc-course-evaluation></mammooc-course-evaluation>
+          <mammooc-course-evaluation-form></mammooc-course-evaluation-form>
+        </div>
     </template>
 
     <script>
