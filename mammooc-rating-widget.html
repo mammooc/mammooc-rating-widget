@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="mammooc-cumulative-rating.html">
 <link rel="import" href="mammooc-course-evaluation.html">
 <link rel="import" href="mammooc-course-evaluation-form.html">
@@ -35,9 +36,12 @@ Custom property | Description | Default
             height: auto;
           }
         </style>
+        <iron-ajax auto url="{{_generateUrl(provider, courseId)}}"
+            on-response="_handleResponse">
+        </iron-ajax>
         <div style="border-radius: 10px; padding: 5px">
-          <mammooc-cumulative-rating></mammooc-cumulative-rating>
-          <mammooc-course-evaluation></mammooc-course-evaluation>
+          <mammooc-cumulative-rating cumulative-rating="{{_cumulativeRating}}" rating-count="{{_ratingCount}}"></mammooc-cumulative-rating>
+          <mammooc-course-evaluation evaluations="{{_evaluations}}"></mammooc-course-evaluation>
           <mammooc-course-evaluation-form></mammooc-course-evaluation-form>
         </div>
     </template>
@@ -54,7 +58,22 @@ Custom property | Description | Default
             /**
             *   The ID of the course in the provider's system
             */
-            courseId: String
+            courseId: String,
+
+            _cumulativeRating: Number,
+            _ratingCount: Number,
+            _evaluations: Object,
+
+        },
+        _generateUrl: function(provider, courseId) {
+            return "https://mammooc-dev.herokuapp.com/evaluations/export?provider=" + this.provider + "&course_id=" + this.courseId;
+        },
+
+        _handleResponse: function(request) {
+            var evaluation = request.detail.response.evaluations[0];
+            this._cumulativeRating = evaluation.overall_rating;
+            this._ratingCount = evaluation.number_of_evaluations;
+            this._evaluations = evaluation.user_evaluations;
         },
         listeners: {
 
