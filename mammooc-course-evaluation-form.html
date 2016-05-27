@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../flexible-rating/flexible-rating.html">
+<link rel="import" href="../iron-form/iron-form.html"
 
 <!--
 An element providing a form for the evaluation of a course.
@@ -14,14 +15,18 @@ Example:
     <template>
         <style>
             :host {
-                
+
             }
         </style>
 
         <!-- local DOM goes here -->
-        <h1>Your rating:</h1>
-        <flexible-rating></flexible-rating>
-        <input type="text" placeholder="Evaluate the course"></input>
+        <form is="iron-form" id="form" method="post" action="/form/handler">
+          <h1>Your rating:</h1>
+          <flexible-rating name="stars" required></flexible-rating>
+          <input type="text" placeholder="Evaluate the course" name="description" label="description"></paper-input>
+          <button>Submit</button>
+        </form>
+
     </template>
 
     <script>
