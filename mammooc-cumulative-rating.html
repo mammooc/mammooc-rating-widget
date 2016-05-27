@@ -21,22 +21,20 @@ Example:
 
         <!-- local DOM goes here -->
         <h1>Ratings:</h1>
-        <flexible-rating value="{{rating}}" read-only="true"></flexible-rating> ({{count}})
+        <flexible-rating value="{{cumulativeRating}}" read-only></flexible-rating> ({{ratingCount}})
     </template>
 
     <script>
     Polymer({
         is: 'mammooc-cumulative-rating',
         properties: {
-
+            cumulativeRating: Number,
+            ratingCount: Number,
         },
         listeners: {
 
         },
         ready: function() {
-            // TODO get these values via AJAX
-            this.rating = 3.6;
-            this.count = 1327;
         }
     });
     </script>

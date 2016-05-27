@@ -13,6 +13,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
+    "iron-ajax": "PolymerElements/iron-ajax#^1.2.0",
     "flexible-rating": "mammooc/flexible-rating#^0.1.0"
   },
   "devDependencies": {
