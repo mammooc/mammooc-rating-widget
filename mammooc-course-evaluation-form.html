@@ -1,6 +1,9 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../flexible-rating/flexible-rating.html">
-<link rel="import" href="../iron-form/iron-form.html"
+<link rel="import" href="../iron-form/iron-form.html">
+<link rel="import" href="../paper-styles/typography.html">
+<link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../paper-button/paper-button.html">
 
 <!--
 An element providing a form for the evaluation of a course.
@@ -17,23 +20,30 @@ Example:
             :host {
 
             }
+            .heading {
+                @apply(--paper-font-display1);
+            }
         </style>
 
         <!-- local DOM goes here -->
+        <div class="heading">Your rating</div>
         <form is="iron-form" id="form" method="post" action="/form/handler">
-          <h1>Your rating:</h1>
           <flexible-rating name="stars" required></flexible-rating>
-          <input type="text" placeholder="Evaluate the course" name="description" label="description"></paper-input>
-          <button>Submit</button>
+          <paper-textarea placeholder="The course was..." name="description" label="Your course evaluation" required></paper-textarea>
+          <paper-button raised on-click="_submitForm">Submit</paper-button>
         </form>
 
     </template>
 
     <script>
+
+
     Polymer({
         is: 'mammooc-course-evaluation-form',
+        _submitForm: function() {
+                this.$.form.submit();
+        },
         properties: {
-
         },
         listeners: {
 

@@ -1,5 +1,9 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-styles/color.html">
+<link rel="import" href="../paper-styles/typography.html">
+<link rel="import" href="../paper-styles/default-theme.html">
 <link rel="import" href="mammooc-cumulative-rating.html">
 <link rel="import" href="mammooc-course-evaluation.html">
 <link rel="import" href="mammooc-course-evaluation-form.html">
@@ -30,20 +34,33 @@ Custom property | Description | Default
 <dom-module id="mammooc-rating-widget">
     <template>
         <style>
-          div {
-            background-color: var(--mammooc-rating-widget-background-color, #eee);
-            width: inherit;
-            height: auto;
-          }
+          paper-card {
+              --paper-card-header: {
+                  background: var(--rating-filled-color);
+              };
+              --paper-card-header-text: {
+                  color: white;
+              };
+              width: inherit;
+              height: auto;
+        };
+
+
         </style>
         <iron-ajax auto url="{{_generateUrl(provider, courseId)}}"
             on-response="_handleResponse">
         </iron-ajax>
-        <div style="border-radius: 10px; padding: 5px">
-          <mammooc-cumulative-rating cumulative-rating="{{_cumulativeRating}}" rating-count="{{_ratingCount}}"></mammooc-cumulative-rating>
-          <mammooc-course-evaluation evaluations="{{_evaluations}}"></mammooc-course-evaluation>
-          <mammooc-course-evaluation-form></mammooc-course-evaluation-form>
-        </div>
+        <paper-card heading="Course evaluation">
+          <div class="card-content">
+              <mammooc-cumulative-rating cumulative-rating="{{_cumulativeRating}}" rating-count="{{_ratingCount}}"></mammooc-cumulative-rating>
+          </div>
+          <div class="card-content">
+              <mammooc-course-evaluation evaluations="{{_evaluations}}"></mammooc-course-evaluation>
+          </div>
+          <div class="card-actions">
+              <mammooc-course-evaluation-form></mammooc-course-evaluation-form>
+          </div>
+        </paper-card>
     </template>
 
     <script>
