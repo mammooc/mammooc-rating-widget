@@ -15,8 +15,8 @@ Example:
     <template>
         <style is="custom-style">
             :host {
-                --star-fill-color: var(--rating-stars-fill-color, rgba(0,255,0,255));
-                --star-stroke-color: var(--rating-stars-stroke-color, rgba(0,0,0,255));
+                --iron-icon-height: 50px;
+                --iron-icon-width: 50px;
             }
             .heading {
                 @apply(--paper-font-display1);
@@ -26,7 +26,7 @@ Example:
         <!-- local DOM goes here -->
         <div class="heading">
             Ratings:
-        <flexible-rating value="{{cumulativeRating}}" read-only></flexible-rating> ({{ratingCount}})
+        <flexible-rating value="{{cumulativeRating}}" disabled></flexible-rating> ({{ratingCount}})
         </div>
     </template>
 

@@ -15,8 +15,8 @@ Example:
     <template>
         <style>
             :host {
-                --star-fill-color: var(--rating-stars-fill-color, rgba(0,255,0,255));
-                --star-stroke-color: var(--rating-stars-stroke-color, rgba(0,0,0,255));
+                --iron-icon-height: 20px;
+                --iron-icon-width: 20px;
             }
             .evaluation-card {
                 min-height: 50px;
@@ -43,7 +43,7 @@ Example:
         <template is="dom-repeat" items="{{evaluations}}" as="evaluation">
             <div class="evaluation-card">
             <img src="http://placehold.it/50x50" />
-            <div><b>{{evaluation.user_name}}</b> <flexible-rating value="{{evaluation.rating}}" read-only></flexible-rating></div>
+            <div><b>{{evaluation.user_name}}</b> <flexible-rating value="{{evaluation.rating}}" disabled></flexible-rating></div>
             <div class="evaluation-content">{{evaluation.description}}</div>
             </div>
             <br />

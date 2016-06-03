@@ -18,19 +18,23 @@ Example:
     <template>
         <style>
             :host {
-
+                    --iron-icon-height: 40px;
+                    --iron-icon-width: 40px;
             }
             .heading {
                 @apply(--paper-font-display1);
+            }
+            .submit-button {
+                float: right;
             }
         </style>
 
         <!-- local DOM goes here -->
         <div class="heading">Your rating</div>
         <form is="iron-form" id="form" method="post" action="/form/handler">
-          <flexible-rating name="stars" required></flexible-rating>
-          <paper-textarea placeholder="The course was..." name="description" label="Your course evaluation" required></paper-textarea>
-          <paper-button raised on-click="_submitForm">Submit</paper-button>
+            <paper-textarea placeholder="The course was..." name="description" label="Your course evaluation" required></paper-textarea>
+            <flexible-rating name="stars" required></flexible-rating>
+            <paper-button class="submit-button" raised on-click="_submitForm">Submit</paper-button>
         </form>
 
     </template>
