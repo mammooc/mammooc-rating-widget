@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <!-- import the element to test -->
+    <link rel="import" href="../mammooc-rating-widget.html">
+  </head>
+  <body>
+      <test-fixture id="values">
+        <template>
+          <mammooc-rating-widget provider="test-provider" course-id="42">
+          </mammooc-rating-widget>
+        </template>
+      </test-fixture>
+    <script>
+      suite('<mammooc-rating-widget>', function() {
+        var valuesFixture;
+        setup(function() {
+          valuesFixture = fixture('values');
+        });
+        test('defines the "provider" property', function() {
+          assert.equal(valuesFixture.provider, 'test-provider');
+        });
+        test('defines the "courseId" property', function() {
+          assert.equal(valuesFixture.courseId, '42');
+        });
+      });
+    </script>
+  </body>
+</html>
