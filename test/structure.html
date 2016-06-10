@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <!-- import the element to test -->
+    <link rel="import" href="../mammooc-rating-widget.html">
+  </head>
+  <body>
+      <test-fixture id="show-all">
+        <template>
+          <mammooc-rating-widget provider="test-provider" course-id="42">
+          </mammooc-rating-widget>
+        </template>
+      </test-fixture>
+      <test-fixture id="disable-all">
+        <template>
+          <mammooc-rating-widget provider="test-provider" course-id="42" disable-rating disable-evaluations disable-evaluation-form>
+          </mammooc-rating-widget>
+        </template>
+      </test-fixture>
+      <test-fixture id="disable-rating">
+        <template>
+          <mammooc-rating-widget provider="test-provider" course-id="42" disable-rating>
+          </mammooc-rating-widget>
+        </template>
+      </test-fixture>
+      <test-fixture id="disable-evaluations">
+        <template>
+          <mammooc-rating-widget provider="test-provider" course-id="42" disable-evaluations>
+          </mammooc-rating-widget>
+        </template>
+      </test-fixture>
+      <test-fixture id="disable-evaluation-form">
+        <template>
+          <mammooc-rating-widget provider="test-provider" course-id="42" disable-evaluation-form>
+          </mammooc-rating-widget>
+        </template>
+      </test-fixture>
+    <script>
+      suite('<mammooc-rating-widget>', function() {
+        var showAllFixture,
+            disableAllFixture,
+            disableRatingFixture,
+            disableEvaluationsFixture,
+            disableEvaluationFormFixture;
+        setup(function() {
+          showAllFixture = fixture('show-all');
+          disableAllFixture = fixture('disable-all');
+          disableRatingFixture = fixture('disable-rating');
+          disableEvaluationsFixture = fixture('disable-evaluations');
+          disableEvaluationFormFixture = fixture('disable-evaluation-form');
+        });
+        test('by default all elements are shown', function(done) {
+          flush(function(){
+            var ratingElement = showAllFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
+                evaluationElement = showAllFixture.getElementsByTagName('mammooc-course-evaluation')[0],
+                evaluationFormElement = showAllFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
+            assert.isOk(ratingElement);
+            assert.isOk(evaluationElement);
+            assert.isOk(evaluationFormElement);
+            done();
+          });
+
+        });
+        test('all elements can be disabled', function(done) {
+          flush(function(){
+            var ratingElement = disableAllFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
+                evaluationElement = disableAllFixture.getElementsByTagName('mammooc-course-evaluation')[0],
+                evaluationFormElement = disableAllFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
+            assert.isNotOk(ratingElement);
+            assert.isNotOk(evaluationElement);
+            assert.isNotOk(evaluationFormElement);
+            done();
+          });
+        });
+        test('only the rating element can be disabled', function(done) {
+          flush(function(){
+            var ratingElement = disableRatingFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
+                evaluationElement = disableRatingFixture.getElementsByTagName('mammooc-course-evaluation')[0],
+                evaluationFormElement = disableRatingFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
+            assert.isNotOk(ratingElement);
+            assert.isOk(evaluationElement);
+            assert.isOk(evaluationFormElement);
+            done();
+          });
+        });
+        test('only the evualtions element can be disabled', function(done) {
+          flush(function(){
+            var ratingElement = disableEvaluationsFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
+                evaluationElement = disableEvaluationsFixture.getElementsByTagName('mammooc-course-evaluation')[0],
+                evaluationFormElement = disableEvaluationsFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
+            assert.isOk(ratingElement);
+            assert.isNotOk(evaluationElement);
+            assert.isOk(evaluationFormElement);
+            done();
+          });
+        });
+        test('only the rating evaluation form element can be disabled', function(done) {
+          flush(function(){
+            var ratingElement = disableEvaluationFormFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
+                evaluationElement = disableEvaluationFormFixture.getElementsByTagName('mammooc-course-evaluation')[0],
+                evaluationFormElement = disableEvaluationFormFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
+            assert.isOk(ratingElement);
+            assert.isOk(evaluationElement);
+            assert.isNotOk(evaluationFormElement);
+            done();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

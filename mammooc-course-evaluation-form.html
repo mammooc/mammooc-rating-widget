@@ -36,7 +36,7 @@ Example:
 
         <!-- local DOM goes here -->
         <div class="heading">Your rating</div>
-        <form is="iron-form" id="evaluationForm" method="post" action="/form/handler">
+        <form is="iron-form" id="form" method="post" action="/form/handler">
             <paper-textarea placeholder="The course was..." name="description" label="Your course evaluation"></paper-textarea>
             <label id="statusLabel">Status:</label>
             <paper-radio-group aria-labelledby="statusLabel" selected="enrolled">
@@ -57,7 +57,7 @@ Example:
     Polymer({
         is: 'mammooc-course-evaluation-form',
         _submitForm: function() {
-                this.$.evaluationForm.submit();
+                this.$.form.submit();
         },
         properties: {
         },

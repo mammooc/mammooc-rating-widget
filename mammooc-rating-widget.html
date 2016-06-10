@@ -35,12 +35,6 @@ Custom property | Description | Default
     <template>
         <style>
           paper-card {
-              --paper-card-header: {
-                  background: var(--rating-filled-color);
-              };
-              --paper-card-header-text: {
-                  color: white;
-              };
               width: inherit;
               height: auto;
         };
@@ -50,16 +44,22 @@ Custom property | Description | Default
         <iron-ajax auto url="{{_generateUrl(provider, courseId)}}"
             on-response="_handleResponse">
         </iron-ajax>
-        <paper-card heading="Course evaluation">
-          <div class="card-content">
-              <mammooc-cumulative-rating cumulative-rating="{{_cumulativeRating}}" rating-count="{{_ratingCount}}"></mammooc-cumulative-rating>
-          </div>
-          <div class="card-content">
-              <mammooc-course-evaluation evaluations="{{_evaluations}}"></mammooc-course-evaluation>
-          </div>
-          <div class="card-actions">
-              <mammooc-course-evaluation-form></mammooc-course-evaluation-form>
-          </div>
+        <paper-card>
+          <template is="dom-if" if="{{!disableRating}}">
+            <div class="card-content">
+                <mammooc-cumulative-rating cumulative-rating="{{_cumulativeRating}}" rating-count="{{_ratingCount}}"></mammooc-cumulative-rating>
+            </div>
+          </template>
+          <template is="dom-if" if="{{!disableEvaluations}}">
+            <div class="card-content">
+                <mammooc-course-evaluation evaluations="{{_evaluations}}"></mammooc-course-evaluation>
+            </div>
+          </template>
+          <template is="dom-if" if="{{!disableEvaluationForm}}">
+            <div class="card-actions">
+                <mammooc-course-evaluation-form></mammooc-course-evaluation-form>
+            </div>
+          </template>
         </paper-card>
     </template>
 
@@ -76,6 +76,19 @@ Custom property | Description | Default
             *   The ID of the course in the provider's system
             */
             courseId: String,
+
+            disableEvaluationForm: {
+              type: Boolean,
+              value: false,
+            },
+            disableEvaluations: {
+              type: Boolean,
+              value: false,
+            },
+            disableRating: {
+              type: Boolean,
+              value: false,
+            },
 
             _cumulativeRating: Number,
             _ratingCount: Number,

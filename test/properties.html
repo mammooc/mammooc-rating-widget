@@ -10,7 +10,7 @@
   <body>
       <test-fixture id="values">
         <template>
-          <mammooc-rating-widget provider="test-provider" course-id="42">
+          <mammooc-rating-widget provider="test-provider" course-id="42" disable-rating disable-evaluations disable-evaluation-form>
           </mammooc-rating-widget>
         </template>
       </test-fixture>
@@ -25,6 +25,15 @@
         });
         test('defines the "courseId" property', function() {
           assert.equal(valuesFixture.courseId, '42');
+        });
+        test('defines the "disableRating" property', function() {
+          assert.equal(valuesFixture.disableRating, true);
+        });
+        test('defines the "disableEvaluations" property', function() {
+          assert.equal(valuesFixture.disableEvaluations, true);
+        });
+        test('defines the "disableEvaluationForm" property', function() {
+          assert.equal(valuesFixture.disableEvaluationForm, true);
         });
       });
     </script>
