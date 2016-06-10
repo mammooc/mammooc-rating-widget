@@ -34,6 +34,11 @@ Custom property | Description | Default
 <dom-module id="mammooc-rating-widget">
     <template>
         <style>
+          :host {
+                  --rating-filled-color: var(--mammooc-rating-widget-primary-color);
+                  --rating-unfilled-color: var(--mammooc-rating-widget-secondary-color);
+          }
+
           paper-card {
               width: inherit;
               height: auto;
