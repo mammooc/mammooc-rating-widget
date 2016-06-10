@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <!-- import the element to test -->
+    <link rel="import" href="../mammooc-rating-widget.html">
+  </head>
+  <body>
+      <test-fixture id="values">
+        <template>
+          <mammooc-rating-widget provider="test-provider" course-id="42">
+          </mammooc-rating-widget>
+        </template>
+      </test-fixture>
+    <script>
+      suite('<mammooc-rating-widget>', function() {
+        var valuesFixture;
+        var server;
+        var responseHeaders = {
+          json: { 'Content-Type': 'application/json' }
+        };
+        setup(function() {
+          valuesFixture = fixture('values');
+
+          server = sinon.fakeServer.create();
+          server.respondWith(
+            'POST',
+            /\/form\/handler.*/, [
+              200,
+              responseHeaders.json,
+              '{"success":true}'
+            ]
+          );
+
+        });
+        teardown(function() {
+          server.restore();
+        });
+        test('submitting the form sends the correct data', function(done) {
+          flush(function() {
+            // Set form data
+            var form = valuesFixture.getElementsByTagName('form')[0];
+            form.getElementsByTagName('flexible-rating')[0].value = '1';
+            form.getElementsByTagName('paper-textarea')[0].value = 'This is the description.';
+
+            var submitted = false;
+            form.addEventListener('iron-form-submit', function(event) {
+              submitted = true;
+              var data = event.detail;
+              // Check form data
+              assert.equal(data.description, 'This is the description.');
+              assert.equal(data.stars, 1);
+            });
+            form.addEventListener('iron-form-response', function(event) {
+              // Check correct endpoint
+              assert.isTrue(submitted);
+              var response = event.detail.response;
+              assert.isOk(response);
+              assert.isObject(response);
+              assert.equal(response.success, true);
+
+              done();
+            });
+            form.submit();
+            server.respond();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
