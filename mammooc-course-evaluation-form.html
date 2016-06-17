@@ -7,6 +7,7 @@
 <link rel="import" href="../paper-radio-button/paper-radio-button.html">
 <link rel="import" href="../paper-radio-group/paper-radio-group.html">
 <link rel="import" href="../paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../iron-jsonp-library/iron-jsonp-library.html">
 
 
 <!--
@@ -32,20 +33,45 @@ Example:
             .submit-button {
                 float: right;
             }
+
+            #form img {
+                float: left;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                margin-right: 5px;
+            }
+
+            #form .description {
+                overflow: auto;
+            }
         </style>
 
+
+        <iron-jsonp-library
+            library-url="{{_generateUrl(provider, courseId)}}"
+            notify-event="api-load">
+        </iron-jsonp-library>
         <!-- local DOM goes here -->
         <div class="heading">Your rating</div>
         <form is="iron-form" id="form" method="post" action="/form/handler">
-            <paper-textarea placeholder="The course was..." name="description" label="Your course evaluation"></paper-textarea>
+            <div>
+                <template is="dom-if" if="{{loggedIn}}">
+                    <img id="profile_image"></img>
+                    <div id="profile_name">Name</div>
+                </template>
+                <div class="description">
+                    <paper-textarea placeholder="The course was..." name="description" label="Your course evaluation"></paper-textarea>
+                </div>
+            </div>
             <label id="statusLabel">Status:</label>
             <paper-radio-group aria-labelledby="statusLabel" selected="enrolled">
-                <paper-radio-button name="aborted">Aborted</paper-radio-button>
-                <paper-radio-button name="enrolled">Enrolled</paper-radio-button>
-                <paper-radio-button name="finished">Finished</paper-radio-button>
+                <paper-radio-button id="aborted" name="aborted">Aborted</paper-radio-button>
+                <paper-radio-button id="enrolled" name="enrolled">Enrolled</paper-radio-button>
+                <paper-radio-button id="finished" name="finished">Finished</paper-radio-button>
             </paper-radio-group>
-            <paper-checkbox name="anonymously">Submit anonymously</paper-checkbox>
-            <flexible-rating name="stars" required></flexible-rating>
+            <paper-checkbox id="anonymously" name="anonymously">Submit anonymously</paper-checkbox>
+            <flexible-rating id="stars" name="stars" required></flexible-rating>
             <paper-button class="submit-button" raised on-click="_submitForm">Submit</paper-button>
         </form>
 
@@ -60,10 +86,37 @@ Example:
                 this.$.form.submit();
         },
         properties: {
+            provider: String,
+            courseId: String,
+            loggedIn: {
+                type: Boolean,
+                value: false,
+                readOnly: true,
+            }
         },
         listeners: {
+            'api-load': '_apiLoaded'
 
         },
+        _generateUrl: function(provider, courseId) {
+            return 'http://mammooc-dev.herokuapp.com/api/current_user_with_evaluation.js?provider='+this.provider + '&course_id=' + this.courseId+'&callback=%%callback%%';
+        },
+        _apiLoaded: function(response) {
+            var result = response.detail[0];
+            this._setLoggedIn(result.logged_in);
+            Polymer.dom.flush();
+            if (!this.loggedIn) {
+                return;
+            }
+            this.$$('#profile_image').src = result.user.profile_picture;
+            this.$$('#profile_name').innerHTML = result.user.name;
+            this.$.form.description.value = result.evaluation.description;
+            this.$$('#stars').value = result.evaluation.rating;
+            this.$$('#aborted').checked = result.evaluation.course_status == 0;
+            this.$$('#enrolled').checked = result.evaluation.course_status == 1;
+            this.$$('#finished').checked = result.evaluation.course_status == 2;
+            this.$$('#anonymously').checked = result.evaluation.rated_anonymously;
+        }
     });
     </script>
 <dom-module>

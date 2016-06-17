@@ -62,7 +62,7 @@ Custom property | Description | Default
           </template>
           <template is="dom-if" if="{{!disableEvaluationForm}}">
             <div class="card-actions">
-                <mammooc-course-evaluation-form></mammooc-course-evaluation-form>
+                <mammooc-course-evaluation-form provider={{provider}} course-id={{courseId}}></mammooc-course-evaluation-form>
             </div>
           </template>
         </paper-card>
