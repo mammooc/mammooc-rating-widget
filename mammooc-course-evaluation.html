@@ -42,7 +42,7 @@ Example:
         <div class="heading">Course Evaluations</div>
         <template is="dom-repeat" items="{{evaluations}}" as="evaluation">
             <div class="evaluation-card">
-            <img src="http://placehold.it/50x50" />
+            <img src="{{evaluation.user_profile_picture}}" />
             <div><b>{{evaluation.user_name}}</b> <flexible-rating value="{{evaluation.rating}}" disabled></flexible-rating></div>
             <div class="evaluation-content">{{evaluation.description}}</div>
             </div>
