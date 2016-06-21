@@ -65,10 +65,10 @@ Example:
                 </div>
             </div>
             <label id="statusLabel">Status:</label>
-            <paper-radio-group aria-labelledby="statusLabel" selected="enrolled">
-                <paper-radio-button id="aborted" name="aborted">Aborted</paper-radio-button>
-                <paper-radio-button id="enrolled" name="enrolled">Enrolled</paper-radio-button>
-                <paper-radio-button id="finished" name="finished">Finished</paper-radio-button>
+            <paper-radio-group id="status" aria-labelledby="statusLabel" selected="enrolled">
+                <paper-radio-button name="aborted">Aborted</paper-radio-button>
+                <paper-radio-button name="enrolled">Enrolled</paper-radio-button>
+                <paper-radio-button name="finished">Finished</paper-radio-button>
             </paper-radio-group>
             <paper-checkbox id="anonymously" name="anonymously">Submit anonymously</paper-checkbox>
             <flexible-rating id="stars" name="stars" required></flexible-rating>
@@ -112,9 +112,8 @@ Example:
             this.$$('#profile_name').innerHTML = result.user.name;
             this.$.form.description.value = result.evaluation.description;
             this.$$('#stars').value = result.evaluation.rating;
-            this.$$('#aborted').checked = result.evaluation.course_status == 0;
-            this.$$('#enrolled').checked = result.evaluation.course_status == 1;
-            this.$$('#finished').checked = result.evaluation.course_status == 2;
+            var statuses = ['aborted', 'enrolled', 'finished'];
+                this.$$('#status').selected = statuses[result.evaluation.course_status];
             this.$$('#anonymously').checked = result.evaluation.rated_anonymously;
         }
     });
