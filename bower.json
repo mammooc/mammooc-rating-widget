@@ -24,7 +24,8 @@
     "paper-radio-group": "PolymerElements/paper-radio-group#^1.2.0",
     "paper-radio-button": "PolymerElements/paper-radio-button#^1.2.0",
     "paper-checkbox": "PolymerElements/paper-checkbox#^1.2.0",
-    "iron-jsonp-library": "PolymerElements/iron-jsonp-library#^1.0.4"
+    "iron-jsonp-library": "PolymerElements/iron-jsonp-library#^1.0.4",
+    "paper-toast": "PolymerElements/paper-toast#^1.3.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

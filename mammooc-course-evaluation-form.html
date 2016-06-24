@@ -7,6 +7,7 @@
 <link rel="import" href="../paper-radio-button/paper-radio-button.html">
 <link rel="import" href="../paper-radio-group/paper-radio-group.html">
 <link rel="import" href="../paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../paper-toast/paper-toast.html">
 <link rel="import" href="../iron-jsonp-library/iron-jsonp-library.html">
 
 
@@ -55,7 +56,7 @@ Example:
         </iron-jsonp-library>
         <!-- local DOM goes here -->
         <div class="heading">Your rating</div>
-        <form is="iron-form" id="form" method="post" action="/form/handler">
+        <form is="iron-form" id="form">
             <div>
                 <template is="dom-if" if="{{loggedIn}}">
                     <img id="profile_image"></img>
@@ -76,6 +77,16 @@ Example:
             <paper-button class="submit-button" raised on-click="_submitForm">Submit</paper-button>
         </form>
 
+        <form method="post" target="_blank" action="/oauth" id="nativeForm">
+        </form>
+
+        <iron-jsonp-library id="postJsonP"
+            callback-name="callback"
+            notify-event="post-sent">
+        </iron-jsonp-library>
+
+        <paper-toast id="successToast" text="Your evaluation was successfully saved."></paper-toast>
+
     </template>
 
     <script>
@@ -83,9 +94,69 @@ Example:
 
     Polymer({
         is: 'mammooc-course-evaluation-form',
-        _submitForm: function() {
-                this.$.form.submit();
+
+        _postSent: function(event) {
+            this.$.successToast.open();
         },
+
+        _jsonPSubmit: function() {
+              var serializedItems = this._serializeFormData();
+              var url = "https://mammooc-dev.herokuapp.com/evaluations/save.js?callback=callback&";
+              url = url + Object.keys(serializedItems).map(function(k) {
+                return encodeURIComponent(k) + '=' + encodeURIComponent(serializedItems[k])
+                }).join('&');
+              this.$$('#postJsonP').libraryUrl = url;
+        },
+
+        _serializeFormData: function() {
+            var formData = this.$.form.serialize();
+            var newFormData = {};
+
+            newFormData['description'] = formData['description'];
+            newFormData['rating'] = formData['stars'];
+            newFormData['rated_anonymously'] = formData['anonymously'] == 'on';
+
+            newFormData['course_status'] = this.$$('#status').selected;
+
+            newFormData['course_id'] = this.courseId;
+            newFormData['provider'] = this.provider;
+
+            return newFormData;
+        },
+
+        _submitForm: function() {
+                if (this.loggedIn)
+                    this._jsonPSubmit();
+                else
+                    this._nativeSubmit();
+        },
+
+
+        _nativeSubmit: function() {
+            var form = this.$.form;
+            var nativeForm = this.$.nativeForm;
+
+            while (nativeForm.firstChild) {
+                nativeForm.removeChild(nativeForm.firstChild);
+            }
+
+            if (form.validate()) {
+              // For each element the iron-form wants to submit, create a hidden
+              // input in the submission form.
+              var serializedItems = this._serializeFormData();
+
+              for (var name in serializedItems) {
+                var input = document.createElement('input');
+                input.hidden = true;
+                input.name = name;
+                input.value = serializedItems[name];
+                nativeForm.appendChild(input);
+              }
+              nativeForm.submit();
+            }
+        },
+
+
         properties: {
             provider: String,
             courseId: String,
@@ -96,7 +167,8 @@ Example:
             }
         },
         listeners: {
-            'api-load': '_apiLoaded'
+            'api-load': '_apiLoaded',
+            'post-sent': '_postSent',
 
         },
         _generateUrl: function(provider, courseId) {
@@ -114,7 +186,7 @@ Example:
             this.$.form.description.value = result.evaluation.description;
             this.$$('#stars').value = result.evaluation.rating;
             var statuses = ['aborted', 'enrolled', 'finished'];
-                this.$$('#status').selected = statuses[result.evaluation.course_status];
+            this.$$('#status').selected = statuses[result.evaluation.course_status];
             this.$$('#anonymously').checked = result.evaluation.rated_anonymously;
         }
     });
