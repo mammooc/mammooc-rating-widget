@@ -18,6 +18,12 @@ Example:
                 --iron-icon-height: 20px;
                 --iron-icon-width: 20px;
             }
+
+            .evaluations {
+                height: 400px;
+                overflow-y: scroll;
+            }
+
             .evaluation-card {
                 min-height: 50px;
             }
@@ -44,17 +50,19 @@ Example:
                 @apply(--paper-font-display1);
             }
         </style>
-
+        
         <!-- local DOM goes here -->
         <div class="heading">Course Evaluations</div>
-        <template is="dom-repeat" items="{{evaluations}}" as="evaluation">
-            <div class="evaluation-card">
-            <img src="{{evaluation.user_profile_picture}}" />
-            <div><b>{{evaluation.user_name}}</b> <flexible-rating value="{{evaluation.rating}}" disabled></flexible-rating></div>
-            <div class="evaluation-content">{{evaluation.description}}</div>
-            </div>
-            <br />
-        </template>
+        <div class="evaluations">
+            <template is="dom-repeat" items="{{evaluations}}" as="evaluation">
+                <div class="evaluation-card">
+                <img src="{{evaluation.user_profile_picture}}" />
+                <div><b>{{evaluation.user_name}}</b> <flexible-rating value="{{evaluation.rating}}" disabled></flexible-rating></div>
+                <div class="evaluation-content">{{evaluation.description}}</div>
+                </div>
+                <br />
+            </template>
+        </div>
     </template>
 
     <script>
