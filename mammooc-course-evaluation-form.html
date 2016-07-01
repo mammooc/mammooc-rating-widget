@@ -50,7 +50,7 @@ Example:
         </style>
 
 
-        <iron-jsonp-library
+        <iron-jsonp-library id="evaluationRequest"
             library-url="{{_generateUrl(provider, courseId)}}"
             notify-event="api-load">
         </iron-jsonp-library>
@@ -94,6 +94,14 @@ Example:
 
     Polymer({
         is: 'mammooc-course-evaluation-form',
+
+        ready: function() {
+            var e = this;
+            window.onfocus = function() {
+                e.$.evaluationRequest.libraryUrl = e._generateUrl(e.provider, e.courseId) + '&try=' + e._tries;
+                e._tries += 1;
+            };
+        },
 
         _postSent: function(event) {
             this.$.successToast.open();
@@ -164,6 +172,10 @@ Example:
                 type: Boolean,
                 value: false,
                 readOnly: true,
+            },
+            _tries: {
+                type: Number,
+                value: 0,
             }
         },
         listeners: {
@@ -172,7 +184,7 @@ Example:
 
         },
         _generateUrl: function(provider, courseId) {
-            return 'http://mammooc-dev.herokuapp.com/api/current_user_with_evaluation.js?provider='+this.provider + '&course_id=' + this.courseId+'&callback=%%callback%%';
+            return 'https://mammooc-dev.herokuapp.com/api/current_user_with_evaluation.js?provider='+this.provider + '&course_id=' + this.courseId+'&callback=%%callback%%';
         },
         _apiLoaded: function(response) {
             var result = response.detail[0];
