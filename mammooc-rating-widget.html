@@ -9,12 +9,16 @@
 <link rel="import" href="mammooc-course-evaluation-form.html">
 
 <!--
-An element providing a rating widget for mammooc.
+An element providing a rating widget for [mammooc.org](https://mammooc.org/), the platform for managing and evaluating MOOCs.
 
 Example:
 
     <mammooc-rating-widget provider="openHPI" course-id="2">
     </mammooc-rating-widget>
+
+The element consists of three smaller elements: one displaying the overall rating by other users, one displaying detailed evaluations by other users, and one form allowing the user to submit an evaluation for the course.
+
+All of these can be disabled with the attributes `disable-rating`, `disable-evaluations` and `disable-evaluation-form`.
 
 ### Styling
 
@@ -23,9 +27,9 @@ for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--rating-filled-color` | Fill color of the selected rating shapes | #ffac33
-`--rating-unfilled-color` | Fill color of remaining rating shapes | #ccd6dd
-`--mammooc-rating-widget-background-color` | Background color of the entire widget | #eee
+`--mammooc-rating-widget-primary-color` | The primary color used for filled stars and highlights | #ffac33
+`--mammooc-rating-widget-secondary-color` | The secondary color used for unfilled stars and secondary text | #ccd6dd
+`--mammooc-rating-widget-background-color` | Background color of the entire widget | #fff
 
 
 
@@ -35,23 +39,25 @@ Custom property | Description | Default
     <template>
         <style>
           :host {
-                  --rating-filled-color: var(--mammooc-rating-widget-primary-color);
-                  --rating-unfilled-color: var(--mammooc-rating-widget-secondary-color);
-                  --paper-card-background-color: var(--mammooc-rating-widget-background-color);
+                  --rating-filled-color: var(--mammooc-rating-widget-primary-color, #ffac33);
+                  --rating-unfilled-color: var(--mammooc-rating-widget-secondary-color, #ccd6dd);
+                  --paper-card-background-color: var(--mammooc-rating-widget-background-color, #fff);
+                  max-width: 100%;
           }
 
           paper-card {
+              max-width: 100%;
               width: inherit;
               height: auto;
         };
 
         .footer {
-          color: var(--mammooc-rating-widget-secondary-color);
+          color: var(--mammooc-rating-widget-secondary-color, #ccd6dd);
           text-align: center;
         }
 
         .footer a {
-          color: var(--mammooc-rating-widget-secondary-color);
+          color: var(--mammooc-rating-widget-secondary-color, #ccd6dd);
           text-decoration: underline;
         }
 
@@ -94,14 +100,23 @@ Custom property | Description | Default
             */
             courseId: String,
 
+            /**
+            *   Disable the form allowing a user to submit an evaluation for the course
+            */
             disableEvaluationForm: {
               type: Boolean,
               value: false,
             },
+            /**
+            *   Disable the component showing the detailed evaluations by other users
+            */
             disableEvaluations: {
               type: Boolean,
               value: false,
             },
+            /**
+            *   Disable the component showing the overall rating by other users
+            */
             disableRating: {
               type: Boolean,
               value: false,
