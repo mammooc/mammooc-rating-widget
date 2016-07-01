@@ -45,6 +45,16 @@ Custom property | Description | Default
               height: auto;
         };
 
+        .footer {
+          color: var(--mammooc-rating-widget-secondary-color);
+          text-align: center;
+        }
+
+        .footer a {
+          color: var(--mammooc-rating-widget-secondary-color);
+          text-decoration: underline;
+        }
+
 
         </style>
         <iron-ajax auto url="{{_generateUrl(provider, courseId)}}"
@@ -66,6 +76,7 @@ Custom property | Description | Default
                 <mammooc-course-evaluation-form provider={{provider}} course-id={{courseId}}></mammooc-course-evaluation-form>
             </div>
           </template>
+          <div class="footer">Powered by <a target="_blank" href="https://mammooc-dev.herokuapp.com/">mammooc</a></div>
         </paper-card>
     </template>
 
