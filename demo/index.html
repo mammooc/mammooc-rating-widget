@@ -3,23 +3,48 @@
     <head>
         <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
         <link rel="import" href="../mammooc-rating-widget.html">
-
-        <style is="custom-style">
-        :root {
-          --mammooc-rating-widget-primary-color: #5F8C1C;
-          --mammooc-rating-widget-secondary-color: #999;
-          --mammooc-rating-widget-background-color: #eee;
-        }
-        #demo{
-          width: 400px;
-          height: auto;
-
-        }
-        </style>
-
+        <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+        <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+        <style is="custom-style" include="demo-pages-shared-styles">
+            .vertical-section-container {
+                max-width: 550px;
+            }
+          </style>
     </head>
     <body>
-        <mammooc-rating-widget id="demo" provider="open_mammooc" course-id="1" ></mammooc-rating-widget>
+      <div class="vertical-section-container centered">
+        <h4>The default element</h4>
+        <demo-snippet class="centered-demo">
+          <template>
+            <mammooc-rating-widget provider="open_mammooc" course-id="1" ></mammooc-rating-widget>
+          </template>
+        </demo-snippet>
+        <h4>An element without the form</h4>
+        <demo-snippet class="centered-demo">
+          <template>
+            <mammooc-rating-widget disable-evaluation-form provider="open_mammooc" course-id="1" ></mammooc-rating-widget>
+          </template>
+        </demo-snippet>
+        <h4>An element only showing the overall rating</h4>
+        <demo-snippet class="centered-demo">
+          <template>
+            <mammooc-rating-widget disable-evaluations disable-evaluation-form provider="open_mammooc" course-id="1" ></mammooc-rating-widget>
+          </template>
+        </demo-snippet>
+        <h4>An element with custom styling</h4>
+        <demo-snippet class="centered-demo">
+          <template>
+            <style is="custom-style">
+              mammooc-rating-widget.customStyling {
+                --mammooc-rating-widget-primary-color: #5F8C1C;
+                --mammooc-rating-widget-secondary-color: #999;
+                --mammooc-rating-widget-background-color: #eee;
+              }
+            </style>
+            <mammooc-rating-widget class="customStyling" provider="open_mammooc" course-id="1" ></mammooc-rating-widget>
+          </template>
+        </demo-snippet>
+      </div>
     </body>
 
 
