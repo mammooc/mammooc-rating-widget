@@ -52,7 +52,9 @@ Example:
         </style>
         
         <!-- local DOM goes here -->
-        <div class="heading">Course Evaluations</div>
+        <div class="heading">
+            <i18n-msg msgid="courseevaluations">Course Evaluations</i18n-msg>
+        </div>
         <div class="evaluations">
             <template is="dom-repeat" items="{{evaluations}}" as="evaluation">
                 <div class="evaluation-card">

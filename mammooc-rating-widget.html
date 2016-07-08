@@ -4,6 +4,7 @@
 <link rel="import" href="../paper-styles/color.html">
 <link rel="import" href="../paper-styles/typography.html">
 <link rel="import" href="../paper-styles/default-theme.html">
+<link rel="import" href="../i18n-msg/i18n-msg.html">
 <link rel="import" href="mammooc-cumulative-rating.html">
 <link rel="import" href="mammooc-course-evaluation.html">
 <link rel="import" href="mammooc-course-evaluation-form.html">
@@ -86,7 +87,9 @@ Custom property | Description | Default
           <template is="dom-if" if="{{!_ratingCount}}">
             <div class="card-content">
               <div class="noratings">
-                <i>No evaluations yet</i>
+                <i>
+                  <i18n-msg msgid="noevaluations">No evaluations yet</i18n-msg>
+                </i>
               </div>
             </div>
           </template>
@@ -95,11 +98,20 @@ Custom property | Description | Default
                 <mammooc-course-evaluation-form provider={{provider}} course-id={{courseId}}></mammooc-course-evaluation-form>
             </div>
           </template>
-          <div class="footer">Powered by <a target="_blank" href="https://mammooc-dev.herokuapp.com/">mammooc</a></div>
+          <div class="footer">
+            <i18n-msg msgid="poweredby">Powered by </i18n-msg>
+            <a target="_blank" href="https://mammooc-dev.herokuapp.com/">mammooc</a>
+          </div>
         </paper-card>
     </template>
 
     <script>
+    document.addEventListener('HTMLImportsLoaded', function() {
+      I18nMsg.lang = document.documentElement.lang || 'en';
+      I18nMsg.url = '../locales'; // optionally use custom folder for locales.
+      Platform.performMicrotaskCheckpoint();
+    });
+
     Polymer({
         is: 'mammooc-rating-widget',
         properties: {
@@ -154,8 +166,13 @@ Custom property | Description | Default
             this._evaluations = evaluation.user_evaluations;
         },
         listeners: {
-
+          'i18n-language-ready': '_updateStrings'
         },
+        _updateStrings: function() {
+          if (!this.disableEvaluationForm) {
+            this.$$('mammooc-course-evaluation-form')._updateStrings();
+          }
+        }
     });
     </script>
 <dom-module>

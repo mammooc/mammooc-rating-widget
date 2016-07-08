@@ -55,26 +55,40 @@ Example:
             notify-event="api-load">
         </iron-jsonp-library>
         <!-- local DOM goes here -->
-        <div class="heading">Your rating</div>
+        <div class="heading">
+            <i18n-msg msgid="yourrating">Your rating</i18n-msg>
+        </div>
         <form is="iron-form" id="form">
             <div>
                 <template is="dom-if" if="{{loggedIn}}">
                     <img id="profile_image"></img>
-                    <div id="profile_name">Name</div>
+                    <div id="profile_name"></div>
                 </template>
                 <div class="description">
                     <paper-textarea placeholder="The course was..." name="description" label="Your course evaluation"></paper-textarea>
                 </div>
             </div>
-            <label id="statusLabel">Status:</label>
+            <label id="statusLabel">
+                <i18n-msg msgid="status">Status:</i18n-msg>
+                </label>
             <paper-radio-group id="status" aria-labelledby="statusLabel" selected="enrolled">
-                <paper-radio-button name="aborted">Aborted</paper-radio-button>
-                <paper-radio-button name="enrolled">Enrolled</paper-radio-button>
-                <paper-radio-button name="finished">Finished</paper-radio-button>
+                <paper-radio-button name="aborted">
+                    <i18n-msg msgid="aborted">Aborted</i18n-msg>
+                </paper-radio-button>
+                <paper-radio-button name="enrolled">
+                    <i18n-msg msgid="enrolled">Enrolled</i18n-msg>
+                </paper-radio-button>
+                <paper-radio-button name="finished">
+                    <i18n-msg msgid="finished">Finished</i18n-msg>
+                </paper-radio-button>
             </paper-radio-group>
-            <paper-checkbox id="anonymously" name="anonymously">Submit anonymously</paper-checkbox>
+            <paper-checkbox id="anonymously" name="anonymously">
+                <i18n-msg msgid="submitanonymously">Submit anonymously</i18n-msg>
+            </paper-checkbox>
             <flexible-rating id="stars" name="stars" required></flexible-rating>
-            <paper-button class="submit-button" raised on-click="_submitForm">Submit</paper-button>
+            <paper-button class="submit-button" raised on-click="_submitForm">
+                <i18n-msg msgid="submit">Submit</i18n-msg>
+            </paper-button>
         </form>
 
         <form method="get" target="_blank" action="https://mammooc-dev.herokuapp.com/evaluations/login_and_save" id="nativeForm">
@@ -94,6 +108,12 @@ Example:
 
     Polymer({
         is: 'mammooc-course-evaluation-form',
+        _i18n: function(msgid) {
+            console.log(I18nMsg.lang);
+            console.log(this.$$('i18n-msg').getMsg(msgid));
+            console.log(msgid);
+            return this.$$('i18n-msg').getMsg(msgid);
+        },
 
         ready: function() {
             var e = this;
@@ -183,6 +203,12 @@ Example:
             'post-sent': '_postSent',
 
         },
+        _updateStrings: function() {
+            this.$$('.description > paper-textarea').placeholder = this.$$('i18n-msg').getMsg('descriptionplaceholder');
+            this.$$('.description > paper-textarea').label = this.$$('i18n-msg').getMsg('descriptionlabel');
+            
+        },
+
         _generateUrl: function(provider, courseId) {
             return 'https://mammooc-dev.herokuapp.com/api/current_user_with_evaluation.js?provider='+this.provider + '&course_id=' + this.courseId+'&callback=%%callback%%';
         },
