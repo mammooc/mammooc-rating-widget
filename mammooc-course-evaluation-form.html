@@ -224,8 +224,7 @@ Example:
             this.$$('#profile_name').innerHTML = result.user.name;
             this.$.form.description.value = result.evaluation.description;
             this.$$('#stars').value = result.evaluation.rating;
-            var statuses = ['aborted', 'enrolled', 'finished'];
-            this.$$('#status').selected = statuses[result.evaluation.course_status];
+            this.$$('#status').selected = result.evaluation.course_status;
             this.$$('#anonymously').checked = result.evaluation.rated_anonymously;
         }
     });
