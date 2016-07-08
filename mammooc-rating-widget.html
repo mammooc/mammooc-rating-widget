@@ -61,20 +61,33 @@ Custom property | Description | Default
           text-decoration: underline;
         }
 
+        .noratings {
+          color: var(--mammooc-rating-widget-secondary-color, #ccd6dd);
+          @apply(--paper-font-display1);
+        }
 
         </style>
         <iron-ajax auto url="{{_generateUrl(provider, courseId)}}"
             on-response="_handleResponse">
         </iron-ajax>
         <paper-card>
-          <template is="dom-if" if="{{!disableRating}}">
-            <div class="card-content">
-                <mammooc-cumulative-rating cumulative-rating="{{_cumulativeRating}}" rating-count="{{_ratingCount}}"></mammooc-cumulative-rating>
-            </div>
+          <template is="dom-if" if="{{_ratingCount}}">
+            <template is="dom-if" if="{{!disableRating}}">
+              <div class="card-content">
+                  <mammooc-cumulative-rating cumulative-rating="{{_cumulativeRating}}" rating-count="{{_ratingCount}}"></mammooc-cumulative-rating>
+              </div>
+            </template>
+            <template is="dom-if" if="{{!disableEvaluations}}">
+              <div class="card-content">
+                  <mammooc-course-evaluation evaluations="{{_evaluations}}"></mammooc-course-evaluation>
+              </div>
+            </template>
           </template>
-          <template is="dom-if" if="{{!disableEvaluations}}">
+          <template is="dom-if" if="{{!_ratingCount}}">
             <div class="card-content">
-                <mammooc-course-evaluation evaluations="{{_evaluations}}"></mammooc-course-evaluation>
+              <div class="noratings">
+                <i>No evaluations yet</i>
+              </div>
             </div>
           </template>
           <template is="dom-if" if="{{!disableEvaluationForm}}">
