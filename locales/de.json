@@ -37,5 +37,8 @@
     },
     "descriptionlabel": {
         "message": "Deine Kurs-Evaluierung"
+    },
+    "successtext": {
+        "message": "Deine Evaluierung wurde erfolgreich gespeichert."
     }
 }

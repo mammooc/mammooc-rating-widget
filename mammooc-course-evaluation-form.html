@@ -206,6 +206,7 @@ Example:
         _updateStrings: function() {
             this.$$('.description > paper-textarea').placeholder = this.$$('i18n-msg').getMsg('descriptionplaceholder');
             this.$$('.description > paper-textarea').label = this.$$('i18n-msg').getMsg('descriptionlabel');
+            this.$$('#successToast').text = this.$$('i18n-msg').getMsg('successtext');
             
         },
 
