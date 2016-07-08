@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+        <link rel="import" href="../mammooc-rating-widget.html">
+        <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+        <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+        <style is="custom-style" include="demo-pages-shared-styles">
+            .vertical-section-container {
+                max-width: 550px;
+            }
+          </style>
+    </head>
+    <body>
+      <div class="vertical-section-container centered">
+        <h4>An element with custom styling</h4>
+        <demo-snippet class="centered-demo">
+          <template>
+            <style is="custom-style">
+              mammooc-rating-widget.customStyling {
+                --mammooc-rating-widget-primary-color: #5F8C1C;
+                --mammooc-rating-widget-secondary-color: #999;
+                --mammooc-rating-widget-background-color: #eee;
+              }
+            </style>
+            <mammooc-rating-widget class="customStyling" provider="open_mammooc" course-id="1" ></mammooc-rating-widget>
+          </template>
+        </demo-snippet>
+      </div>
+    </body>
+
+
+</html>

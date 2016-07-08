@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+        <link rel="import" href="../mammooc-rating-widget.html">
+        <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+        <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+        <style is="custom-style" include="demo-pages-shared-styles">
+            .vertical-section-container {
+                max-width: 550px;
+            }
+          </style>
+    </head>
+    <body>
+      <div class="vertical-section-container centered">
+        <h4>An element only showing the overall rating</h4>
+        <demo-snippet class="centered-demo">
+          <template>
+            <mammooc-rating-widget disable-evaluations disable-evaluation-form provider="open_mammooc" course-id="1" ></mammooc-rating-widget>
+          </template>
+        </demo-snippet>
+      </div>
+    </body>
+
+
+</html>

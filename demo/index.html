@@ -1,51 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
-        <link rel="import" href="../mammooc-rating-widget.html">
-        <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-        <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-        <style is="custom-style" include="demo-pages-shared-styles">
-            .vertical-section-container {
-                max-width: 550px;
-            }
-          </style>
-    </head>
-    <body>
-      <div class="vertical-section-container centered">
-        <h4>The default element</h4>
-        <demo-snippet class="centered-demo">
-          <template>
-            <mammooc-rating-widget provider="open_mammooc" course-id="1" ></mammooc-rating-widget>
-          </template>
-        </demo-snippet>
-        <h4>An element without the form</h4>
-        <demo-snippet class="centered-demo">
-          <template>
-            <mammooc-rating-widget disable-evaluation-form provider="open_mammooc" course-id="1" ></mammooc-rating-widget>
-          </template>
-        </demo-snippet>
-        <h4>An element only showing the overall rating</h4>
-        <demo-snippet class="centered-demo">
-          <template>
-            <mammooc-rating-widget disable-evaluations disable-evaluation-form provider="open_mammooc" course-id="1" ></mammooc-rating-widget>
-          </template>
-        </demo-snippet>
-        <h4>An element with custom styling</h4>
-        <demo-snippet class="centered-demo">
-          <template>
-            <style is="custom-style">
-              mammooc-rating-widget.customStyling {
-                --mammooc-rating-widget-primary-color: #5F8C1C;
-                --mammooc-rating-widget-secondary-color: #999;
-                --mammooc-rating-widget-background-color: #eee;
-              }
-            </style>
-            <mammooc-rating-widget class="customStyling" provider="open_mammooc" course-id="1" ></mammooc-rating-widget>
-          </template>
-        </demo-snippet>
-      </div>
-    </body>
+<head>
+  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="../../paper-styles/demo-pages.html">
+  <style>
+    a {
+      display: block;
+      margin-bottom: 10px;
+    }
 
+    li {
+      list-style: none;
+    }
+  </style>
+</head>
+<body unresolved>
 
+  <div class="horizontal-section-container">
+    <div>
+      <h4>mammooc-rating-widget demos</h4>
+      <ul class="horizontal-section">
+        <li><a href="default.html">The default element</a></li>
+        <li><a href="withoutform.html">Without the form</a></li>
+        <li><a href="onlyoverall.html">Only overall rating</a></li>
+        <li><a href="customstyling.html">Custom styling</a></li>
+      </ul>
+    </div>
+  </div>
+
+</body>
 </html>
