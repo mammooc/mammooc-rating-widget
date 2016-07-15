@@ -107,12 +107,14 @@ Custom property | Description | Default
     <script>
     document.addEventListener('HTMLImportsLoaded', function() {
       I18nMsg.lang = document.documentElement.lang || 'en';
-      I18nMsg.url = '../locales'; // optionally use custom folder for locales.
       Platform.performMicrotaskCheckpoint();
     });
 
     Polymer({
         is: 'mammooc-rating-widget',
+        created: function() {
+          I18nMsg.url = this.resolveUrl('locales');
+        },
         properties: {
             /**
             *    The provider of the course, e.g. "openHPI"
