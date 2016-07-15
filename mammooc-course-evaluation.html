@@ -1,6 +1,13 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../flexible-rating/flexible-rating.html">
 <link rel="import" href="../paper-styles/typography.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../iron-scroll-threshold/iron-scroll-threshold.html">
+<link rel="import" href="../i18n-msg/i18n-msg.html">
+<link rel="import" href="../iron-list/iron-list.html">
+
+
+
 
 <!--
 An element providing course ratings.
@@ -20,7 +27,7 @@ Example:
             }
 
             .evaluations {
-                max-height: 400px;
+                max-height: 200px;
                 overflow-y: scroll;
             }
 
@@ -50,34 +57,95 @@ Example:
                 @apply(--paper-font-display1);
             }
         </style>
-        
         <!-- local DOM goes here -->
+        <iron-ajax auto url="{{_generateEvaluationUrl(provider, courseId, perPage, _page)}}"
+            on-response="_handleEvaluationResponse">
+        </iron-ajax>
         <div class="heading">
             <i18n-msg msgid="courseevaluations">Course Evaluations</i18n-msg>
         </div>
-        <div class="evaluations">
-            <template is="dom-repeat" items="{{evaluations}}" as="evaluation">
-                <div class="evaluation-card">
-                <img src="{{evaluation.user_profile_picture}}" />
-                <div><b>{{evaluation.user_name}}</b> <flexible-rating value="{{evaluation.rating}}" disabled></flexible-rating></div>
-                <div class="evaluation-content">{{evaluation.description}}</div>
-                </div>
-                <br />
-            </template>
+        <div class="evaluations" id="scrollingRegion">
+            <iron-scroll-threshold id="scrollThreshold" on-lower-threshold="_loadMoreData" lower-threshold="500">
+              <iron-list scroll-target="scrollThreshold" items="[[_evaluations]]" as="evaluation">
+                <template>
+                  <div class="evaluation-card">
+                  <img src="{{evaluation.user_profile_picture}}" />
+                  <div><b>{{evaluation.user_name}}</b> <flexible-rating value="{{evaluation.rating}}" disabled></flexible-rating></div>
+                  <div class="evaluation-content">{{evaluation.description}}</div>
+                  </div>
+                  <br />
+                </template>
+              </iron-list>
+            </iron-scroll-threshold>
+
+
+
+
+            <!--
+                <template is="dom-repeat" items="[[_evaluations]]" as="evaluation">
+                    <div class="evaluation-card">
+                    <img src="{{evaluation.user_profile_picture}}" />
+                    <div><b>{{evaluation.user_name}}</b> <flexible-rating value="{{evaluation.rating}}" disabled></flexible-rating></div>
+                    <div class="evaluation-content">{{evaluation.description}}</div>
+                    </div>
+                    <br />
+                </template>
+              -->
         </div>
+
     </template>
 
     <script>
+
     Polymer({
         is: 'mammooc-course-evaluation',
         properties: {
-            evaluations: Object,
+            _evaluations: Object,
+            provider: String,
+            courseId: String,
+            perPage: Number,
+            ratingCount: Number,
+            _page: {
+              type: Number,
+              value: 0
+            }
         },
         listeners: {
 
         },
         ready: function() {
-        }
+
+        },
+        _generateEvaluationUrl: function(provider, courseId, perPage, page) {
+          console.log(page);
+          page++;
+            return "https://mammooc-dev.herokuapp.com/evaluations/export_course_evaluations?provider=" + provider + "&course_id=" + courseId + "&page=" + page + "&per_page=" + perPage;
+        },
+        _loadMoreData: function() {
+          var xhr = new XMLHttpRequest();
+
+          if (this._ratingCount > 0) {
+            //console.log(_page);
+            xhr.open('GET', this._generateEvaluationUrl(this.provider, this.courseId, this.perPage, ++_page));
+            xhr.send(null);
+          }
+          xhr.onreadystatechange = function () {
+            var DONE = 4; // readyState 4 means the request is done.
+            var OK = 200; // status 200 is a successful return.
+            if (xhr.readyState === DONE) {
+              if (xhr.status === OK) {
+                this._handleEvaluationResponse(xhr.response); // 'This is the returned text.'
+              }
+            } else {
+              console.log('Error: ' + xhr.status); // An error occurred during the request.
+            }
+          }
+          scrollThreshold.clearTriggers();
+        },
+        _handleEvaluationResponse: function(request) {
+            var evaluation = request.detail.response.evaluations[0];
+            this._evaluations = evaluation.user_evaluations;
+        },
     });
     </script>
 <dom-module>

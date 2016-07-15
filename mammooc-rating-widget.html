@@ -33,7 +33,6 @@ Custom property | Description | Default
 `--mammooc-rating-widget-background-color` | Background color of the entire widget | #fff
 
 
-
 @demo demo/index.html
 -->
 <dom-module id="mammooc-rating-widget">
@@ -68,8 +67,8 @@ Custom property | Description | Default
         }
 
         </style>
-        <iron-ajax auto url="{{_generateUrl(provider, courseId)}}"
-            on-response="_handleResponse">
+        <iron-ajax auto url="{{_generateRatingUrl(provider, courseId)}}"
+            on-response="_handleRatingResponse">
         </iron-ajax>
         <paper-card>
           <template is="dom-if" if="{{_ratingCount}}">
@@ -80,7 +79,7 @@ Custom property | Description | Default
             </template>
             <template is="dom-if" if="{{!disableEvaluations}}">
               <div class="card-content">
-                  <mammooc-course-evaluation evaluations="{{_evaluations}}"></mammooc-course-evaluation>
+                  <mammooc-course-evaluation provider="{{provider}}" rating-count="{{ratingCount}}" course-id="{{courseId}}" per-page="7" ></mammooc-course-evaluation>
               </div>
             </template>
           </template>
@@ -155,15 +154,16 @@ Custom property | Description | Default
             _evaluations: Object,
 
         },
-        _generateUrl: function(provider, courseId) {
-            return "https://mammooc-dev.herokuapp.com/evaluations/export?provider=" + this.provider + "&course_id=" + this.courseId;
+        _generateRatingUrl: function(provider, courseId) {
+            return "https://mammooc-dev.herokuapp.com/evaluations/export_overall_course_rating?provider=" + this.provider + "&course_id=" + this.courseId;
         },
 
-        _handleResponse: function(request) {
-            var evaluation = request.detail.response.evaluations[0];
+        _handleRatingResponse: function(request) {
+
+            var evaluation = request.detail.response.evaluations;
+
             this._cumulativeRating = evaluation.overall_rating;
             this._ratingCount = evaluation.number_of_evaluations;
-            this._evaluations = evaluation.user_evaluations;
         },
         listeners: {
           'i18n-language-ready': '_updateStrings'
