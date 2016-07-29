@@ -126,7 +126,7 @@ Example:
             }
             // Add all new evaluations to the list
             // IMPORTANT: Use Polymer's array mutation methods here in order to prevent scrolling to top
-            for(var i in newEvaluations)
+            for(var i = 0; i < newEvaluations.length; ++i)
                 this.push('_evaluations', newEvaluations[i]);
 
             this.$.scrollThreshold.clearTriggers();
