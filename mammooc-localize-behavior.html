@@ -9,14 +9,16 @@
               value: function() {
                 var lang = document.documentElement.lang || 'en';
                 var availableLanguages = ['en', 'de', 'fr', 'zh'];
+
+                // Use correct language code for Chinese (needed for openHPI)
+            	if (lang === "cn") {
+            		lang = "zh";
+            	}
+
                 // Fallback to english if language not available
                 if (availableLanguages.indexOf(lang) === -1) {
                 	lang = 'en';
                 }
-                // Use correct language code for Chinese (needed for openHPI)
-            	if (lang = "cn") {
-            		lang = "zh";
-            	}
 
                 return lang;
               }
