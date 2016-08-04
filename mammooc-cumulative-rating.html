@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../flexible-rating/flexible-rating.html">
 <link rel="import" href="../paper-styles/typography.html">
+<link rel="import" href="mammooc-localize-behavior.html">
 
 <!--
 An element providing an overall rating.
@@ -25,7 +26,7 @@ Example:
 
         <!-- local DOM goes here -->
         <div class="heading">
-            <i18n-msg msgid="ratings">Ratings:</i18n-msg>
+            {{localize("ratings")}}
         <flexible-rating value="{{cumulativeRating}}" disabled></flexible-rating> ({{ratingCount}})
         </div>
     </template>
@@ -33,6 +34,9 @@ Example:
     <script>
     Polymer({
         is: 'mammooc-cumulative-rating',
+        behaviors: [
+            MammoocLocalizeBehavior
+            ],
         properties: {
             /**
             *   The average rating for the course

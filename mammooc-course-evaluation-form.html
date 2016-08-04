@@ -56,7 +56,7 @@ Example:
         </iron-jsonp-library>
         <!-- local DOM goes here -->
         <div class="heading">
-            <i18n-msg msgid="yourrating">Your rating</i18n-msg>
+            {{localize("yourrating")}}
         </div>
         <form is="iron-form" id="form">
             <div>
@@ -65,29 +65,29 @@ Example:
                     <div id="profile_name"></div>
                 </template>
                 <div class="description">
-                    <paper-textarea placeholder="The course was..." name="description" label="Your course evaluation"></paper-textarea>
+                    <paper-textarea placeholder="{{localize('descriptionplaceholder')}}" name="description" label="{{localize('descriptionlabel')}}"></paper-textarea>
                 </div>
             </div>
             <label id="statusLabel">
-                <i18n-msg msgid="status">Status:</i18n-msg>
+                {{localize("status")}}
                 </label>
             <paper-radio-group id="status" aria-labelledby="statusLabel" selected="enrolled">
                 <paper-radio-button name="aborted">
-                    <i18n-msg msgid="aborted">Aborted</i18n-msg>
+                    {{localize("aborted")}}
                 </paper-radio-button>
                 <paper-radio-button name="enrolled">
-                    <i18n-msg msgid="enrolled">Enrolled</i18n-msg>
+                    {{localize("enrolled")}}
                 </paper-radio-button>
                 <paper-radio-button name="finished">
-                    <i18n-msg msgid="finished">Finished</i18n-msg>
+                    {{localize("finished")}}
                 </paper-radio-button>
             </paper-radio-group>
             <paper-checkbox id="anonymously" name="anonymously">
-                <i18n-msg msgid="submitanonymously">Submit anonymously</i18n-msg>
+                {{localize("submitanonymously")}}
             </paper-checkbox>
             <flexible-rating id="stars" name="stars" required></flexible-rating>
             <paper-button class="submit-button" raised on-click="_submitForm">
-                <i18n-msg msgid="submit">Submit</i18n-msg>
+                {{localize("submit")}}
             </paper-button>
         </form>
 
@@ -101,7 +101,7 @@ Example:
             notify-event="post-sent">
         </iron-jsonp-library>
 
-        <paper-toast id="successToast" text="Your evaluation was successfully saved."></paper-toast>
+        <paper-toast id="successToast" text="{{localize('successtext')}}"></paper-toast>
 
     </template>
 
@@ -110,6 +110,9 @@ Example:
 
     Polymer({
         is: 'mammooc-course-evaluation-form',
+        behaviors: [
+            MammoocLocalizeBehavior
+            ],
         ready: function() {
           // Every time the window gets focus, send a new request in case of changes on mammooc
           // _tries is needed because the jsonp library won't resend if the url is the same
@@ -208,13 +211,6 @@ Example:
         listeners: {
             'api-load': '_apiLoaded',
             'post-sent': '_postSent',
-
-        },
-        // Will get called by the mammooc-rating-widget
-        _updateStrings: function() {
-            this.$$('.description > paper-textarea').placeholder = this.$$('i18n-msg').getMsg('descriptionplaceholder');
-            this.$$('.description > paper-textarea').label = this.$$('i18n-msg').getMsg('descriptionlabel');
-            this.$$('#successToast').text = this.$$('i18n-msg').getMsg('successtext');
 
         },
         _generateUrl: function(provider, courseId) {

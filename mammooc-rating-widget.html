@@ -4,7 +4,7 @@
 <link rel="import" href="../paper-styles/color.html">
 <link rel="import" href="../paper-styles/typography.html">
 <link rel="import" href="../paper-styles/default-theme.html">
-<link rel="import" href="../i18n-msg/i18n-msg.html">
+<link rel="import" href="mammooc-localize-behavior.html">
 <link rel="import" href="mammooc-cumulative-rating.html">
 <link rel="import" href="mammooc-course-evaluation.html">
 <link rel="import" href="mammooc-course-evaluation-form.html">
@@ -86,9 +86,7 @@ Custom property | Description | Default
           <template is="dom-if" if="{{!_ratingCount}}">
             <div class="card-content">
               <div class="noratings">
-                <i>
-                  <i18n-msg msgid="noevaluations">No evaluations yet</i18n-msg>
-                </i>
+                <i>{{localize("noevaluations")}}</i>
               </div>
             </div>
           </template>
@@ -98,24 +96,17 @@ Custom property | Description | Default
             </div>
           </template>
           <div class="footer">
-            <i18n-msg msgid="poweredby">Powered by </i18n-msg>
-            <a target="_blank" href="https://mammooc-dev.herokuapp.com/">mammooc</a>
+            {{localize("poweredby")}} <a target="_blank" href="https://mammooc-dev.herokuapp.com/">mammooc</a>
           </div>
         </paper-card>
     </template>
 
     <script>
-    // Listener for when all i18n HTML imports are loaded
-    document.addEventListener('HTMLImportsLoaded', function() {
-      I18nMsg.lang = document.documentElement.lang || 'en';
-      Platform.performMicrotaskCheckpoint();
-    });
-
     Polymer({
         is: 'mammooc-rating-widget',
-        created: function() {
-          I18nMsg.url = this.resolveUrl('locales');
-        },
+        behaviors: [
+          MammoocLocalizeBehavior
+        ],
         properties: {
             /**
             *    The provider of the course, e.g. "openHPI"
@@ -170,14 +161,6 @@ Custom property | Description | Default
             this._ratingCount = evaluation.number_of_evaluations;
 
             this.fire('data-loaded');
-        },
-        listeners: {
-          'i18n-language-ready': '_updateStrings'
-        },
-        _updateStrings: function() {
-          if (!this.disableEvaluationForm) {
-            this.$$('mammooc-course-evaluation-form')._updateStrings();
-          }
         }
     });
     </script>

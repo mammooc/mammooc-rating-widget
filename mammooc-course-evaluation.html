@@ -3,7 +3,6 @@
 <link rel="import" href="../paper-styles/typography.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../iron-scroll-threshold/iron-scroll-threshold.html">
-<link rel="import" href="../i18n-msg/i18n-msg.html">
 <link rel="import" href="../iron-list/iron-list.html">
 
 
@@ -60,7 +59,7 @@ Example:
             on-response="_handleEvaluationResponse">
         </iron-ajax>
         <div class="heading">
-            <i18n-msg msgid="courseevaluations">Course Evaluations</i18n-msg>
+            {{localize("courseevaluations")}}
         </div>
         <div class="evaluations">
             <iron-scroll-threshold id="scrollThreshold" on-lower-threshold="_loadMoreData">
@@ -83,6 +82,9 @@ Example:
 
     Polymer({
         is: 'mammooc-course-evaluation',
+        behaviors: [
+            MammoocLocalizeBehavior
+        ],
         properties: {
             _evaluations: {
                 type: Object,
