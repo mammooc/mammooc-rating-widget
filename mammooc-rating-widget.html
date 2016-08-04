@@ -63,7 +63,7 @@ Custom property | Description | Default
 
         .noratings {
           color: var(--mammooc-rating-widget-secondary-color, #ccd6dd);
-          @apply(--paper-font-headline);
+          @apply(--paper-font-display1);
         }
 
         </style>
@@ -105,16 +105,15 @@ Custom property | Description | Default
     </template>
 
     <script>
+    // Listener for when all i18n HTML imports are loaded
     document.addEventListener('HTMLImportsLoaded', function() {
       I18nMsg.lang = document.documentElement.lang || 'en';
+      I18nMsg.url = '../locales'; // optionally use custom folder for locales.
       Platform.performMicrotaskCheckpoint();
     });
 
     Polymer({
         is: 'mammooc-rating-widget',
-        created: function() {
-          I18nMsg.url = this.resolveUrl('locales');
-        },
         properties: {
             /**
             *    The provider of the course, e.g. "openHPI"
@@ -133,6 +132,7 @@ Custom property | Description | Default
               type: Boolean,
               value: false,
             },
+
             /**
             *   Disable the component showing the detailed evaluations by other users
             */
@@ -140,6 +140,7 @@ Custom property | Description | Default
               type: Boolean,
               value: false,
             },
+
             /**
             *   Disable the component showing the overall rating by other users
             */
@@ -157,17 +158,14 @@ Custom property | Description | Default
 
         },
         _generateRatingUrl: function(provider, courseId) {
-            return "https://mammooc-dev.herokuapp.com/evaluations/export_overall_course_rating?provider=" + this.provider + "&course_id=" + this.courseId;
+            return "e://mammooc-dev.herokuapp.com/evaluations/export_overall_course_rating?provider=" + this.provider + "&course_id=" + this.courseId;
         },
 
         _handleRatingResponse: function(request) {
-
             var evaluation = request.detail.response.evaluations;
 
             this._cumulativeRating = evaluation.overall_rating;
             this._ratingCount = evaluation.number_of_evaluations;
-
-            this.fire('data-loaded');
         },
         listeners: {
           'i18n-language-ready': '_updateStrings'

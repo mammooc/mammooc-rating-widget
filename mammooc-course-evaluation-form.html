@@ -49,7 +49,7 @@ Example:
             }
         </style>
 
-
+        <!-- Library for loading the data from mammooc -->
         <iron-jsonp-library id="evaluationRequest"
             library-url="{{_generateUrl(provider, courseId)}}"
             notify-event="api-load">
@@ -91,9 +91,11 @@ Example:
             </paper-button>
         </form>
 
-        <form method="get" target="_blank" action="https://mammooc-dev.herokuapp.com/evaluations/login_and_save" id="nativeForm">
+        <!-- Send form if user is not logged in -->
+        <form method="post" target="_blank" action="https://mammooc-dev.herokuapp.com/evaluations/login_and_save" id="nativeForm">
         </form>
 
+        <!-- Callback for finished post, flashes success message -->
         <iron-jsonp-library id="postJsonP"
             callback-name="callback"
             notify-event="post-sent">
@@ -108,14 +110,9 @@ Example:
 
     Polymer({
         is: 'mammooc-course-evaluation-form',
-        _i18n: function(msgid) {
-            console.log(I18nMsg.lang);
-            console.log(this.$$('i18n-msg').getMsg(msgid));
-            console.log(msgid);
-            return this.$$('i18n-msg').getMsg(msgid);
-        },
-
         ready: function() {
+          // Every time the window gets focus, send a new request in case of changes on mammooc
+          // _tries is needed because the jsonp library won't resend if the url is the same
             var e = this;
             window.onfocus = function() {
                 e.$.evaluationRequest.libraryUrl = e._generateUrl(e.provider, e.courseId) + '&try=' + e._tries;
@@ -125,6 +122,13 @@ Example:
 
         _postSent: function(event) {
             this.$.successToast.open();
+        },
+
+        _submitForm: function() {
+                if (this.loggedIn)
+                    this._jsonPSubmit();
+                else
+                    this._nativeSubmit();
         },
 
         _jsonPSubmit: function() {
@@ -152,14 +156,6 @@ Example:
             return newFormData;
         },
 
-        _submitForm: function() {
-                if (this.loggedIn)
-                    this._jsonPSubmit();
-                else
-                    this._nativeSubmit();
-        },
-
-
         _nativeSubmit: function() {
             var form = this.$.form;
             var nativeForm = this.$.nativeForm;
@@ -186,8 +182,19 @@ Example:
 
 
         properties: {
+            /**
+            *    The provider of the course, e.g. "openHPI"
+            */
             provider: String,
+
+            /**
+            *   The ID of the course in the provider's system
+            */
             courseId: String,
+
+            /**
+            *   A boolean stating whether the user is logged in on mammooc
+            */
             loggedIn: {
                 type: Boolean,
                 value: false,
@@ -203,13 +210,13 @@ Example:
             'post-sent': '_postSent',
 
         },
+        // Will get called by the mammooc-rating-widget
         _updateStrings: function() {
             this.$$('.description > paper-textarea').placeholder = this.$$('i18n-msg').getMsg('descriptionplaceholder');
             this.$$('.description > paper-textarea').label = this.$$('i18n-msg').getMsg('descriptionlabel');
             this.$$('#successToast').text = this.$$('i18n-msg').getMsg('successtext');
-            
-        },
 
+        },
         _generateUrl: function(provider, courseId) {
             return 'https://mammooc-dev.herokuapp.com/api/current_user_with_evaluation.js?provider='+this.provider + '&course_id=' + this.courseId+'&callback=%%callback%%';
         },

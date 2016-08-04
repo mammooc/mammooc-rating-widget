@@ -7,8 +7,6 @@
 <link rel="import" href="../iron-list/iron-list.html">
 
 
-
-
 <!--
 An element providing course ratings.
 
@@ -90,10 +88,26 @@ Example:
                 type: Object,
                 value: []
             },
+            /**
+            *    The provider of the course, e.g. "openHPI"
+            */
             provider: String,
+
+            /**
+            *   The ID of the course in the provider's system
+            */
             courseId: String,
+
+            /**
+            *   The number of items shown per page
+            */
             perPage: Number,
+
+            /**
+            *   The number of ratings in general
+            */
             ratingCount: Number,
+
             _page: {
               type: Number,
               value: 1
@@ -116,6 +130,7 @@ Example:
           if(this._reachedEnd)
             return;
 
+          // Iron ajax will automatically send a new request wenn the _page changes
           this._page++;
         },
         _handleEvaluationResponse: function(request) {
