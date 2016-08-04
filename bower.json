@@ -16,7 +16,7 @@
     "iron-form-element-behavior": "PolymerElements/iron-form-element-behavior#^1.0.6",
     "iron-form": "PolymerElements/iron-form#^1.0.16",
     "iron-ajax": "PolymerElements/iron-ajax#^1.2.0",
-    "flexible-rating": "mammooc/flexible-rating#^0.2.0",
+    "flexible-rating": "mammooc/flexible-rating#^1.0.0",
     "paper-card": "PolymerElements/paper-card#^1.1.1",
     "paper-styles": "PolymerElements/paper-styles#^1.1.4",
     "paper-input": "PolymerElements/paper-input#^1.1.11",
