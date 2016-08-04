@@ -52,15 +52,15 @@
           disableEvaluationsFixture = fixture('disable-evaluations');
           disableEvaluationFormFixture = fixture('disable-evaluation-form');
         });
-        test('by default all elements are shown', function(done) {
-          flush(function(){
-            var ratingElement = showAllFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
-                evaluationElement = showAllFixture.getElementsByTagName('mammooc-course-evaluation')[0],
-                evaluationFormElement = showAllFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
-            assert.isOk(ratingElement);
-            assert.isOk(evaluationElement);
-            assert.isOk(evaluationFormElement);
-            done();
+        test('by default all elements are shown', function() {
+          showAllFixture.addEventListener('data-loaded', function(event) {
+              var ratingElement = showAllFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
+                  evaluationElement = showAllFixture.getElementsByTagName('mammooc-course-evaluation')[0],
+                  evaluationFormElement = showAllFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
+              assert.isOk(ratingElement);
+              assert.isOk(evaluationElement);
+              assert.isOk(evaluationFormElement);
+              done();
           });
 
         });

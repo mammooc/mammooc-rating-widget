@@ -166,6 +166,8 @@ Custom property | Description | Default
 
             this._cumulativeRating = evaluation.overall_rating;
             this._ratingCount = evaluation.number_of_evaluations;
+
+            this.fire('data-loaded');
         },
         listeners: {
           'i18n-language-ready': '_updateStrings'
