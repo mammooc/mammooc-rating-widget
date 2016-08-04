@@ -13,6 +13,11 @@
                 if (availableLanguages.indexOf(lang) === -1) {
                 	lang = 'en';
                 }
+                // Use correct language code for Chinese (needed for openHPI)
+            	if (lang = "cn") {
+            		lang = "zh";
+            	}
+
                 return lang;
               }
             },
