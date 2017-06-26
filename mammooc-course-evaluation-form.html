@@ -92,7 +92,7 @@ Example:
         </form>
 
         <!-- Send form if user is not logged in -->
-        <form method="post" target="_blank" action="https://mammooc.org/evaluations/login_and_save" id="nativeForm">
+        <form method="post" target="_blank" action="https://mammooc-dev.herokuapp.com/evaluations/login_and_save" id="nativeForm">
         </form>
 
         <!-- Callback for finished post, flashes success message -->
@@ -136,7 +136,7 @@ Example:
 
         _jsonPSubmit: function() {
               var serializedItems = this._serializeFormData();
-              var url = "https://mammooc.org/evaluations/save.js?callback=callback&";
+              var url = "https://mammooc-dev.herokuapp.com/evaluations/save.js?callback=callback&";
               url = url + Object.keys(serializedItems).map(function(k) {
                 return encodeURIComponent(k) + '=' + encodeURIComponent(serializedItems[k])
                 }).join('&');
@@ -214,7 +214,7 @@ Example:
 
         },
         _generateUrl: function(provider, courseId) {
-            return 'https://mammooc.org/api/current_user_with_evaluation.js?provider='+this.provider + '&course_id=' + this.courseId+'&callback=%%callback%%';
+            return 'https://mammooc-dev.herokuapp.com/api/current_user_with_evaluation.js?provider='+this.provider + '&course_id=' + this.courseId+'&callback=%%callback%%';
         },
         _apiLoaded: function(response) {
             var result = response.detail[0];
