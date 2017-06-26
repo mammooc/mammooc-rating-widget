@@ -10,9 +10,8 @@ addons:
     - google-chrome
     packages:
     - google-chrome-stable
-before_script:
-- npm install -g bower web-component-tester
-- bower install
+before_install:
+- npm install -g bower
 script:
 - xvfb-run wct
 env:

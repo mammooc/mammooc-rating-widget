@@ -1,5 +1,9 @@
 bower_components
+node_modules
 
 # Ignore IntelliJ files
 .idea
 *.iml
+
+# Builds
+dist
