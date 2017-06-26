@@ -39,7 +39,7 @@
     "test": "polymer test",
     "postinstall": "bower install",
     "serve": "polymer serve",
-    "bundle": "mkdir -p dist && polymer-bundler mammooc-rating-widget.html > dist/mammooc-rating-widget.html"
+    "bundle": "mkdir -p dist && polymer-bundler --strip-comments mammooc-rating-widget.html > dist/mammooc-rating-widget.html"
   },
   "dependencies": {}
 }
