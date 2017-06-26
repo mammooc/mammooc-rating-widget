@@ -1,0 +1,45 @@
+{
+  "name": "mammooc-rating-widget",
+  "version": "1.0.1",
+  "description": "",
+  "contributors": [
+    {
+      "name": "Paul Arndt"
+    },
+    {
+      "name": "Rosa Braatz"
+    },
+    {
+      "name": "Philipp Fischbeck"
+    },
+    {
+      "name": "Dominic Sauer"
+    },
+    {
+      "name": "Sebastian Serth"
+    }
+  ],
+  "main": "mammooc-rating-widget.html",
+  "homepage": "https://github.com/mammooc/mammooc-rating-widget#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mammooc/mammooc-rating-widget.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mammooc/mammooc-rating-widget/issues"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "polymer-bundler": "^2.1.0"
+  },
+  "scripts": {
+    "test": "polymer test",
+    "postinstall": "bower install",
+    "serve": "polymer serve",
+    "bundle": "mkdir -p dist && polymer-bundler mammooc-rating-widget.html > dist/mammooc-rating-widget.html"
+  },
+  "dependencies": {}
+}
