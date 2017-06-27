@@ -147,9 +147,11 @@ Example:
             var formData = this.$.form.serialize();
             var newFormData = {};
 
-            newFormData['description'] = formData['description'];
+            if (formData['description'] !== undefined || formData['description'] !== null) {
+                newFormData['description'] = formData['description'];
+            }
             newFormData['rating'] = formData['stars'];
-            newFormData['rated_anonymously'] = formData['anonymously'] == 'on';
+            newFormData['rated_anonymously'] = formData['anonymously'] === 'on';
 
             newFormData['course_status'] = this.$$('#status').selected;
 
@@ -201,17 +203,16 @@ Example:
             loggedIn: {
                 type: Boolean,
                 value: false,
-                readOnly: true,
+                readOnly: true
             },
             _tries: {
                 type: Number,
-                value: 0,
+                value: 0
             }
         },
         listeners: {
             'api-load': '_apiLoaded',
-            'post-sent': '_postSent',
-
+            'post-sent': '_postSent'
         },
         _generateUrl: function(provider, courseId) {
             return 'https://mammooc-dev.herokuapp.com/api/current_user_with_evaluation.js?provider='+this.provider + '&course_id=' + this.courseId+'&callback=%%callback%%';
@@ -232,4 +233,4 @@ Example:
         }
     });
     </script>
-<dom-module>
+</dom-module>
