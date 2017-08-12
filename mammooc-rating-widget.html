@@ -67,7 +67,7 @@ Custom property | Description | Default
         }
 
         </style>
-        <iron-ajax auto url="{{_generateRatingUrl(provider, courseId)}}"
+        <iron-ajax id="evaluationsXHR" auto url="{{_generateRatingUrl(provider, courseId)}}"
             on-response="_handleRatingResponse">
         </iron-ajax>
         <paper-card>

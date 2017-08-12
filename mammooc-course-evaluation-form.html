@@ -124,6 +124,7 @@ Example:
         },
 
         _postSent: function(event) {
+            document.getElementById('evaluationsXHR').generateRequest();
             this.$.successToast.open();
         },
 
