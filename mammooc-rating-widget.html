@@ -154,7 +154,7 @@ Custom property | Description | Default
             return "https://mammooc.org/evaluations/export_overall_course_rating?provider=" + this.provider + "&course_id=" + this.courseId;
         },
         _generateCourseUrl: function(provider, courseId) {
-            return "https://mammooc-dev.herokuapp.com/courses/" + this.provider + "~" + this.courseId;
+            return "https://mammooc.org/courses/" + this.provider + "~" + this.courseId;
         },
 
         _handleRatingResponse: function(request) {
