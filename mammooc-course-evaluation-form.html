@@ -124,6 +124,7 @@ Example:
         },
 
         _postSent: function(event) {
+            document.getElementById('evaluationsXHR').generateRequest();
             this.$.successToast.open();
         },
 
@@ -147,7 +148,7 @@ Example:
             var formData = this.$.form.serialize();
             var newFormData = {};
 
-            if (formData['description'] !== undefined || formData['description'] !== null) {
+            if (formData['description'] !== undefined && formData['description'] !== null && formData['description'] !==  '') {
                 newFormData['description'] = formData['description'];
             }
             newFormData['rating'] = formData['stars'];

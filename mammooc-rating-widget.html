@@ -67,7 +67,7 @@ Custom property | Description | Default
         }
 
         </style>
-        <iron-ajax auto url="{{_generateRatingUrl(provider, courseId)}}"
+        <iron-ajax id="evaluationsXHR" auto url="{{_generateRatingUrl(provider, courseId)}}"
             on-response="_handleRatingResponse">
         </iron-ajax>
         <paper-card>
@@ -96,7 +96,7 @@ Custom property | Description | Default
             </div>
           </template>
           <div class="footer">
-            {{localize("poweredby")}} <a target="_blank" href="https://mammooc.org/">mammooc</a>
+            {{localize("poweredby")}} <a target="_blank" href="{{_generateCourseUrl(provider, courseId)}}">mammooc</a>
           </div>
         </paper-card>
     </template>
@@ -123,7 +123,7 @@ Custom property | Description | Default
             */
             disableEvaluationForm: {
               type: Boolean,
-              value: false,
+              value: false
             },
 
             /**
@@ -131,7 +131,7 @@ Custom property | Description | Default
             */
             disableEvaluations: {
               type: Boolean,
-              value: false,
+              value: false
             },
 
             /**
@@ -152,6 +152,9 @@ Custom property | Description | Default
         },
         _generateRatingUrl: function(provider, courseId) {
             return "https://mammooc.org/evaluations/export_overall_course_rating?provider=" + this.provider + "&course_id=" + this.courseId;
+        },
+        _generateCourseUrl: function(provider, courseId) {
+            return "https://mammooc-dev.herokuapp.com/courses/" + this.provider + "~" + this.courseId;
         },
 
         _handleRatingResponse: function(request) {
