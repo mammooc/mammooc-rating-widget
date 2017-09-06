@@ -1,4 +1,8 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-if.html">
+<link rel="import" href="../polymer/lib/utils/flush.html">
+<link rel="import" href="../shadycss/apply-shim.html">
+
 <link rel="import" href="../flexible-rating/flexible-rating.html">
 <link rel="import" href="../iron-form/iron-form.html">
 <link rel="import" href="../paper-styles/typography.html">
@@ -28,9 +32,11 @@ Example:
                     --iron-icon-width: 40px;
                     --primary-color: var(--mammooc-rating-widget-primary-color, #ffac33);
             }
+
             .heading {
-                @apply(--paper-font-headline);
+                @apply --paper-font-headline;
             }
+
             .submit-button {
                 float: right;
             }
@@ -58,41 +64,43 @@ Example:
         <div class="heading">
             {{localize("yourrating")}}
         </div>
-        <form is="iron-form" id="form">
-            <div>
-                <template is="dom-if" if="{{loggedIn}}">
-                    <img id="profile_image"></img>
-                    <div id="profile_name"></div>
-                </template>
-                <div class="description">
-                    <paper-textarea placeholder="{{localize('descriptionplaceholder')}}" name="description" label="{{localize('descriptionlabel')}}"></paper-textarea>
+        <iron-form id="form">
+            <form>
+                <div>
+                    <template is="dom-if" if="{{loggedIn}}">
+                        <img id="profile_image"></img>
+                        <div id="profile_name"></div>
+                    </template>
+                    <div class="description">
+                        <paper-textarea placeholder="{{localize('descriptionplaceholder')}}" name="description" label="{{localize('descriptionlabel')}}" id="description"></paper-textarea>
+                    </div>
                 </div>
-            </div>
-            <label id="statusLabel">
-                {{localize("status")}}
-                </label>
-            <paper-radio-group id="status" aria-labelledby="statusLabel" selected="enrolled">
-                <paper-radio-button name="aborted">
-                    {{localize("aborted")}}
-                </paper-radio-button>
-                <paper-radio-button name="enrolled">
-                    {{localize("enrolled")}}
-                </paper-radio-button>
-                <paper-radio-button name="finished">
-                    {{localize("finished")}}
-                </paper-radio-button>
-            </paper-radio-group>
-            <paper-checkbox id="anonymously" name="anonymously">
-                {{localize("submitanonymously")}}
-            </paper-checkbox>
-            <flexible-rating id="stars" name="stars" required></flexible-rating>
-            <paper-button class="submit-button" raised on-click="_submitForm">
-                {{localize("submit")}}
-            </paper-button>
-        </form>
+                <label id="statusLabel">
+                    {{localize("status")}}
+                    </label>
+                <paper-radio-group id="status" aria-labelledby="statusLabel" selected="enrolled">
+                    <paper-radio-button name="aborted">
+                        {{localize("aborted")}}
+                    </paper-radio-button>
+                    <paper-radio-button name="enrolled">
+                        {{localize("enrolled")}}
+                    </paper-radio-button>
+                    <paper-radio-button name="finished">
+                        {{localize("finished")}}
+                    </paper-radio-button>
+                </paper-radio-group>
+                <paper-checkbox id="anonymously" name="anonymously">
+                    {{localize("submitanonymously")}}
+                </paper-checkbox>
+                <flexible-rating id="stars" name="stars" required></flexible-rating>
+                <paper-button class="submit-button" raised on-click="_submitForm">
+                    {{localize("submit")}}
+                </paper-button>
+            </form>
+        </iron-form>
 
         <!-- Send form if user is not logged in -->
-        <form method="post" target="_blank" action="https://mammooc.org/evaluations/login_and_save" id="nativeForm">
+        <form method="post" target="_blank" action="https://mammooc-dev.herokuapp.com/evaluations/login_and_save" id="nativeForm">
         </form>
 
         <!-- Callback for finished post, flashes success message -->
@@ -106,132 +114,150 @@ Example:
     </template>
 
     <script>
+        "use strict";
+        class MammoocCourseEvaluationForm extends Polymer.mixinBehaviors([
+            MammoocLocalizeBehavior,
+            Polymer.IronJsonpLibraryBehavior
+        ], Polymer.Element) {
 
+            static get is() {
+                return 'mammooc-course-evaluation-form';
+            }
 
-    Polymer({
-        is: 'mammooc-course-evaluation-form',
-        behaviors: [
-            MammoocLocalizeBehavior
-            ],
-        ready: function() {
-          // Every time the window gets focus, send a new request in case of changes on mammooc
-          // _tries is needed because the jsonp library won't resend if the url is the same
-            var e = this;
-            window.onfocus = function() {
-                e.$.evaluationRequest.libraryUrl = e._generateUrl(e.provider, e.courseId) + '&try=' + e._tries;
-                e._tries += 1;
-            };
-        },
+            static get properties() {
+                return {
+                    /**
+                     *    The provider of the course, e.g. "openHPI"
+                     */
+                    provider: {
+                        type: String
+                    },
 
-        _postSent: function(event) {
-            document.getElementById('evaluationsXHR').generateRequest();
-            this.$.successToast.open();
-        },
+                    /**
+                     *   The ID of the course in the provider's system
+                     */
+                    courseId: {
+                        type: String
+                    },
 
-        _submitForm: function() {
+                    /**
+                     *   A boolean stating whether the user is logged in on mammooc
+                     */
+                    loggedIn: {
+                        type: Boolean,
+                        value: false,
+                        readOnly: true
+                    },
+
+                    _tries: {
+                        type: Number,
+                        value: 0
+                    }
+                }
+            }
+
+            static get observers() {
+                return [
+                ]
+            }
+
+            ready() {
+                this.addEventListener('api-load', this._apiLoaded.bind(this));
+                this.addEventListener('post-sent', this._postSent.bind(this));
+                // Every time the window gets focus, send a new request in case of changes on mammooc
+                // _tries is needed because the jsonp library won't resend if the url is the same
+                let e = this;
+                window.onfocus = function() {
+                    e.$.evaluationRequest.libraryUrl = e._generateUrl(e.provider, e.courseId) + '&try=' + e._tries;
+                    e._tries += 1;
+                };
+                super.ready()
+            }
+
+            _postSent(event) {
+                this.parentNode.parentNode.parentNode.querySelector('#evaluationsXHR').generateRequest();
+                this.$.successToast.open();
+            }
+
+            _submitForm() {
                 if (this.loggedIn)
                     this._jsonPSubmit();
                 else
                     this._nativeSubmit();
-        },
+            }
 
-        _jsonPSubmit: function() {
-              var serializedItems = this._serializeFormData();
-              var url = "https://mammooc.org/evaluations/save.js?callback=callback&";
-              url = url + Object.keys(serializedItems).map(function(k) {
-                return encodeURIComponent(k) + '=' + encodeURIComponent(serializedItems[k])
+            _jsonPSubmit() {
+                const serializedItems = this._serializeFormData();
+                let url = "https://mammooc-dev.herokuapp.com/evaluations/save.js?callback=callback&";
+                url = url + Object.keys(serializedItems).map(function(k) {
+                    return encodeURIComponent(k) + '=' + encodeURIComponent(serializedItems[k])
                 }).join('&');
-              this.$$('#postJsonP').libraryUrl = url;
-        },
-
-        _serializeFormData: function() {
-            var formData = this.$.form.serialize();
-            var newFormData = {};
-
-            if (formData['description'] !== undefined && formData['description'] !== null && formData['description'] !==  '') {
-                newFormData['description'] = formData['description'];
-            }
-            newFormData['rating'] = formData['stars'];
-            newFormData['rated_anonymously'] = formData['anonymously'] === 'on';
-
-            newFormData['course_status'] = this.$$('#status').selected;
-
-            newFormData['course_id'] = this.courseId;
-            newFormData['provider'] = this.provider;
-
-            return newFormData;
-        },
-
-        _nativeSubmit: function() {
-            var form = this.$.form;
-            var nativeForm = this.$.nativeForm;
-
-            while (nativeForm.firstChild) {
-                nativeForm.removeChild(nativeForm.firstChild);
+                this.shadowRoot.querySelector('#postJsonP').libraryUrl = url;
             }
 
-            if (form.validate()) {
-              // For each element the iron-form wants to submit, create a hidden
-              // input in the submission form.
-              var serializedItems = this._serializeFormData();
+            _serializeFormData() {
+                const formData = this.$.form.serializeForm();
+                let newFormData = {};
 
-              for (var name in serializedItems) {
-                var input = document.createElement('input');
-                input.hidden = true;
-                input.name = name;
-                input.value = serializedItems[name];
-                nativeForm.appendChild(input);
-              }
-              nativeForm.submit();
+                if (formData['description'] !== undefined && formData['description'] !== null && formData['description'] !==  '') {
+                    newFormData['description'] = formData['description'];
+                }
+                newFormData['rating'] = formData['stars'];
+                newFormData['rated_anonymously'] = formData['anonymously'] === 'on';
+
+                newFormData['course_status'] = this.shadowRoot.querySelector('#status').selected;
+
+                newFormData['course_id'] = this.courseId;
+                newFormData['provider'] = this.provider;
+
+                return newFormData;
             }
-        },
 
+            _nativeSubmit() {
+                const form = this.$.form;
+                let nativeForm = this.$.nativeForm;
 
-        properties: {
-            /**
-            *    The provider of the course, e.g. "openHPI"
-            */
-            provider: String,
+                while (nativeForm.firstChild) {
+                    nativeForm.removeChild(nativeForm.firstChild);
+                }
 
-            /**
-            *   The ID of the course in the provider's system
-            */
-            courseId: String,
+                if (form.validate()) {
+                    // For each element the iron-form wants to submit, create a hidden
+                    // input in the submission form.
+                    const serializedItems = this._serializeFormData();
 
-            /**
-            *   A boolean stating whether the user is logged in on mammooc
-            */
-            loggedIn: {
-                type: Boolean,
-                value: false,
-                readOnly: true
-            },
-            _tries: {
-                type: Number,
-                value: 0
+                    for (const name in serializedItems) {
+                        let input = document.createElement('input');
+                        input.hidden = true;
+                        input.name = name;
+                        input.value = serializedItems[name];
+                        nativeForm.appendChild(input);
+                    }
+                    nativeForm.submit();
+                }
             }
-        },
-        listeners: {
-            'api-load': '_apiLoaded',
-            'post-sent': '_postSent'
-        },
-        _generateUrl: function(provider, courseId) {
-            return 'https://mammooc.org/api/current_user_with_evaluation.js?provider='+this.provider + '&course_id=' + this.courseId+'&callback=%%callback%%';
-        },
-        _apiLoaded: function(response) {
-            var result = response.detail[0];
-            this._setLoggedIn(result.logged_in);
-            Polymer.dom.flush();
-            if (!this.loggedIn) {
-                return;
+
+            _generateUrl(provider, courseId) {
+                return 'https://mammooc-dev.herokuapp.com/api/current_user_with_evaluation.js?provider='+this.provider + '&course_id=' + this.courseId+'&callback=%%callback%%';
             }
-            this.$$('#profile_image').src = result.user.profile_picture;
-            this.$$('#profile_name').innerHTML = result.user.name;
-            this.$.form.description.value = result.evaluation.description;
-            this.$$('#stars').value = result.evaluation.rating;
-            this.$$('#status').selected = result.evaluation.course_status;
-            this.$$('#anonymously').checked = result.evaluation.rated_anonymously;
+
+            _apiLoaded(response) {
+                const result = response.detail[0];
+                this._setLoggedIn(result.logged_in);
+                Polymer.flush();
+                if (!this.loggedIn) {
+                    return;
+                }
+                this.shadowRoot.querySelector('#profile_image').src = result.user.profile_picture;
+                this.shadowRoot.querySelector('#profile_name').innerHTML = result.user.name;
+                this.shadowRoot.querySelector('#description').value = result.evaluation.description;
+                this.shadowRoot.querySelector('#stars').value = result.evaluation.rating;
+                this.shadowRoot.querySelector('#status').selected = result.evaluation.course_status;
+                this.shadowRoot.querySelector('#anonymously').checked = result.evaluation.rated_anonymously;
+            }
         }
-    });
+
+        // Register custom element definition using standard platform API
+        customElements.define(MammoocCourseEvaluationForm.is, MammoocCourseEvaluationForm);
     </script>
 </dom-module>
