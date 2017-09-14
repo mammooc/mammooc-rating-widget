@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="de">
     <head>
-        <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+        <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
         <link rel="import" href="../mammooc-rating-widget.html">
+        <link rel="import" href="../../polymer/polymer-element.html">
         <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
         <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-        <style is="custom-style" include="demo-pages-shared-styles">
-            .vertical-section-container {
-                max-width: 550px;
-            }
-          </style>
+        <custom-style>
+            <style include="demo-pages-shared-styles">
+                .vertical-section-container {
+                    max-width: 550px;
+                }
+            </style>
+        </custom-style>
     </head>
     <body>
-      <div class="vertical-section-container centered">
+    <div class="vertical-section-container centered">
         <h4>A localized element (German)</h4>
         <demo-snippet class="centered-demo">
-          <template>
-            <mammooc-rating-widget provider="open_mammooc" course-id="1" ></mammooc-rating-widget>
-          </template>
+            <template>
+                <mammooc-rating-widget provider="open_mammooc" course-id="1"></mammooc-rating-widget>
+            </template>
         </demo-snippet>
         <a href="index.html">Back</a>
-      </div>
+    </div>
     </body>
 
 

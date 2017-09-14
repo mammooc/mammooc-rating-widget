@@ -1,4 +1,6 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../shadycss/apply-shim.html">
+
 <link rel="import" href="../flexible-rating/flexible-rating.html">
 <link rel="import" href="../paper-styles/typography.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
@@ -30,6 +32,7 @@ Example:
 
             .evaluation-card {
                 min-height: 50px;
+                padding-bottom: 3px;
             }
 
             .evaluation-card img {
@@ -50,8 +53,9 @@ Example:
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
+
             .heading {
-                @apply(--paper-font-headline);
+                @apply --paper-font-headline;
             }
         </style>
         <!-- local DOM goes here -->
@@ -79,75 +83,98 @@ Example:
     </template>
 
     <script>
-
-    Polymer({
-        is: 'mammooc-course-evaluation',
-        behaviors: [
+        "use strict";
+        class MammoocCourseEvaluation extends Polymer.mixinBehaviors([
             MammoocLocalizeBehavior
-        ],
-        properties: {
-            _evaluations: {
-                type: Object,
-                value: []
-            },
-            /**
-            *    The provider of the course, e.g. "openHPI"
-            */
-            provider: String,
+        ], Polymer.Element) {
 
-            /**
-            *   The ID of the course in the provider's system
-            */
-            courseId: String,
-
-            /**
-            *   The number of items shown per page
-            */
-            perPage: Number,
-
-            /**
-            *   The number of ratings in general
-            */
-            ratingCount: Number,
-
-            _page: {
-              type: Number,
-              value: 1
-            },
-            _reachedEnd: {
-                type: Boolean,
-                value: false
+            static get is() {
+                return 'mammooc-course-evaluation';
             }
-        },
-        listeners: {
 
-        },
-        ready: function() {
+            static get properties() {
+                return {
+                    _evaluations: {
+                        type: Object,
+                        value: []
+                    },
 
-        },
-        _generateEvaluationUrl: function(provider, courseId, perPage, page) {
-            return "https://mammooc.org/evaluations/export_course_evaluations?provider=" + provider + "&course_id=" + courseId + "&page=" + page + "&per_page=" + perPage;
-        },
-        _loadMoreData: function() {
-          if(this._reachedEnd)
-            return;
+                    /**
+                     *    The provider of the course, e.g. "openHPI"
+                     */
+                    provider: {
+                        type: String
+                    },
 
-          // Iron ajax will automatically send a new request wenn the _page changes
-          this._page++;
-        },
-        _handleEvaluationResponse: function(request) {
-            var newEvaluations = request.detail.response.evaluations[0].user_evaluations;
-            // If we got less evaluations than requested, we are done
-            if (newEvaluations.length < this.perPage) {
-                this._reachedEnd = true;
+                    /**
+                     *   The ID of the course in the provider's system
+                     */
+                    courseId: {
+                        type: String
+                    },
+
+                    /**
+                     *   The number of items shown per page
+                     */
+                    perPage: {
+                        type: Number
+                    },
+
+                    /**
+                     *   The number of ratings in general
+                     */
+                    ratingCount: {
+                        type: Number
+                    },
+
+                    _page: {
+                        type: Number,
+                        value: 1
+                    },
+
+                    _reachedEnd: {
+                        type: Boolean,
+                        value: false
+                    }
+                }
             }
-            // Add all new evaluations to the list
-            // IMPORTANT: Use Polymer's array mutation methods here in order to prevent scrolling to top
-            for(var i = 0; i < newEvaluations.length; ++i)
-                this.push('_evaluations', newEvaluations[i]);
 
-            this.$.scrollThreshold.clearTriggers();
+            static get observers() {
+                return []
+            }
+
+            ready() {
+                super.ready()
+            }
+
+            _generateEvaluationUrl(provider, courseId, perPage, page) {
+                return "https://mammooc-dev.herokuapp.com/evaluations/export_course_evaluations?provider=" + provider + "&course_id=" + courseId + "&page=" + page + "&per_page=" + perPage;
+            }
+
+            _loadMoreData() {
+                if (this._reachedEnd)
+                    return;
+
+                // Iron ajax will automatically send a new request when the _page changes
+                this._page++;
+            }
+
+            _handleEvaluationResponse(request) {
+                const newEvaluations = request.detail.response.evaluations[0].user_evaluations;
+                // If we got less evaluations than requested, we are done
+                if (newEvaluations.length < this.perPage) {
+                    this._reachedEnd = true;
+                }
+                // Add all new evaluations to the list
+                // IMPORTANT: Use Polymer's array mutation methods here in order to prevent scrolling to top
+                for (let i = 0; i < newEvaluations.length; ++i)
+                    this.push('_evaluations', newEvaluations[i]);
+
+                this.$.scrollThreshold.clearTriggers();
+            }
         }
-    });
+
+        // Register custom element definition using standard platform API
+        customElements.define(MammoocCourseEvaluation.is, MammoocCourseEvaluation);
     </script>
 </dom-module>

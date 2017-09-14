@@ -1,4 +1,7 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/custom-style.html">
+<link rel="import" href="../shadycss/apply-shim.html">
+
 <link rel="import" href="../flexible-rating/flexible-rating.html">
 <link rel="import" href="../paper-styles/typography.html">
 <link rel="import" href="mammooc-localize-behavior.html">
@@ -14,15 +17,18 @@ Example:
 -->
 <dom-module id="mammooc-cumulative-rating">
     <template>
-        <style is="custom-style">
-            :host {
-                --iron-icon-height: 50px;
-                --iron-icon-width: 50px;
-            }
-            .heading {
-                @apply(--paper-font-headline);
-            }
-        </style>
+        <custom-style>
+            <style>
+                :host {
+                    --iron-icon-height: 50px;
+                    --iron-icon-width: 50px;
+                }
+
+                .heading {
+                    @apply --paper-font-headline;
+                }
+            </style>
+        </custom-style>
 
         <!-- local DOM goes here -->
         <div class="heading">
@@ -32,27 +38,43 @@ Example:
     </template>
 
     <script>
-    Polymer({
-        is: 'mammooc-cumulative-rating',
-        behaviors: [
+        "use strict";
+        class MammoocCumulativeRating extends Polymer.mixinBehaviors([
             MammoocLocalizeBehavior
-            ],
-        properties: {
-            /**
-            *   The average rating for the course
-            */
-            cumulativeRating: Number,
-            /**
-            *   The number of ratings for the course
-            */
-            ratingCount: Number
-        },
-        listeners: {
+        ], Polymer.Element) {
 
-        },
-        ready: function() {
+            static get is() {
+                return 'mammooc-cumulative-rating';
+            }
 
+            static get properties() {
+                return {
+                    /**
+                     *   The average rating for the course
+                     */
+                    cumulativeRating: {
+                        type: Number
+                    },
+                    
+                    /**
+                     *   The number of ratings for the course
+                     */
+                    ratingCount: {
+                        type: Number
+                    }
+                }
+            }
+
+            static get observers() {
+                return []
+            }
+
+            ready() {
+                super.ready()
+            }
         }
-    });
+
+        // Register custom element definition using standard platform API
+        customElements.define(MammoocCumulativeRating.is, MammoocCumulativeRating);
     </script>
 </dom-module>

@@ -1,7 +1,7 @@
 {
   "name": "mammooc-rating-widget",
-  "version": "1.0.1",
-  "description": "",
+  "version": "2.0.0",
+  "description": "A Polymer element providing MOOC evaluation support with mammooc",
   "contributors": [
     {
       "name": "Paul Arndt"
@@ -33,7 +33,7 @@
     "test": "test"
   },
   "devDependencies": {
-    "polymer-bundler": "^2.1.0",
+    "polymer-bundler": "^3.0.0",
     "web-component-tester": "^6.0.0"
   },
   "scripts": {
