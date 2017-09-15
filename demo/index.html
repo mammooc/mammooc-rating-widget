@@ -1,33 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
-  <link rel="import" href="../../paper-styles/demo-pages.html">
-  <style>
-    a {
-      display: block;
-      margin-bottom: 10px;
-    }
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="../../polymer/polymer-element.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <custom-style>
+        <style include="demo-pages-shared-styles">
+            .vertical-section-container {
+                max-width: 500px;
+            }
+        </style>
+    </custom-style>
 
-    li {
-      list-style: none;
-    }
-  </style>
+    <style>
+        a {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        li {
+            list-style: none;
+        }
+    </style>
 </head>
-<body unresolved>
-
-  <div class="horizontal-section-container">
+<body>
+<div class="horizontal-section-container">
     <div>
-      <h4>mammooc-rating-widget demos</h4>
-      <ul class="horizontal-section">
-        <li><a href="default.html">The default element</a></li>
-        <li><a href="withoutform.html">Without the form</a></li>
-        <li><a href="onlyoverall.html">Only overall rating</a></li>
-        <li><a href="customstyling.html">Custom styling</a></li>
-        <li><a href="localized.html">Localized</a></li>
-      </ul>
+        <h4>mammooc-rating-widget demos</h4>
+        <ul class="horizontal-section">
+            <li><a href="default.html">The default element</a></li>
+            <li><a href="withoutform.html">Without the form</a></li>
+            <li><a href="onlyoverall.html">Only overall rating</a></li>
+            <li><a href="customstyling.html">Custom styling</a></li>
+            <li><a href="localized.html">Localized</a></li>
+        </ul>
     </div>
-  </div>
-
+</div>
 </body>
+
+
 </html>

@@ -1,4 +1,7 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-if.html">
+<link rel="import" href="../shadycss/apply-shim.html">
+
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-styles/color.html">
@@ -49,22 +52,22 @@ Custom property | Description | Default
               max-width: 100%;
               width: inherit;
               height: auto;
-        };
+          };
 
-        .footer {
-          color: var(--mammooc-rating-widget-secondary-color, #ccd6dd);
-          text-align: center;
-        }
+          .footer {
+            color: var(--mammooc-rating-widget-secondary-color, #ccd6dd);
+            text-align: center;
+          }
 
-        .footer a {
-          color: var(--mammooc-rating-widget-secondary-color, #ccd6dd);
-          text-decoration: underline;
-        }
+          .footer a {
+            color: var(--mammooc-rating-widget-secondary-color, #ccd6dd);
+            text-decoration: underline;
+          }
 
-        .noratings {
-          color: var(--mammooc-rating-widget-secondary-color, #ccd6dd);
-          @apply(--paper-font-headline);
-        }
+          .noratings {
+            color: var(--mammooc-rating-widget-secondary-color, #ccd6dd);
+            @apply --paper-font-headline;
+          }
 
         </style>
         <iron-ajax id="evaluationsXHR" auto url="{{_generateRatingUrl(provider, courseId)}}"
@@ -102,69 +105,91 @@ Custom property | Description | Default
     </template>
 
     <script>
-    Polymer({
-        is: 'mammooc-rating-widget',
-        behaviors: [
-          MammoocLocalizeBehavior
-        ],
-        properties: {
-            /**
-            *    The provider of the course, e.g. "openHPI"
-            */
-            provider: String,
+        "use strict";
+        class MammoocRatingWidget extends Polymer.mixinBehaviors([
+            MammoocLocalizeBehavior
+        ], Polymer.Element) {
 
-            /**
-            *   The ID of the course in the provider's system
-            */
-            courseId: String,
+            static get is() {
+                return 'mammooc-rating-widget';
+            }
 
-            /**
-            *   Disable the form allowing a user to submit an evaluation for the course
-            */
-            disableEvaluationForm: {
-              type: Boolean,
-              value: false
-            },
+            static get properties() {
+                return {
+                    /**
+                     *    The provider of the course, e.g. "openHPI"
+                     */
+                    provider: {
+                        type: String
+                    },
 
-            /**
-            *   Disable the component showing the detailed evaluations by other users
-            */
-            disableEvaluations: {
-              type: Boolean,
-              value: false
-            },
+                    /**
+                     *   The ID of the course in the provider's system
+                     */
+                    courseId: {
+                        type: String
+                    },
 
-            /**
-            *   Disable the component showing the overall rating by other users
-            */
-            disableRating: {
-              type: Boolean,
-              value: false
-            },
+                    /**
+                     *   Disable the form allowing a user to submit an evaluation for the course
+                     */
+                    disableEvaluationForm: {
+                        type: Boolean,
+                        value: false
+                    },
 
-            _cumulativeRating: Number,
-            _ratingCount: {
-              type: Number,
-              value: 0
-            },
-            _evaluations: Object
+                    /**
+                     *   Disable the component showing the detailed evaluations by other users
+                     */
+                    disableEvaluations: {
+                        type: Boolean,
+                        value: false
+                    },
 
-        },
-        _generateRatingUrl: function(provider, courseId) {
-            return "https://mammooc.org/evaluations/export_overall_course_rating?provider=" + this.provider + "&course_id=" + this.courseId;
-        },
-        _generateCourseUrl: function(provider, courseId) {
-            return "https://mammooc.org/courses/" + this.provider + "~" + this.courseId;
-        },
+                    /**
+                     *   Disable the component showing the overall rating by other users
+                     */
+                    disableRating: {
+                        type: Boolean,
+                        value: false
+                    },
 
-        _handleRatingResponse: function(request) {
-            var evaluation = request.detail.response.evaluations;
+                    _cumulativeRating: Number,
+                    _ratingCount: {
+                        type: Number,
+                        value: 0
+                    },
 
-            this._cumulativeRating = evaluation.overall_rating;
-            this._ratingCount = evaluation.number_of_evaluations;
+                    _evaluations: {
+                        type: Object
+                    }
 
-            this.fire('data-loaded');
+                }
+            }
+
+            ready() {
+                super.ready()
+            }
+
+            _generateRatingUrl(provider, courseId) {
+                return "https://mammooc-dev.herokuapp.com/evaluations/export_overall_course_rating?provider=" + this.provider + "&course_id=" + this.courseId;
+            }
+
+            _generateCourseUrl(provider, courseId) {
+                return "https://mammooc-dev.herokuapp.com/courses/" + this.provider + "~" + this.courseId;
+            }
+
+            _handleRatingResponse(request) {
+                const evaluation = request.detail.response.evaluations;
+
+                this._cumulativeRating = evaluation.overall_rating;
+                this._ratingCount = evaluation.number_of_evaluations;
+
+                this.dispatchEvent(new CustomEvent('data-loaded', { bubbles: true, composed: true }));
+            }
         }
-    });
+
+        // Register custom element definition using standard platform API
+        customElements.define(MammoocRatingWidget.is, MammoocRatingWidget);
     </script>
 </dom-module>
