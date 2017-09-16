@@ -32,15 +32,26 @@
   "directories": {
     "test": "test"
   },
+  "dependencies": {},
   "devDependencies": {
     "polymer-bundler": "^3.0.0",
-    "web-component-tester": "^6.0.0"
+    "web-component-tester": "^6.0.0",
+    "eslint": "^4.2.0",
+    "eslint-plugin-html": "^3.1.0",
+    "htmlhint": "^0.9.13",
+    "polymer-cli": "^1.4.0"
   },
   "scripts": {
-    "test": "polymer test",
+    "test": "node_modules/web-component-tester/bin/wct test/index.html",
+    "test-firefox": "node_modules/web-component-tester/bin/wct  test/index.html -l firefox",
+    "test-safari": "node_modules/web-component-tester/bin/wct  test/index.html -l safari",
+    "test-chrome": "node_modules/web-component-tester/bin/wct  test/index.html -l chrome",
+    "testdebugging": "node_modules/web-component-tester/bin/wct -p test/index.html",
+    "lint": "eslint src --ext .html --fix && htmlhint --config .htmlhintrc src/**/*.html index.html && polymer lint",
     "postinstall": "bower install",
     "serve": "polymer serve",
-    "bundle": "mkdir -p dist && polymer-bundler --strip-comments mammooc-rating-widget.html > dist/mammooc-rating-widget.html"
-  },
-  "dependencies": {}
+    "bundle": "polymer build",
+    "analyze": "polymer analyze > analysis.json",
+    "deploy": "./utils/deploy.sh && ./utils/github-pages.sh mammooc mammooc-rating-widget dev && rm -rf ./utils/mammooc-rating-widget"
+  }
 }
