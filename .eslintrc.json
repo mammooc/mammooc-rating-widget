@@ -44,6 +44,7 @@
     "Polymer": false,
     "define": false,
     "require": false,
-    "exports": false
+    "exports": false,
+    "MammoocLocalizeBehavior": true
   }
 }

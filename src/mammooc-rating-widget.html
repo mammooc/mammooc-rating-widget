@@ -95,7 +95,7 @@ Custom property | Description | Default
           </template>
           <template is="dom-if" if="{{!disableEvaluationForm}}">
             <div class="card-actions">
-                <mammooc-course-evaluation-form provider={{provider}} course-id={{courseId}}></mammooc-course-evaluation-form>
+                <mammooc-course-evaluation-form provider="{{provider}}" course-id="{{courseId}}"></mammooc-course-evaluation-form>
             </div>
           </template>
           <div class="footer">
@@ -105,7 +105,7 @@ Custom property | Description | Default
     </template>
 
     <script>
-        "use strict";
+        'use strict';
         class MammoocRatingWidget extends Polymer.mixinBehaviors([
             MammoocLocalizeBehavior
         ], Polymer.Element) {
@@ -164,7 +164,7 @@ Custom property | Description | Default
                         type: Object
                     }
 
-                }
+                };
             }
 
             /**
@@ -175,15 +175,15 @@ Custom property | Description | Default
             }
 
             ready() {
-                super.ready()
+                super.ready();
             }
 
             _generateRatingUrl(provider, courseId) {
-                return "https://mammooc-dev.herokuapp.com/evaluations/export_overall_course_rating?provider=" + this.provider + "&course_id=" + this.courseId;
+                return 'https://mammooc-dev.herokuapp.com/evaluations/export_overall_course_rating?provider=' + provider + '&course_id=' + courseId;
             }
 
             _generateCourseUrl(provider, courseId) {
-                return "https://mammooc-dev.herokuapp.com/courses/" + this.provider + "~" + this.courseId;
+                return 'https://mammooc-dev.herokuapp.com/courses/' + provider + '~' + courseId;
             }
 
             _handleRatingResponse(request) {

@@ -70,7 +70,7 @@ Example:
               <iron-list scroll-target="scrollThreshold" items="[[_evaluations]]" as="evaluation">
                 <template>
                   <div class="evaluation-card">
-                  <img src="{{evaluation.user_profile_picture}}" />
+                  <img src="{{evaluation.user_profile_picture}}" alt="mammooc profile image"/>
                   <div><b>{{evaluation.user_name}}</b> <flexible-rating value="{{evaluation.rating}}" disabled></flexible-rating></div>
                   <div class="evaluation-content">{{evaluation.description}}</div>
                   </div>
@@ -83,7 +83,7 @@ Example:
     </template>
 
     <script>
-        "use strict";
+        'use strict';
         class MammoocCourseEvaluation extends Polymer.mixinBehaviors([
             MammoocLocalizeBehavior
         ], Polymer.Element) {
@@ -136,19 +136,19 @@ Example:
                         type: Boolean,
                         value: false
                     }
-                }
+                };
             }
 
             static get observers() {
-                return []
+                return [];
             }
 
             ready() {
-                super.ready()
+                super.ready();
             }
 
             _generateEvaluationUrl(provider, courseId, perPage, page) {
-                return "https://mammooc-dev.herokuapp.com/evaluations/export_course_evaluations?provider=" + provider + "&course_id=" + courseId + "&page=" + page + "&per_page=" + perPage;
+                return 'https://mammooc-dev.herokuapp.com/evaluations/export_course_evaluations?provider=' + provider + '&course_id=' + courseId + '&page=' + page + '&per_page=' + perPage;
             }
 
             _loadMoreData() {

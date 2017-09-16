@@ -38,7 +38,7 @@ Example:
     </template>
 
     <script>
-        "use strict";
+        'use strict';
         class MammoocCumulativeRating extends Polymer.mixinBehaviors([
             MammoocLocalizeBehavior
         ], Polymer.Element) {
@@ -62,15 +62,15 @@ Example:
                     ratingCount: {
                         type: Number
                     }
-                }
+                };
             }
 
             static get observers() {
-                return []
+                return [];
             }
 
             ready() {
-                super.ready()
+                super.ready();
             }
         }
 

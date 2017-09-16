@@ -68,7 +68,7 @@ Example:
             <form>
                 <div>
                     <template is="dom-if" if="{{loggedIn}}">
-                        <img id="profile_image"></img>
+                        <img id="profile_image" alt="mammooc profile image"/>
                         <div id="profile_name"></div>
                     </template>
                     <div class="description">
@@ -114,7 +114,7 @@ Example:
     </template>
 
     <script>
-        "use strict";
+        'use strict';
         class MammoocCourseEvaluationForm extends Polymer.mixinBehaviors([
             MammoocLocalizeBehavior,
             Polymer.IronJsonpLibraryBehavior
@@ -153,12 +153,12 @@ Example:
                         type: Number,
                         value: 0
                     }
-                }
+                };
             }
 
             static get observers() {
                 return [
-                ]
+                ];
             }
 
             ready() {
@@ -166,15 +166,15 @@ Example:
                 this.addEventListener('post-sent', this._postSent.bind(this));
                 // Every time the window gets focus, send a new request in case of changes on mammooc
                 // _tries is needed because the jsonp library won't resend if the url is the same
-                let e = this;
+                let that = this;
                 window.onfocus = function() {
-                    e.$.evaluationRequest.libraryUrl = e._generateUrl(e.provider, e.courseId) + '&try=' + e._tries;
-                    e._tries += 1;
+                    that.$.evaluationRequest.libraryUrl = that._generateUrl(that.provider, that.courseId) + '&try=' + that._tries;
+                    that._tries += 1;
                 };
-                super.ready()
+                super.ready();
             }
 
-            _postSent(event) {
+            _postSent() {
                 this.getRootNode().host.updateEvaluations();
                 this.$.successToast.open();
             }
@@ -188,29 +188,29 @@ Example:
 
             _jsonPSubmit() {
                 const serializedItems = this._serializeFormData();
-                let url = "https://mammooc-dev.herokuapp.com/evaluations/save.js?callback=callback&";
-                url = url + Object.keys(serializedItems).map(function(k) {
-                    return encodeURIComponent(k) + '=' + encodeURIComponent(serializedItems[k])
-                }).join('&');
+                let url = 'https://mammooc-dev.herokuapp.com/evaluations/save.js?callback=callback&';
+                url = url + Object.keys(serializedItems).map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(serializedItems[k])).join('&');
                 this.shadowRoot.querySelector('#postJsonP').libraryUrl = url;
             }
 
             _serializeFormData() {
+                /* eslint-disable camelcase */
                 const formData = this.$.form.serializeForm();
                 let newFormData = {};
 
-                if (formData['description'] !== undefined && formData['description'] !== null && formData['description'] !==  '') {
-                    newFormData['description'] = formData['description'];
+                if (formData.description !== undefined && formData.description !== null && formData.description !== '') {
+                    newFormData.description = formData.description;
                 }
-                newFormData['rating'] = formData['stars'];
-                newFormData['rated_anonymously'] = formData['anonymously'] === 'on';
+                newFormData.rating = formData.stars;
+                newFormData.rated_anonymously = formData.anonymously === 'on';
 
-                newFormData['course_status'] = this.shadowRoot.querySelector('#status').selected;
+                newFormData.course_status = this.shadowRoot.querySelector('#status').selected;
 
-                newFormData['course_id'] = this.courseId;
-                newFormData['provider'] = this.provider;
+                newFormData.course_id = this.courseId;
+                newFormData.provider = this.provider;
 
                 return newFormData;
+                /* eslint-enable camelcase */
             }
 
             _nativeSubmit() {
@@ -227,18 +227,20 @@ Example:
                     const serializedItems = this._serializeFormData();
 
                     for (const name in serializedItems) {
-                        let input = document.createElement('input');
-                        input.hidden = true;
-                        input.name = name;
-                        input.value = serializedItems[name];
-                        nativeForm.appendChild(input);
+                        if (serializedItems.hasOwnProperty(name)) {
+                            let input = document.createElement('input');
+                            input.hidden = true;
+                            input.name = name;
+                            input.value = serializedItems[name];
+                            nativeForm.appendChild(input);
+                        }
                     }
                     nativeForm.submit();
                 }
             }
 
             _generateUrl(provider, courseId) {
-                return 'https://mammooc-dev.herokuapp.com/api/current_user_with_evaluation.js?provider='+this.provider + '&course_id=' + this.courseId+'&callback=%%callback%%';
+                return 'https://mammooc-dev.herokuapp.com/api/current_user_with_evaluation.js?provider=' + provider + '&course_id=' + courseId + '&callback=%%callback%%';
             }
 
             _apiLoaded(response) {
