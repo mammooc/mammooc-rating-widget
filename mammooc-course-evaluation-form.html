@@ -175,9 +175,7 @@ Example:
             }
 
             _postSent(event) {
-                // TODO: Find a more general way to access the element in the mammooc-rating-widget shadow DOM
-                //       without using a fixed, relative path which might break when introducing additional nodes.
-                this.parentNode.parentNode.parentNode.querySelector('#evaluationsXHR').generateRequest();
+                this.getRootNode().host.updateEvaluations();
                 this.$.successToast.open();
             }
 

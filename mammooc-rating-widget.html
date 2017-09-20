@@ -167,6 +167,13 @@ Custom property | Description | Default
                 }
             }
 
+            /**
+             *  Request the current evaluations present on mammooc and update the visuals accordingly.
+             */
+            updateEvaluations() {
+                this.$.evaluationsXHR.generateRequest();
+            }
+
             ready() {
                 super.ready()
             }
