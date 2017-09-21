@@ -52,6 +52,6 @@
     "serve": "polymer serve",
     "bundle": "polymer build",
     "analyze": "polymer analyze > analysis.json",
-    "deploy": "./utils/deploy.sh && ./utils/github-pages.sh mammooc mammooc-rating-widget dev && rm -rf ./utils/mammooc-rating-widget"
+    "deploy": "./utils/deploy.sh"
   }
 }
