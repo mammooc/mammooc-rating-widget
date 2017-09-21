@@ -555,7 +555,7 @@
               "column": 12
             },
             "end": {
-              "line": 181,
+              "line": 179,
               "column": 13
             }
           },
@@ -568,11 +568,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 183,
+              "line": 181,
               "column": 12
             },
             "end": {
-              "line": 188,
+              "line": 186,
               "column": 13
             }
           },
@@ -585,11 +585,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 190,
+              "line": 188,
               "column": 12
             },
             "end": {
-              "line": 195,
+              "line": 193,
               "column": 13
             }
           },
@@ -602,11 +602,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 197,
+              "line": 195,
               "column": 12
             },
             "end": {
-              "line": 215,
+              "line": 213,
               "column": 13
             }
           },
@@ -619,11 +619,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 217,
+              "line": 215,
               "column": 12
             },
             "end": {
-              "line": 241,
+              "line": 239,
               "column": 13
             }
           },
@@ -636,11 +636,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 243,
+              "line": 241,
               "column": 12
             },
             "end": {
-              "line": 245,
+              "line": 243,
               "column": 13
             }
           },
@@ -660,11 +660,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 247,
+              "line": 245,
               "column": 12
             },
             "end": {
-              "line": 260,
+              "line": 258,
               "column": 13
             }
           },
@@ -685,7 +685,7 @@
           "column": 8
         },
         "end": {
-          "line": 261,
+          "line": 259,
           "column": 9
         }
       },
@@ -914,16 +914,33 @@
       ],
       "methods": [
         {
+          "name": "updateEvaluations",
+          "description": "Request the current evaluations present on mammooc and update the visuals accordingly.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 172,
+              "column": 12
+            },
+            "end": {
+              "line": 174,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
           "name": "ready",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 169,
+              "line": 176,
               "column": 12
             },
             "end": {
-              "line": 171,
+              "line": 178,
               "column": 13
             }
           },
@@ -936,11 +953,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 173,
+              "line": 180,
               "column": 12
             },
             "end": {
-              "line": 175,
+              "line": 182,
               "column": 13
             }
           },
@@ -960,11 +977,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 177,
+              "line": 184,
               "column": 12
             },
             "end": {
-              "line": 179,
+              "line": 186,
               "column": 13
             }
           },
@@ -984,11 +1001,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 181,
+              "line": 188,
               "column": 12
             },
             "end": {
-              "line": 188,
+              "line": 195,
               "column": 13
             }
           },
@@ -1014,7 +1031,7 @@
           "column": 8
         },
         "end": {
-          "line": 189,
+          "line": 196,
           "column": 9
         }
       },
