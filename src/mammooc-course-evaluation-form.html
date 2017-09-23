@@ -250,12 +250,16 @@ Example:
                 if (!this.loggedIn) {
                     return;
                 }
-                this.shadowRoot.querySelector('#profile_image').src = result.user.profile_picture;
-                this.shadowRoot.querySelector('#profile_name').innerHTML = result.user.name;
-                this.shadowRoot.querySelector('#description').value = result.evaluation.description;
-                this.shadowRoot.querySelector('#stars').value = result.evaluation.rating;
-                this.shadowRoot.querySelector('#status').selected = result.evaluation.course_status;
-                this.shadowRoot.querySelector('#anonymously').checked = result.evaluation.rated_anonymously;
+                if (result.user) {
+                    this.shadowRoot.querySelector('#profile_image').src = result.user.profile_picture;
+                    this.shadowRoot.querySelector('#profile_name').innerHTML = result.user.name;
+                }
+                if (result.evaluation) {
+                    this.shadowRoot.querySelector('#description').value = result.evaluation.description;
+                    this.shadowRoot.querySelector('#stars').value = result.evaluation.rating;
+                    this.shadowRoot.querySelector('#status').selected = result.evaluation.course_status;
+                    this.shadowRoot.querySelector('#anonymously').checked = result.evaluation.rated_anonymously;
+                }
             }
         }
 
