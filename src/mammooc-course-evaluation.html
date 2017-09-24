@@ -30,12 +30,16 @@ Example:
                 overflow-y: scroll;
             }
 
-            .evaluation-card {
+            .evaluation-card, .evaluation-card-fixed {
                 min-height: 50px;
                 padding-bottom: 3px;
             }
 
-            .evaluation-card img {
+            .evaluation-card {
+                cursor: pointer;
+            }
+
+            .evaluation-card img, .evaluation-card-fixed img {
                 float: left;
                 width: 50px;
                 height: 50px;
@@ -44,14 +48,43 @@ Example:
                 border: 1px solid var(--mammooc-rating-widget-secondary-color, #9999);
             }
 
-            .evaluation-content {
-                overflow: auto;
-            }
-
-            .evaluation-content {
+            .evaluation-content-short {
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
+            }
+
+            .evaluation-content-long {
+                display: none;
+            }
+
+            .evaluation-card:hover .evaluation-header::after {
+                content: ' [+]';
+                color: var(--mammooc-rating-widget-secondary-color, #9999);
+            }
+
+            .evaluation-card.expanded {
+                padding-bottom: 15px;
+            }
+
+            .evaluation-card.expanded:hover .evaluation-header::after {
+                content: '';
+            }
+
+            .evaluation-card.expanded .evaluation-content-long {
+                display: flex;
+                white-space: normal;
+                text-overflow: initial;
+                overflow: visible;
+            }
+
+            .evaluation-card.expanded .evaluation-content-short {
+                display: none;
+            }
+
+            .evaluation-card.expanded:hover .evaluation-header::after {
+                content: ' [–]';
+                color: var(--mammooc-rating-widget-secondary-color, #9999);
             }
 
             .heading {
@@ -67,12 +100,15 @@ Example:
         </div>
         <div class="evaluations">
             <iron-scroll-threshold id="scrollThreshold" on-lower-threshold="_loadMoreData">
-              <iron-list scroll-target="scrollThreshold" items="[[_evaluations]]" as="evaluation">
+              <iron-list scroll-target="scrollThreshold" items="[[_evaluations]]" as="evaluation" selection-enabled multi-selection>
                 <template>
-                  <div class="evaluation-card">
-                  <img src="{{evaluation.user_profile_picture}}" alt="mammooc profile image"/>
-                  <div><b>{{evaluation.user_name}}</b> <flexible-rating value="{{evaluation.rating}}" disabled></flexible-rating></div>
-                  <div class="evaluation-content">{{evaluation.description}}</div>
+                  <div class$="{{_getClassForEvaluation(evaluation, selected)}}">
+                      <img src="{{evaluation.user_profile_picture}}" alt="mammooc profile image"/>
+                      <div class="evaluation-header">
+                          <flexible-rating value="{{evaluation.rating}}" disabled></flexible-rating> <b>{{evaluation.user_name}}</b>
+                      </div>
+                      <div class="evaluation-content-short">{{evaluation.description}}</div>
+                      <div class="evaluation-content-long">{{evaluation.description}}</div>
                   </div>
                   <br />
                 </template>
@@ -171,6 +207,27 @@ Example:
                     this.push('_evaluations', newEvaluations[i]);
 
                 this.$.scrollThreshold.clearTriggers();
+            }
+
+            _getClassForEvaluation(evaluation, selected) {
+                if (!this._textWillOverflow(evaluation.description)) {
+                    return 'evaluation-card-fixed';
+                }
+                else {
+                    return selected ? 'evaluation-card expanded' : 'evaluation-card';
+                }
+            }
+
+            _textWillOverflow(text) {
+                const tag = document.createElement("div");
+                tag.className = "evaluation-content-short";
+                tag.innerHTML = text;
+
+                this.shadowRoot.querySelector('.evaluations').appendChild(tag);
+                const result = tag.clientWidth < tag.scrollWidth;
+                this.shadowRoot.querySelector('.evaluations').removeChild(tag);
+
+                return result;
             }
         }
 
