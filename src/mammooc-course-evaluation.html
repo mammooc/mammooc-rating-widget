@@ -212,15 +212,14 @@ Example:
             _getClassForEvaluation(evaluation, selected) {
                 if (!this._textWillOverflow(evaluation.description)) {
                     return 'evaluation-card-fixed';
-                }
-                else {
+                } else {
                     return selected ? 'evaluation-card expanded' : 'evaluation-card';
                 }
             }
 
             _textWillOverflow(text) {
-                const tag = document.createElement("div");
-                tag.className = "evaluation-content-short";
+                const tag = document.createElement('div');
+                tag.className = 'evaluation-content-short';
                 tag.innerHTML = text;
 
                 this.shadowRoot.querySelector('.evaluations').appendChild(tag);
