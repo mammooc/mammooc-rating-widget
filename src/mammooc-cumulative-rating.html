@@ -1,9 +1,9 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../polymer/lib/elements/custom-style.html">
-<link rel="import" href="../shadycss/apply-shim.html">
+<link rel="import" href="../../polymer/polymer-element.html">
+<link rel="import" href="../../polymer/lib/elements/custom-style.html">
+<link rel="import" href="../../shadycss/apply-shim.html">
 
-<link rel="import" href="../flexible-rating/flexible-rating.html">
-<link rel="import" href="../paper-styles/typography.html">
+<link rel="import" href="../../flexible-rating/flexible-rating.html">
+<link rel="import" href="../../paper-styles/typography.html">
 <link rel="import" href="mammooc-localize-behavior.html">
 
 <!--
@@ -38,7 +38,7 @@ Example:
     </template>
 
     <script>
-        "use strict";
+        'use strict';
         class MammoocCumulativeRating extends Polymer.mixinBehaviors([
             MammoocLocalizeBehavior
         ], Polymer.Element) {
@@ -62,15 +62,15 @@ Example:
                     ratingCount: {
                         type: Number
                     }
-                }
+                };
             }
 
             static get observers() {
-                return []
+                return [];
             }
 
             ready() {
-                super.ready()
+                super.ready();
             }
         }
 

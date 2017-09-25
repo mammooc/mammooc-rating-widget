@@ -1,18 +1,18 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../polymer/lib/elements/dom-if.html">
-<link rel="import" href="../polymer/lib/utils/flush.html">
-<link rel="import" href="../shadycss/apply-shim.html">
+<link rel="import" href="../../polymer/polymer-element.html">
+<link rel="import" href="../../polymer/lib/elements/dom-if.html">
+<link rel="import" href="../../polymer/lib/utils/flush.html">
+<link rel="import" href="../../shadycss/apply-shim.html">
 
-<link rel="import" href="../flexible-rating/flexible-rating.html">
-<link rel="import" href="../iron-form/iron-form.html">
-<link rel="import" href="../paper-styles/typography.html">
-<link rel="import" href="../paper-input/paper-textarea.html">
-<link rel="import" href="../paper-button/paper-button.html">
-<link rel="import" href="../paper-radio-button/paper-radio-button.html">
-<link rel="import" href="../paper-radio-group/paper-radio-group.html">
-<link rel="import" href="../paper-checkbox/paper-checkbox.html">
-<link rel="import" href="../paper-toast/paper-toast.html">
-<link rel="import" href="../iron-jsonp-library/iron-jsonp-library.html">
+<link rel="import" href="../../flexible-rating/flexible-rating.html">
+<link rel="import" href="../../iron-form/iron-form.html">
+<link rel="import" href="../../paper-styles/typography.html">
+<link rel="import" href="../../paper-input/paper-textarea.html">
+<link rel="import" href="../../paper-button/paper-button.html">
+<link rel="import" href="../../paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../paper-toast/paper-toast.html">
+<link rel="import" href="../../iron-jsonp-library/iron-jsonp-library.html">
 
 
 <!--
@@ -68,7 +68,7 @@ Example:
             <form>
                 <div>
                     <template is="dom-if" if="{{loggedIn}}">
-                        <img id="profile_image"></img>
+                        <img id="profile_image" alt="mammooc profile image"/>
                         <div id="profile_name"></div>
                     </template>
                     <div class="description">
@@ -114,7 +114,7 @@ Example:
     </template>
 
     <script>
-        "use strict";
+        'use strict';
         class MammoocCourseEvaluationForm extends Polymer.mixinBehaviors([
             MammoocLocalizeBehavior,
             Polymer.IronJsonpLibraryBehavior
@@ -153,12 +153,12 @@ Example:
                         type: Number,
                         value: 0
                     }
-                }
+                };
             }
 
             static get observers() {
                 return [
-                ]
+                ];
             }
 
             ready() {
@@ -166,18 +166,16 @@ Example:
                 this.addEventListener('post-sent', this._postSent.bind(this));
                 // Every time the window gets focus, send a new request in case of changes on mammooc
                 // _tries is needed because the jsonp library won't resend if the url is the same
-                let e = this;
+                let that = this;
                 window.onfocus = function() {
-                    e.$.evaluationRequest.libraryUrl = e._generateUrl(e.provider, e.courseId) + '&try=' + e._tries;
-                    e._tries += 1;
+                    that.$.evaluationRequest.libraryUrl = that._generateUrl(that.provider, that.courseId) + '&try=' + that._tries;
+                    that._tries += 1;
                 };
-                super.ready()
+                super.ready();
             }
 
-            _postSent(event) {
-                // TODO: Find a more general way to access the element in the mammooc-rating-widget shadow DOM
-                //       without using a fixed, relative path which might break when introducing additional nodes.
-                this.parentNode.parentNode.parentNode.querySelector('#evaluationsXHR').generateRequest();
+            _postSent() {
+                this.getRootNode().host.updateEvaluations();
                 this.$.successToast.open();
             }
 
@@ -190,29 +188,29 @@ Example:
 
             _jsonPSubmit() {
                 const serializedItems = this._serializeFormData();
-                let url = "https://mammooc.org/evaluations/save.js?callback=callback&";
-                url = url + Object.keys(serializedItems).map(function(k) {
-                    return encodeURIComponent(k) + '=' + encodeURIComponent(serializedItems[k])
-                }).join('&');
+                let url = 'https://mammooc.org/evaluations/save.js?callback=callback&';
+                url = url + Object.keys(serializedItems).map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(serializedItems[k])).join('&');
                 this.shadowRoot.querySelector('#postJsonP').libraryUrl = url;
             }
 
             _serializeFormData() {
+                /* eslint-disable camelcase */
                 const formData = this.$.form.serializeForm();
                 let newFormData = {};
 
-                if (formData['description'] !== undefined && formData['description'] !== null && formData['description'] !==  '') {
-                    newFormData['description'] = formData['description'];
+                if (formData.description !== undefined && formData.description !== null && formData.description !== '') {
+                    newFormData.description = formData.description;
                 }
-                newFormData['rating'] = formData['stars'];
-                newFormData['rated_anonymously'] = formData['anonymously'] === 'on';
+                newFormData.rating = formData.stars;
+                newFormData.rated_anonymously = formData.anonymously === 'on';
 
-                newFormData['course_status'] = this.shadowRoot.querySelector('#status').selected;
+                newFormData.course_status = this.shadowRoot.querySelector('#status').selected;
 
-                newFormData['course_id'] = this.courseId;
-                newFormData['provider'] = this.provider;
+                newFormData.course_id = this.courseId;
+                newFormData.provider = this.provider;
 
                 return newFormData;
+                /* eslint-enable camelcase */
             }
 
             _nativeSubmit() {
@@ -229,18 +227,20 @@ Example:
                     const serializedItems = this._serializeFormData();
 
                     for (const name in serializedItems) {
-                        let input = document.createElement('input');
-                        input.hidden = true;
-                        input.name = name;
-                        input.value = serializedItems[name];
-                        nativeForm.appendChild(input);
+                        if (serializedItems.hasOwnProperty(name)) {
+                            let input = document.createElement('input');
+                            input.hidden = true;
+                            input.name = name;
+                            input.value = serializedItems[name];
+                            nativeForm.appendChild(input);
+                        }
                     }
                     nativeForm.submit();
                 }
             }
 
             _generateUrl(provider, courseId) {
-                return 'https://mammooc.org/api/current_user_with_evaluation.js?provider='+this.provider + '&course_id=' + this.courseId+'&callback=%%callback%%';
+                return 'https://mammooc.org/api/current_user_with_evaluation.js?provider=' + provider + '&course_id=' + courseId + '&callback=%%callback%%';
             }
 
             _apiLoaded(response) {
@@ -250,12 +250,16 @@ Example:
                 if (!this.loggedIn) {
                     return;
                 }
-                this.shadowRoot.querySelector('#profile_image').src = result.user.profile_picture;
-                this.shadowRoot.querySelector('#profile_name').innerHTML = result.user.name;
-                this.shadowRoot.querySelector('#description').value = result.evaluation.description;
-                this.shadowRoot.querySelector('#stars').value = result.evaluation.rating;
-                this.shadowRoot.querySelector('#status').selected = result.evaluation.course_status;
-                this.shadowRoot.querySelector('#anonymously').checked = result.evaluation.rated_anonymously;
+                if (result.user) {
+                    this.shadowRoot.querySelector('#profile_image').src = result.user.profile_picture;
+                    this.shadowRoot.querySelector('#profile_name').innerHTML = result.user.name;
+                }
+                if (result.evaluation) {
+                    this.shadowRoot.querySelector('#description').value = result.evaluation.description;
+                    this.shadowRoot.querySelector('#stars').value = result.evaluation.rating;
+                    this.shadowRoot.querySelector('#status').selected = result.evaluation.course_status;
+                    this.shadowRoot.querySelector('#anonymously').checked = result.evaluation.rated_anonymously;
+                }
             }
         }
 
