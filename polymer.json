@@ -1,5 +1,5 @@
 {
-  "entrypoint": "src/mammooc-rating-widget.html",
+  "entrypoint": "mammooc-rating-widget.html",
   "sources": [
     "src/**/*",
     "bower.json"
