@@ -180,11 +180,11 @@ Custom property | Description | Default
             }
 
             _generateRatingUrl(provider, courseId) {
-                return 'https://mammooc-dev.herokuapp.com/evaluations/export_overall_course_rating?provider=' + provider + '&course_id=' + courseId;
+                return 'https://mammooc.org/evaluations/export_overall_course_rating?provider=' + provider + '&course_id=' + courseId;
             }
 
             _generateCourseUrl(provider, courseId) {
-                return 'https://mammooc-dev.herokuapp.com/courses/' + provider + '~' + courseId;
+                return 'https://mammooc.org/courses/' + provider + '~' + courseId;
             }
 
             _handleRatingResponse(request) {
