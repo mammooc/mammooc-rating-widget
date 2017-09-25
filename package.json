@@ -47,7 +47,7 @@
     "test-safari": "node_modules/web-component-tester/bin/wct  test/index.html -l safari",
     "test-chrome": "node_modules/web-component-tester/bin/wct  test/index.html -l chrome",
     "testdebugging": "node_modules/web-component-tester/bin/wct -p test/index.html",
-    "lint": "eslint src --ext .html --fix && htmlhint --config .htmlhintrc src/**/*.html index.html && polymer lint",
+    "lint": "eslint src --ext .html --fix && htmlhint --config .htmlhintrc src/**/*.html index.html mammooc-rating-widget.html && polymer lint",
     "postinstall": "bower install",
     "serve": "polymer serve",
     "bundle": "polymer build",
