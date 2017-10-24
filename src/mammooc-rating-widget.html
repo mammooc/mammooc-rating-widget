@@ -99,7 +99,7 @@ Custom property | Description | Default
             </div>
           </template>
           <div class="footer">
-            {{localize("poweredby")}} <a target="_blank" href="{{_generateCourseUrl(provider, courseId)}}">mammooc</a>
+            {{localize("poweredby")}} <a target="_blank" href="https://mammooc.org">mammooc</a>
           </div>
         </paper-card>
     </template>
@@ -181,10 +181,6 @@ Custom property | Description | Default
 
             _generateRatingUrl(provider, courseId) {
                 return 'https://mammooc.org/evaluations/export_overall_course_rating?provider=' + provider + '&course_id=' + courseId;
-            }
-
-            _generateCourseUrl(provider, courseId) {
-                return 'https://mammooc.org/courses/' + provider + '~' + courseId;
             }
 
             _handleRatingResponse(request) {
