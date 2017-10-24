@@ -1,6 +1,6 @@
 {
   "name": "mammooc-rating-widget",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A Polymer element providing MOOC evaluation support with mammooc",
   "contributors": [
     {
