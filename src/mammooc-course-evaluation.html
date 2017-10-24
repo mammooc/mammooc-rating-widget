@@ -25,6 +25,14 @@ Example:
                 --iron-icon-width: 20px;
             }
 
+            .heading {
+                display:inline;
+            }
+
+            a {
+                color: var(--mammooc-rating-widget-primary-color, #ffac33);
+            }
+
             .evaluations > iron-scroll-threshold {
                 max-height: 200px;
                 overflow-y: scroll;
@@ -98,6 +106,7 @@ Example:
         <div class="heading">
             {{localize("courseevaluations")}}
         </div>
+        <a target="_blank" href="{{_generateCourseUrl(provider, courseId)}}" >{{localize("seeall")}}</a>
         <div class="evaluations">
             <iron-scroll-threshold id="scrollThreshold" on-lower-threshold="_loadMoreData">
               <iron-list scroll-target="scrollThreshold" items="[[_evaluations]]" as="evaluation" selection-enabled multi-selection>
@@ -181,6 +190,10 @@ Example:
 
             ready() {
                 super.ready();
+            }
+
+            _generateCourseUrl(provider, courseId) {
+                return 'https://mammooc-dev.herokuapp.com/courses/' + provider + '~' + courseId;
             }
 
             _generateEvaluationUrl(provider, courseId, perPage, page) {
