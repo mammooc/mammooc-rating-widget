@@ -4,7 +4,7 @@
     {
       "description": "An element providing an overall rating.\n\nExample:\n\n    <mammooc-cumulative-rating></mammooc-cumulative-rating>",
       "summary": "",
-      "path": "src/mammooc-cumulative-rating.html",
+      "path": "src/mammooc-cumulative-rating.js",
       "properties": [
         {
           "name": "cumulativeRating",
@@ -13,16 +13,18 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 54,
-              "column": 20
+              "line": 56,
+              "column": 12
             },
             "end": {
-              "line": 56,
-              "column": 21
+              "line": 58,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Number"
+            }
           }
         },
         {
@@ -32,16 +34,18 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 61,
-              "column": 20
+              "line": 64,
+              "column": 12
             },
             "end": {
-              "line": 63,
-              "column": 21
+              "line": 66,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Number"
+            }
           }
         }
       ],
@@ -52,16 +56,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 71,
-              "column": 12
+              "line": 74,
+              "column": 4
             },
             "end": {
-              "line": 73,
-              "column": 13
+              "line": 76,
+              "column": 5
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         }
       ],
       "staticMethods": [],
@@ -69,12 +76,12 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 41,
-          "column": 8
+          "line": 20,
+          "column": 0
         },
         "end": {
-          "line": 74,
-          "column": 9
+          "line": 77,
+          "column": 1
         }
       },
       "privacy": "public",
@@ -86,12 +93,12 @@
           "description": "The average rating for the course",
           "sourceRange": {
             "start": {
-              "line": 54,
-              "column": 20
+              "line": 56,
+              "column": 12
             },
             "end": {
-              "line": 56,
-              "column": 21
+              "line": 58,
+              "column": 13
             }
           },
           "metadata": {},
@@ -102,12 +109,12 @@
           "description": "The number of ratings for the course",
           "sourceRange": {
             "start": {
-              "line": 61,
-              "column": 20
+              "line": 64,
+              "column": 12
             },
             "end": {
-              "line": 63,
-              "column": 21
+              "line": 66,
+              "column": 13
             }
           },
           "metadata": {},
@@ -125,25 +132,27 @@
     {
       "description": "An element providing course ratings.\n\nExample:\n\n    <mammooc-course-evaluation></mammooc-course-evaluation>",
       "summary": "",
-      "path": "src/mammooc-course-evaluation.html",
+      "path": "src/mammooc-course-evaluation.js",
       "properties": [
         {
           "name": "_evaluations",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 141,
-              "column": 20
+              "line": 140,
+              "column": 12
             },
             "end": {
-              "line": 144,
-              "column": 21
+              "line": 143,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           },
           "defaultValue": "[]"
         },
@@ -155,15 +164,17 @@
           "sourceRange": {
             "start": {
               "line": 149,
-              "column": 20
+              "column": 12
             },
             "end": {
               "line": 151,
-              "column": 21
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
@@ -173,35 +184,39 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 156,
-              "column": 20
+              "line": 157,
+              "column": 12
             },
             "end": {
-              "line": 158,
-              "column": 21
+              "line": 159,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
           "name": "perPage",
-          "type": "number",
+          "type": "number | null | undefined",
           "description": "The number of items shown per page",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 163,
-              "column": 20
+              "line": 164,
+              "column": 12
             },
             "end": {
-              "line": 165,
-              "column": 21
+              "line": 166,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Number"
+            }
           }
         },
         {
@@ -211,55 +226,61 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 170,
-              "column": 20
+              "line": 172,
+              "column": 12
             },
             "end": {
-              "line": 172,
-              "column": 21
+              "line": 174,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Number"
+            }
           }
         },
         {
           "name": "_page",
-          "type": "number",
+          "type": "number | null | undefined",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 174,
-              "column": 20
+              "line": 176,
+              "column": 12
             },
             "end": {
-              "line": 177,
-              "column": 21
+              "line": 179,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Number"
+            }
           },
           "defaultValue": "1"
         },
         {
           "name": "_reachedEnd",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 179,
-              "column": 20
+              "line": 181,
+              "column": 12
             },
             "end": {
-              "line": 182,
-              "column": 21
+              "line": 184,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         }
@@ -271,16 +292,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 190,
-              "column": 12
+              "line": 192,
+              "column": 4
             },
             "end": {
-              "line": 192,
-              "column": 13
+              "line": 194,
+              "column": 5
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_generateCourseUrl",
@@ -288,12 +312,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 194,
-              "column": 12
+              "line": 196,
+              "column": 4
             },
             "end": {
-              "line": 196,
-              "column": 13
+              "line": 198,
+              "column": 5
             }
           },
           "metadata": {},
@@ -312,12 +336,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 198,
-              "column": 12
+              "line": 200,
+              "column": 4
             },
             "end": {
-              "line": 200,
-              "column": 13
+              "line": 202,
+              "column": 5
             }
           },
           "metadata": {},
@@ -342,16 +366,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 202,
-              "column": 12
+              "line": 204,
+              "column": 4
             },
             "end": {
-              "line": 208,
-              "column": 13
+              "line": 210,
+              "column": 5
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_handleEvaluationResponse",
@@ -359,12 +386,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 210,
-              "column": 12
+              "line": 212,
+              "column": 4
             },
             "end": {
-              "line": 222,
-              "column": 13
+              "line": 224,
+              "column": 5
             }
           },
           "metadata": {},
@@ -372,7 +399,10 @@
             {
               "name": "request"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_getClassForEvaluation",
@@ -380,12 +410,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 224,
-              "column": 12
+              "line": 226,
+              "column": 4
             },
             "end": {
-              "line": 230,
-              "column": 13
+              "line": 232,
+              "column": 5
             }
           },
           "metadata": {},
@@ -404,12 +434,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 232,
-              "column": 12
+              "line": 234,
+              "column": 4
             },
             "end": {
-              "line": 242,
-              "column": 13
+              "line": 244,
+              "column": 5
             }
           },
           "metadata": {},
@@ -425,12 +455,12 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 131,
-          "column": 8
+          "line": 22,
+          "column": 0
         },
         "end": {
-          "line": 243,
-          "column": 9
+          "line": 245,
+          "column": 1
         }
       },
       "privacy": "public",
@@ -443,11 +473,11 @@
           "sourceRange": {
             "start": {
               "line": 149,
-              "column": 20
+              "column": 12
             },
             "end": {
               "line": 151,
-              "column": 21
+              "column": 13
             }
           },
           "metadata": {},
@@ -458,12 +488,12 @@
           "description": "The ID of the course in the provider's system",
           "sourceRange": {
             "start": {
-              "line": 156,
-              "column": 20
+              "line": 157,
+              "column": 12
             },
             "end": {
-              "line": 158,
-              "column": 21
+              "line": 159,
+              "column": 13
             }
           },
           "metadata": {},
@@ -474,28 +504,28 @@
           "description": "The number of items shown per page",
           "sourceRange": {
             "start": {
-              "line": 163,
-              "column": 20
+              "line": 164,
+              "column": 12
             },
             "end": {
-              "line": 165,
-              "column": 21
+              "line": 166,
+              "column": 13
             }
           },
           "metadata": {},
-          "type": "number"
+          "type": "number | null | undefined"
         },
         {
           "name": "rating-count",
           "description": "The number of ratings in general",
           "sourceRange": {
             "start": {
-              "line": 170,
-              "column": 20
+              "line": 172,
+              "column": 12
             },
             "end": {
-              "line": 172,
-              "column": 21
+              "line": 174,
+              "column": 13
             }
           },
           "metadata": {},
@@ -513,7 +543,7 @@
     {
       "description": "An element providing a form for the evaluation of a course.\n\nExample:\n\n    <mammooc-course-evaluation-form></mammooc-course-evaluation-form>",
       "summary": "",
-      "path": "src/mammooc-course-evaluation-form.html",
+      "path": "src/mammooc-course-evaluation-form.js",
       "properties": [
         {
           "name": "provider",
@@ -522,16 +552,18 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 131,
-              "column": 20
+              "line": 128,
+              "column": 12
             },
             "end": {
-              "line": 133,
-              "column": 21
+              "line": 130,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
@@ -541,16 +573,18 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 138,
-              "column": 20
+              "line": 136,
+              "column": 12
             },
             "end": {
-              "line": 140,
-              "column": 21
+              "line": 138,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
@@ -560,38 +594,41 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 145,
-              "column": 20
+              "line": 144,
+              "column": 12
             },
             "end": {
-              "line": 149,
-              "column": 21
+              "line": 148,
+              "column": 13
             }
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false"
         },
         {
           "name": "_tries",
-          "type": "number",
+          "type": "number | null | undefined",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 151,
-              "column": 20
+              "line": 150,
+              "column": 12
             },
             "end": {
-              "line": 154,
-              "column": 21
+              "line": 153,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Number"
+            }
           },
           "defaultValue": "0"
         }
@@ -603,16 +640,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 163,
-              "column": 12
+              "line": 162,
+              "column": 4
             },
             "end": {
-              "line": 174,
-              "column": 13
+              "line": 173,
+              "column": 5
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_postSent",
@@ -620,16 +660,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 176,
-              "column": 12
+              "line": 175,
+              "column": 4
             },
             "end": {
-              "line": 179,
-              "column": 13
+              "line": 178,
+              "column": 5
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_submitForm",
@@ -637,16 +680,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 181,
-              "column": 12
+              "line": 180,
+              "column": 4
             },
             "end": {
-              "line": 186,
-              "column": 13
+              "line": 185,
+              "column": 5
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_jsonPSubmit",
@@ -654,16 +700,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 188,
-              "column": 12
+              "line": 187,
+              "column": 4
             },
             "end": {
-              "line": 193,
-              "column": 13
+              "line": 192,
+              "column": 5
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_serializeFormData",
@@ -671,12 +720,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 195,
-              "column": 12
+              "line": 194,
+              "column": 4
             },
             "end": {
-              "line": 213,
-              "column": 13
+              "line": 212,
+              "column": 5
             }
           },
           "metadata": {},
@@ -688,16 +737,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 215,
-              "column": 12
+              "line": 214,
+              "column": 4
             },
             "end": {
-              "line": 239,
-              "column": 13
+              "line": 238,
+              "column": 5
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_generateUrl",
@@ -705,12 +757,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 241,
-              "column": 12
+              "line": 240,
+              "column": 4
             },
             "end": {
-              "line": 243,
-              "column": 13
+              "line": 242,
+              "column": 5
             }
           },
           "metadata": {},
@@ -729,12 +781,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 245,
-              "column": 12
+              "line": 244,
+              "column": 4
             },
             "end": {
-              "line": 262,
-              "column": 13
+              "line": 261,
+              "column": 5
             }
           },
           "metadata": {},
@@ -742,7 +794,10 @@
             {
               "name": "response"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         }
       ],
       "staticMethods": [],
@@ -750,12 +805,12 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 117,
-          "column": 8
+          "line": 29,
+          "column": 0
         },
         "end": {
-          "line": 263,
-          "column": 9
+          "line": 262,
+          "column": 1
         }
       },
       "privacy": "public",
@@ -767,12 +822,12 @@
           "description": "The provider of the course, e.g. \"openHPI\"",
           "sourceRange": {
             "start": {
-              "line": 131,
-              "column": 20
+              "line": 128,
+              "column": 12
             },
             "end": {
-              "line": 133,
-              "column": 21
+              "line": 130,
+              "column": 13
             }
           },
           "metadata": {},
@@ -783,12 +838,12 @@
           "description": "The ID of the course in the provider's system",
           "sourceRange": {
             "start": {
-              "line": 138,
-              "column": 20
+              "line": 136,
+              "column": 12
             },
             "end": {
-              "line": 140,
-              "column": 21
+              "line": 138,
+              "column": 13
             }
           },
           "metadata": {},
@@ -799,12 +854,12 @@
           "description": "A boolean stating whether the user is logged in on mammooc",
           "sourceRange": {
             "start": {
-              "line": 145,
-              "column": 20
+              "line": 144,
+              "column": 12
             },
             "end": {
-              "line": 149,
-              "column": 21
+              "line": 148,
+              "column": 13
             }
           },
           "metadata": {},
@@ -822,7 +877,7 @@
     {
       "description": "An element providing a rating widget for [mammooc.org](https://mammooc.org/), the platform for managing and evaluating MOOCs.\n\nExample:\n\n    <mammooc-rating-widget provider=\"openHPI\" course-id=\"2\">\n    </mammooc-rating-widget>\n\nThe element consists of three smaller elements: one displaying the overall rating by other users, one displaying detailed evaluations by other users, and one form allowing the user to submit an evaluation for the course.\n\nAll of these can be disabled with the attributes `disable-rating`, `disable-evaluations` and `disable-evaluation-form`.\n\n### Styling\n\n`<mammooc-rating-widget>` provides the following custom properties and mixins\nfor styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--mammooc-rating-widget-primary-color` | The primary color used for filled stars and highlights | #ffac33\n`--mammooc-rating-widget-secondary-color` | The secondary color used for unfilled stars and secondary text | #ccd6dd\n`--mammooc-rating-widget-background-color` | Background color of the entire widget | #fff",
       "summary": "",
-      "path": "src/mammooc-rating-widget.html",
+      "path": "src/mammooc-rating-widget.js",
       "properties": [
         {
           "name": "provider",
@@ -831,16 +886,18 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 121,
-              "column": 20
+              "line": 123,
+              "column": 12
             },
             "end": {
-              "line": 123,
-              "column": 21
+              "line": 125,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
@@ -850,16 +907,18 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 128,
-              "column": 20
+              "line": 131,
+              "column": 12
             },
             "end": {
-              "line": 130,
-              "column": 21
+              "line": 133,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
@@ -869,16 +928,18 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 135,
-              "column": 20
+              "line": 139,
+              "column": 12
             },
             "end": {
-              "line": 138,
-              "column": 21
+              "line": 142,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
@@ -889,16 +950,18 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 143,
-              "column": 20
+              "line": 148,
+              "column": 12
             },
             "end": {
-              "line": 146,
-              "column": 21
+              "line": 151,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
@@ -909,75 +972,83 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 151,
-              "column": 20
+              "line": 157,
+              "column": 12
             },
             "end": {
-              "line": 154,
-              "column": 21
+              "line": 160,
+              "column": 13
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "_cumulativeRating",
-          "type": "number",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 156,
-              "column": 20
-            },
-            "end": {
-              "line": 156,
-              "column": 45
-            }
-          },
-          "metadata": {
-            "polymer": {}
-          }
-        },
-        {
-          "name": "_ratingCount",
-          "type": "number",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 157,
-              "column": 20
-            },
-            "end": {
-              "line": 160,
-              "column": 21
-            }
-          },
-          "metadata": {
-            "polymer": {}
-          },
-          "defaultValue": "0"
-        },
-        {
-          "name": "_evaluations",
-          "type": "Object",
+          "type": "number | null | undefined",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
               "line": 162,
-              "column": 20
+              "column": 12
             },
             "end": {
-              "line": 164,
-              "column": 21
+              "line": 162,
+              "column": 37
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Number"
+            }
+          }
+        },
+        {
+          "name": "_ratingCount",
+          "type": "number | null | undefined",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 163,
+              "column": 12
+            },
+            "end": {
+              "line": 166,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Number"
+            }
+          },
+          "defaultValue": "0"
+        },
+        {
+          "name": "_evaluations",
+          "type": "Object | null | undefined",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 168,
+              "column": 12
+            },
+            "end": {
+              "line": 170,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Object"
+            }
           }
         }
       ],
@@ -988,12 +1059,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 173,
-              "column": 12
+              "line": 179,
+              "column": 4
             },
             "end": {
-              "line": 175,
-              "column": 13
+              "line": 181,
+              "column": 5
             }
           },
           "metadata": {},
@@ -1008,16 +1079,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 177,
-              "column": 12
+              "line": 183,
+              "column": 4
             },
             "end": {
-              "line": 179,
-              "column": 13
+              "line": 185,
+              "column": 5
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_generateRatingUrl",
@@ -1025,12 +1099,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 181,
-              "column": 12
+              "line": 187,
+              "column": 4
             },
             "end": {
-              "line": 183,
-              "column": 13
+              "line": 189,
+              "column": 5
             }
           },
           "metadata": {},
@@ -1049,12 +1123,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 185,
-              "column": 12
+              "line": 191,
+              "column": 4
             },
             "end": {
-              "line": 192,
-              "column": 13
+              "line": 198,
+              "column": 5
             }
           },
           "metadata": {},
@@ -1062,7 +1136,10 @@
             {
               "name": "request"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         }
       ],
       "staticMethods": [],
@@ -1075,12 +1152,12 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 108,
-          "column": 8
+          "line": 44,
+          "column": 0
         },
         "end": {
-          "line": 193,
-          "column": 9
+          "line": 199,
+          "column": 1
         }
       },
       "privacy": "public",
@@ -1092,12 +1169,12 @@
           "description": "The provider of the course, e.g. \"openHPI\"",
           "sourceRange": {
             "start": {
-              "line": 121,
-              "column": 20
+              "line": 123,
+              "column": 12
             },
             "end": {
-              "line": 123,
-              "column": 21
+              "line": 125,
+              "column": 13
             }
           },
           "metadata": {},
@@ -1108,12 +1185,12 @@
           "description": "The ID of the course in the provider's system",
           "sourceRange": {
             "start": {
-              "line": 128,
-              "column": 20
+              "line": 131,
+              "column": 12
             },
             "end": {
-              "line": 130,
-              "column": 21
+              "line": 133,
+              "column": 13
             }
           },
           "metadata": {},
@@ -1124,12 +1201,12 @@
           "description": "Disable the form allowing a user to submit an evaluation for the course",
           "sourceRange": {
             "start": {
-              "line": 135,
-              "column": 20
+              "line": 139,
+              "column": 12
             },
             "end": {
-              "line": 138,
-              "column": 21
+              "line": 142,
+              "column": 13
             }
           },
           "metadata": {},
@@ -1140,12 +1217,12 @@
           "description": "Disable the component showing the detailed evaluations by other users",
           "sourceRange": {
             "start": {
-              "line": 143,
-              "column": 20
+              "line": 148,
+              "column": 12
             },
             "end": {
-              "line": 146,
-              "column": 21
+              "line": 151,
+              "column": 13
             }
           },
           "metadata": {},
@@ -1156,12 +1233,12 @@
           "description": "Disable the component showing the overall rating by other users",
           "sourceRange": {
             "start": {
-              "line": 151,
-              "column": 20
+              "line": 157,
+              "column": 12
             },
             "end": {
-              "line": 154,
-              "column": 21
+              "line": 160,
+              "column": 13
             }
           },
           "metadata": {},
@@ -1181,7 +1258,7 @@
     {
       "description": "",
       "summary": "",
-      "path": "src/mammooc-localize-behavior.html",
+      "path": "src/mammooc-localize-behavior.js",
       "properties": [],
       "methods": [],
       "staticMethods": [],
@@ -1189,12 +1266,12 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 4,
-          "column": 4
+          "line": 3,
+          "column": 0
         },
         "end": {
-          "line": 104,
-          "column": 5
+          "line": 103,
+          "column": 1
         }
       },
       "privacy": "public",

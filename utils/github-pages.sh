@@ -29,21 +29,26 @@ git checkout --orphan gh-pages
 # remove all content
 git rm -rf -q .
 
-# use bower to install runtime deployment
-bower cache clean $repo # ensure we're getting the latest from the desired branch.
-git show origin/${branch}:bower.json > bower.json
-echo "{
-  \"directory\": \"components\"
-}
-" > .bowerrc
-bower install
-bower install $org/$repo#$branch
+# use npm to install runtime deployment
+git show origin/${branch}:package.json > package.json
+npm install --ignore-scripts
+npm install $org/$repo#$branch --force --ignore-scripts
+find node_modules -name "*.md" -type f -delete # Prevents build bug on GH pages
+find node_modules -name "*.exe" -type f -delete # Prevents binary warning on GH pages
+
+find . -type f -name "*.js" -print0 | xargs -0 sed -i '' -e "s/'@polymer\//'\/mammooc-rating-widget\/node_modules\/@polymer\//g"
+find . -type f -name "*.js" -print0 | xargs -0 sed -i '' -e "s/'@webcomponents\//'\/mammooc-rating-widget\/node_modules\/@webcomponents\//g"
+find . -type f -name "*.html" -print0 | xargs -0 sed -i '' -e "s/'@polymer\//'\/mammooc-rating-widget\/node_modules\/@polymer\//g"
+find . -type f -name "*.html" -print0 | xargs -0 sed -i '' -e "s/'@webcomponents\//'\/mammooc-rating-widget\/node_modules\/@webcomponents\//g"
+find . -type f -name "*.js" -print0 | xargs -0 sed -i '' -e "s/import 'marked\//import '\/mammooc-rating-widget\/node_modules\/marked\//g"
+find . -type f -name "*.js" -print0 | xargs -0 sed -i '' -e "s/import 'prismjs\//import '\/mammooc-rating-widget\/node_modules\/prismjs\//g"
+
 git checkout origin/${branch} -- demo
-rm -rf components/$repo/demo
-mv demo components/$repo/
+rm -rf node_modules/$repo/demo
+mv demo node_modules/$repo/
 
 # redirect by default to the component folder
-echo "<META http-equiv="refresh" content=\"0;URL=components/$repo/\">" >index.html
+echo "<META http-equiv="refresh" content=\"0;URL=node_modules/$repo/\">" >index.html
 
 # send it all to github
 git add -A .
