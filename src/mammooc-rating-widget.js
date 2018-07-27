@@ -105,7 +105,7 @@ class MammoocRatingWidget extends mixinBehaviors([
             </div>
           </template>
           <div class="footer">
-            {{localize("poweredby")}} <a target="_blank" href="https://mammooc-dev.herokuapp.com">mammooc</a>
+            {{localize("poweredby")}} <a target="_blank" href="https://mammooc.org">mammooc</a>
           </div>
         </paper-card>
 `;
@@ -186,7 +186,7 @@ class MammoocRatingWidget extends mixinBehaviors([
     }
 
     _generateRatingUrl(provider, courseId) {
-        return 'https://mammooc-dev.herokuapp.com/evaluations/export_overall_course_rating?provider=' + provider + '&course_id=' + courseId;
+        return 'https://mammooc.org/evaluations/export_overall_course_rating?provider=' + provider + '&course_id=' + courseId;
     }
 
     _handleRatingResponse(request) {

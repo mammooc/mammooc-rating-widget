@@ -105,7 +105,7 @@ class MammoocCourseEvaluationForm extends mixinBehaviors([
         </iron-form>
 
         <!-- Send form if user is not logged in -->
-        <form method="post" target="_blank" action="https://mammooc-dev.herokuapp.com/evaluations/login_and_save" id="nativeForm">
+        <form method="post" target="_blank" action="https://mammooc.org/evaluations/login_and_save" id="nativeForm">
         </form>
 
         <!-- Callback for finished post, flashes success message -->
@@ -187,7 +187,7 @@ class MammoocCourseEvaluationForm extends mixinBehaviors([
 
     _jsonPSubmit() {
         const serializedItems = this._serializeFormData();
-        let url = 'https://mammooc-dev.herokuapp.com/evaluations/save.js?callback=callback&';
+        let url = 'https://mammooc.org/evaluations/save.js?callback=callback&';
         url = url + Object.keys(serializedItems).map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(serializedItems[k])).join('&');
         this.shadowRoot.querySelector('#postJsonP').libraryUrl = url;
     }
@@ -239,7 +239,7 @@ class MammoocCourseEvaluationForm extends mixinBehaviors([
     }
 
     _generateUrl(provider, courseId) {
-        return 'https://mammooc-dev.herokuapp.com/api/current_user_with_evaluation.js?provider=' + provider + '&course_id=' + courseId + '&callback=%%callback%%';
+        return 'https://mammooc.org/api/current_user_with_evaluation.js?provider=' + provider + '&course_id=' + courseId + '&callback=%%callback%%';
     }
 
     _apiLoaded(response) {
