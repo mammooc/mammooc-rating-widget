@@ -1,43 +1,69 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-    <link rel="import" href="../../polymer/polymer-element.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <custom-style>
-        <style include="demo-pages-shared-styles">
-            .vertical-section-container {
-                max-width: 500px;
-            }
-        </style>
-    </custom-style>
+    <head>
+        <script src="../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+        <script type="module" src="../../@polymer/polymer/polymer-element.js"></script>
+        <script type="module" src="../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
+        <script type="module" src="../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+        <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+        <script type="module">
+            const $_documentContainer = document.createElement('template');
 
-    <style>
-        a {
-            display: block;
-            margin-bottom: 10px;
-        }
+            $_documentContainer.innerHTML = `<custom-style>
+                    <style include="demo-pages-shared-styles">
+                        .vertical-section-container {
+                            max-width: 500px;
+                        }
+                    </style>
+                </custom-style>`;
 
-        li {
-            list-style: none;
-        }
-    </style>
-</head>
-<body>
-<div class="horizontal-section-container">
-    <div>
-        <h4>mammooc-rating-widget demos</h4>
-        <ul class="horizontal-section">
-            <li><a href="default.html">The default element</a></li>
-            <li><a href="withoutform.html">Without the form</a></li>
-            <li><a href="onlyoverall.html">Only overall rating</a></li>
-            <li><a href="customstyling.html">Custom styling</a></li>
-            <li><a href="localized.html">Localized</a></li>
-        </ul>
-    </div>
-</div>
-</body>
+            document.body.appendChild($_documentContainer.content);
+        </script>
+
+        <script type="module">
+            const $_documentContainer = document.createElement('template');
+
+            $_documentContainer.innerHTML = `<style>
+                    a {
+                        display: block;
+                        margin-bottom: 10px;
+                    }
+
+                    li {
+                        list-style: none;
+                    }
+                </style>`;
+
+            document.body.appendChild($_documentContainer.content);
+        </script>
+    </head>
+    <body>
+        <script type="module">
+            const $_documentContainer = document.createElement('template');
+
+            $_documentContainer.innerHTML = `<div class="horizontal-section-container">
+                <div>
+                    <h4>mammooc-rating-widget demos</h4>
+                    <ul class="horizontal-section">
+                        <li><a href="default.html">The default element</a></li>
+                        <li><a href="withoutform.html">Without the form</a></li>
+                        <li><a href="onlyoverall.html">Only overall rating</a></li>
+                        <li><a href="customstyling.html">Custom styling</a></li>
+                        <li><a href="localized.html">Localized</a></li>
+                    </ul>
+                </div>
+            </div>`;
+
+            document.body.appendChild($_documentContainer.content);
+        </script>
+    </body>
 
 
 </html>

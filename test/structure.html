@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../../wct-browser-legacy/browser.js"></script>
     <!-- import the element to test -->
-    <link rel="import" href="../src/mammooc-rating-widget.html">
+    <script type="module" src="../src/mammooc-rating-widget.js"></script>
   </head>
   <body>
       <test-fixture id="show-all">
@@ -38,14 +38,15 @@
           </mammooc-rating-widget>
         </template>
       </test-fixture>
-    <script>
+    <script type="module">
+      import '../src/mammooc-rating-widget.js';
       suite('<mammooc-rating-widget>', function() {
-        var showAllFixture,
-            disableAllFixture,
-            disableRatingFixture,
-            disableEvaluationsFixture,
-            disableEvaluationFormFixture;
-        setup(function() {
+          let showAllFixture,
+              disableAllFixture,
+              disableRatingFixture,
+              disableEvaluationsFixture,
+              disableEvaluationFormFixture;
+          setup(function() {
           showAllFixture = fixture('show-all');
           disableAllFixture = fixture('disable-all');
           disableRatingFixture = fixture('disable-rating');
@@ -54,9 +55,9 @@
         });
         test('by default all elements are shown', function() {
           showAllFixture.addEventListener('data-loaded', function(event) {
-              var ratingElement = showAllFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
-                  evaluationElement = showAllFixture.getElementsByTagName('mammooc-course-evaluation')[0],
-                  evaluationFormElement = showAllFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
+              const ratingElement = showAllFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
+                    evaluationElement = showAllFixture.getElementsByTagName('mammooc-course-evaluation')[0],
+                    evaluationFormElement = showAllFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
               assert.isOk(ratingElement);
               assert.isOk(evaluationElement);
               assert.isOk(evaluationFormElement);
@@ -65,9 +66,9 @@
         });
         test('all elements can be disabled', function() {
           showAllFixture.addEventListener('data-loaded', function(event) {
-            var ratingElement = disableAllFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
-                evaluationElement = disableAllFixture.getElementsByTagName('mammooc-course-evaluation')[0],
-                evaluationFormElement = disableAllFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
+            const ratingElement = disableAllFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
+                  evaluationElement = disableAllFixture.getElementsByTagName('mammooc-course-evaluation')[0],
+                  evaluationFormElement = disableAllFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
             assert.isNotOk(ratingElement);
             assert.isNotOk(evaluationElement);
             assert.isNotOk(evaluationFormElement);
@@ -75,9 +76,9 @@
         });
         test('only the rating element can be disabled', function() {
           showAllFixture.addEventListener('data-loaded', function(event) {
-            var ratingElement = disableRatingFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
-                evaluationElement = disableRatingFixture.getElementsByTagName('mammooc-course-evaluation')[0],
-                evaluationFormElement = disableRatingFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
+            const ratingElement = disableRatingFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
+                  evaluationElement = disableRatingFixture.getElementsByTagName('mammooc-course-evaluation')[0],
+                  evaluationFormElement = disableRatingFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
             assert.isNotOk(ratingElement);
             assert.isOk(evaluationElement);
             assert.isOk(evaluationFormElement);
@@ -85,9 +86,9 @@
         });
         test('only the evualtions element can be disabled', function() {
           showAllFixture.addEventListener('data-loaded', function(event) {
-            var ratingElement = disableEvaluationsFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
-                evaluationElement = disableEvaluationsFixture.getElementsByTagName('mammooc-course-evaluation')[0],
-                evaluationFormElement = disableEvaluationsFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
+            const ratingElement = disableEvaluationsFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
+                  evaluationElement = disableEvaluationsFixture.getElementsByTagName('mammooc-course-evaluation')[0],
+                  evaluationFormElement = disableEvaluationsFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
             assert.isOk(ratingElement);
             assert.isNotOk(evaluationElement);
             assert.isOk(evaluationFormElement);
@@ -95,9 +96,9 @@
         });
         test('only the rating evaluation form element can be disabled', function() {
           showAllFixture.addEventListener('data-loaded', function(event) {
-            var ratingElement = disableEvaluationFormFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
-                evaluationElement = disableEvaluationFormFixture.getElementsByTagName('mammooc-course-evaluation')[0],
-                evaluationFormElement = disableEvaluationFormFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
+            const ratingElement = disableEvaluationFormFixture.getElementsByTagName('mammooc-cumulative-rating')[0],
+                  evaluationElement = disableEvaluationFormFixture.getElementsByTagName('mammooc-course-evaluation')[0],
+                  evaluationFormElement = disableEvaluationFormFixture.getElementsByTagName('mammooc-course-evaluation-form')[0];
             assert.isOk(ratingElement);
             assert.isOk(evaluationElement);
             assert.isNotOk(evaluationFormElement);
