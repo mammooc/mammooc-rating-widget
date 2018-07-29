@@ -42,6 +42,10 @@ find . -type f -name "*.html" -print0 | xargs -0 sed -i '' -e "s/'@polymer\//'\/
 find . -type f -name "*.html" -print0 | xargs -0 sed -i '' -e "s/'@webcomponents\//'\/mammooc-rating-widget\/node_modules\/@webcomponents\//g"
 find . -type f -name "*.js" -print0 | xargs -0 sed -i '' -e "s/import 'marked\//import '\/mammooc-rating-widget\/node_modules\/marked\//g"
 find . -type f -name "*.js" -print0 | xargs -0 sed -i '' -e "s/import 'prismjs\//import '\/mammooc-rating-widget\/node_modules\/prismjs\//g"
+find . -type f -name "*.js" -print0 | xargs -0 sed -i '' -e "s/import 'flexible-rating\//import '\/mammooc-rating-widget\/node_modules\/flexible-rating\//g"
+find . -type f -name "*.js" -print0 | xargs -0 sed -i '' -e "s/from 'intl-messageformat'/from '\/mammooc-rating-widget\/node_modules\/intl-messageformat\/src\/main.js'/g"
+find . -type f -name "*.js" -print0 | xargs -0 sed -i '' -e "s/from 'intl-messageformat-parser'/from '\/mammooc-rating-widget\/node_modules\/intl-messageformat-parser\/src\/parser.js'/g"
+find . -type f -name "*.js" -print0 | xargs -0 perl -pi -e 's/(import.*'\''.*)(?<!\.js)'\'';/$1.js'\'';/g'
 
 git checkout origin/${branch} -- demo
 rm -rf node_modules/$repo/demo
