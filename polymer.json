@@ -1,8 +1,7 @@
 {
   "entrypoint": "mammooc-rating-widget.js",
   "sources": [
-    "src/**/*",
-    "package.json"
+    "src/**/*"
   ],
   "lint": {
     "rules": [
