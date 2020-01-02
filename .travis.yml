@@ -10,8 +10,6 @@ addons:
       - google-chrome
     packages:
       - google-chrome-stable
-before_install:
-  - npm install -g bower
 script: xvfb-run wct --module-resolution=node --npm
 env:
   global:
