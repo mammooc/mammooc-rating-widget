@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" name="viewport">
+
+    <title>mammooc-rating-widget demo only overall</title>
+
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <script type="module" src="../../../@polymer/polymer/polymer-element.js"></script>
+    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
+    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../../src/elements/mammooc-rating-widget.js"></script>
+
+    <!-- Bug fix by polymer-modulizer:
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+    -->
+    <script type="module">
+        import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+
+        const template = html`<custom-style>
+                <style include="demo-pages-shared-styles">
+                    .vertical-section-container {
+                        max-width: 550px;
+                    }
+                </style>
+            </custom-style>`;
+
+        document.body.appendChild(template.content);
+    </script>
+</head>
+<body>
+    <div class="vertical-section-container centered">
+        <span>
+            Ensure you are signed in on <a href="https://mammooc-dev.herokuapp.com/">mammooc-dev on Heroku</a>. <br/>
+            <p>
+                You might use these seed credentials: <br/>
+                username: <code>max@example.com</code> <br/>
+                password: <code>12345678</code>
+            </p>
+        </span>
+
+        <h4>An element only showing the overall rating</h4>
+        <demo-snippet class="centered-demo">
+            <template>
+                <mammooc-rating-widget disable-evaluations="" disable-evaluation-form="" provider="open_mammooc" course-id="1"></mammooc-rating-widget>
+            </template>
+        </demo-snippet>
+        <a href="index.html">Back</a>
+    </div>
+</body>
+
+</html>
