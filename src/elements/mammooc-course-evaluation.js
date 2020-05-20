@@ -185,11 +185,11 @@ class MammoocCourseEvaluation extends MammoocLocalizeMixin(PolymerElement) {
     }
 
     _generateCourseUrl(provider, courseId) {
-        return 'https://mammooc-dev.herokuapp.com/courses/' + provider + '~' + courseId;
+        return 'https://mammooc.org/courses/' + provider + '~' + courseId;
     }
 
     _generateEvaluationUrl(provider, courseId, perPage, page) {
-        return 'https://mammooc-dev.herokuapp.com/evaluations/export_course_evaluations?provider=' + provider + '&course_id=' + courseId + '&page=' + page + '&per_page=' + perPage;
+        return 'https://mammooc.org/evaluations/export_course_evaluations?provider=' + provider + '&course_id=' + courseId + '&page=' + page + '&per_page=' + perPage;
     }
 
     _loadMoreData() {
