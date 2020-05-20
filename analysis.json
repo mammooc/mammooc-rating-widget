@@ -2,138 +2,56 @@
   "schema_version": "1.0.0",
   "elements": [
     {
-      "description": "An element providing an overall rating.\n\nExample:\n\n    <mammooc-cumulative-rating></mammooc-cumulative-rating>",
+      "description": "## `mammooc-course-evaluation`\n\nAn element providing course ratings.",
       "summary": "",
-      "path": "src/mammooc-cumulative-rating.js",
+      "path": "src/elements/mammooc-course-evaluation.js",
       "properties": [
         {
-          "name": "cumulativeRating",
-          "type": "number",
-          "description": "The average rating for the course",
+          "name": "language",
+          "type": "string | null | undefined",
+          "description": "The language to use for display",
           "privacy": "public",
           "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
             "start": {
-              "line": 56,
+              "line": 17,
               "column": 12
             },
             "end": {
-              "line": 58,
+              "line": 35,
               "column": 13
             }
           },
           "metadata": {
             "polymer": {
-              "attributeType": "Number"
+              "attributeType": "String"
             }
-          }
+          },
+          "inheritedFrom": "MammoocLocalizeMixin"
         },
         {
-          "name": "ratingCount",
-          "type": "number",
-          "description": "The number of ratings for the course",
+          "name": "resources",
+          "type": "Object | null | undefined",
+          "description": "A dictionary containing the translations for various languages",
           "privacy": "public",
           "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
             "start": {
-              "line": 64,
+              "line": 37,
               "column": 12
             },
             "end": {
-              "line": 66,
+              "line": 111,
               "column": 13
             }
           },
           "metadata": {
             "polymer": {
-              "attributeType": "Number"
-            }
-          }
-        }
-      ],
-      "methods": [
-        {
-          "name": "ready",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 74,
-              "column": 4
-            },
-            "end": {
-              "line": 76,
-              "column": 5
+              "attributeType": "Object"
             }
           },
-          "metadata": {},
-          "params": [],
-          "return": {
-            "type": "void"
-          }
-        }
-      ],
-      "staticMethods": [],
-      "demos": [],
-      "metadata": {},
-      "sourceRange": {
-        "start": {
-          "line": 20,
-          "column": 0
+          "inheritedFrom": "MammoocLocalizeMixin"
         },
-        "end": {
-          "line": 77,
-          "column": 1
-        }
-      },
-      "privacy": "public",
-      "superclass": "HTMLElement",
-      "name": "MammoocCumulativeRating",
-      "attributes": [
-        {
-          "name": "cumulative-rating",
-          "description": "The average rating for the course",
-          "sourceRange": {
-            "start": {
-              "line": 56,
-              "column": 12
-            },
-            "end": {
-              "line": 58,
-              "column": 13
-            }
-          },
-          "metadata": {},
-          "type": "number"
-        },
-        {
-          "name": "rating-count",
-          "description": "The number of ratings for the course",
-          "sourceRange": {
-            "start": {
-              "line": 64,
-              "column": 12
-            },
-            "end": {
-              "line": 66,
-              "column": 13
-            }
-          },
-          "metadata": {},
-          "type": "number"
-        }
-      ],
-      "events": [],
-      "styling": {
-        "cssVariables": [],
-        "selectors": []
-      },
-      "slots": [],
-      "tagname": "mammooc-cumulative-rating"
-    },
-    {
-      "description": "An element providing course ratings.\n\nExample:\n\n    <mammooc-course-evaluation></mammooc-course-evaluation>",
-      "summary": "",
-      "path": "src/mammooc-course-evaluation.js",
-      "properties": [
         {
           "name": "_evaluations",
           "type": "Object | null | undefined",
@@ -141,11 +59,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 140,
+              "line": 146,
               "column": 12
             },
             "end": {
-              "line": 143,
+              "line": 149,
               "column": 13
             }
           },
@@ -158,16 +76,16 @@
         },
         {
           "name": "provider",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "The provider of the course, e.g. \"openHPI\"",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 149,
+              "line": 151,
               "column": 12
             },
             "end": {
-              "line": 151,
+              "line": 153,
               "column": 13
             }
           },
@@ -179,16 +97,16 @@
         },
         {
           "name": "courseId",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "The ID of the course in the provider's system",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 157,
+              "line": 155,
               "column": 12
             },
             "end": {
-              "line": 159,
+              "line": 157,
               "column": 13
             }
           },
@@ -205,11 +123,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 164,
+              "line": 159,
               "column": 12
             },
             "end": {
-              "line": 166,
+              "line": 161,
               "column": 13
             }
           },
@@ -221,16 +139,16 @@
         },
         {
           "name": "ratingCount",
-          "type": "number",
+          "type": "number | null | undefined",
           "description": "The number of ratings in general",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 172,
+              "line": 163,
               "column": 12
             },
             "end": {
-              "line": 174,
+              "line": 165,
               "column": 13
             }
           },
@@ -241,17 +159,39 @@
           }
         },
         {
+          "name": "hideEmptyEvaluations",
+          "type": "boolean | null | undefined",
+          "description": "Whether to hide evaluations without a written review in the list or not",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 167,
+              "column": 12
+            },
+            "end": {
+              "line": 170,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
           "name": "_page",
           "type": "number | null | undefined",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 176,
+              "line": 171,
               "column": 12
             },
             "end": {
-              "line": 179,
+              "line": 174,
               "column": 13
             }
           },
@@ -269,11 +209,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 181,
+              "line": 175,
               "column": 12
             },
             "end": {
-              "line": 184,
+              "line": 178,
               "column": 13
             }
           },
@@ -287,36 +227,16 @@
       ],
       "methods": [
         {
-          "name": "ready",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 192,
-              "column": 4
-            },
-            "end": {
-              "line": 194,
-              "column": 5
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "return": {
-            "type": "void"
-          }
-        },
-        {
           "name": "_generateCourseUrl",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 196,
+              "line": 186,
               "column": 4
             },
             "end": {
-              "line": 198,
+              "line": 188,
               "column": 5
             }
           },
@@ -336,11 +256,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 200,
+              "line": 190,
               "column": 4
             },
             "end": {
-              "line": 202,
+              "line": 192,
               "column": 5
             }
           },
@@ -366,11 +286,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 204,
+              "line": 194,
               "column": 4
             },
             "end": {
-              "line": 210,
+              "line": 200,
               "column": 5
             }
           },
@@ -386,11 +306,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 212,
+              "line": 202,
               "column": 4
             },
             "end": {
-              "line": 224,
+              "line": 214,
               "column": 5
             }
           },
@@ -410,11 +330,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 226,
+              "line": 216,
               "column": 4
             },
             "end": {
-              "line": 232,
+              "line": 222,
               "column": 5
             }
           },
@@ -434,11 +354,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 234,
+              "line": 224,
               "column": 4
             },
             "end": {
-              "line": 244,
+              "line": 234,
               "column": 5
             }
           },
@@ -448,18 +368,44 @@
               "name": "text"
             }
           ]
+        },
+        {
+          "name": "_showEvaluation",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 236,
+              "column": 4
+            },
+            "end": {
+              "line": 238,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "evaluation"
+            }
+          ]
         }
       ],
       "staticMethods": [],
-      "demos": [],
+      "demos": [
+        {
+          "url": "demo/mammooc-course-evaluation.html",
+          "description": ""
+        }
+      ],
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 22,
+          "line": 20,
           "column": 0
         },
         "end": {
-          "line": 245,
+          "line": 239,
           "column": 1
         }
       },
@@ -468,47 +414,83 @@
       "name": "MammoocCourseEvaluation",
       "attributes": [
         {
-          "name": "provider",
-          "description": "The provider of the course, e.g. \"openHPI\"",
+          "name": "language",
+          "description": "The language to use for display",
           "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
             "start": {
-              "line": 149,
+              "line": 17,
               "column": 12
             },
             "end": {
-              "line": 151,
+              "line": 35,
               "column": 13
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined",
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
+          "name": "resources",
+          "description": "A dictionary containing the translations for various languages",
+          "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
+            "start": {
+              "line": 37,
+              "column": 12
+            },
+            "end": {
+              "line": 111,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "Object | null | undefined",
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
+          "name": "provider",
+          "description": "The provider of the course, e.g. \"openHPI\"",
+          "sourceRange": {
+            "start": {
+              "line": 151,
+              "column": 12
+            },
+            "end": {
+              "line": 153,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
         },
         {
           "name": "course-id",
           "description": "The ID of the course in the provider's system",
           "sourceRange": {
             "start": {
-              "line": 157,
+              "line": 155,
               "column": 12
             },
             "end": {
-              "line": 159,
+              "line": 157,
               "column": 13
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "per-page",
           "description": "The number of items shown per page",
           "sourceRange": {
             "start": {
-              "line": 164,
+              "line": 159,
               "column": 12
             },
             "end": {
-              "line": 166,
+              "line": 161,
               "column": 13
             }
           },
@@ -520,16 +502,32 @@
           "description": "The number of ratings in general",
           "sourceRange": {
             "start": {
-              "line": 172,
+              "line": 163,
               "column": 12
             },
             "end": {
-              "line": 174,
+              "line": 165,
               "column": 13
             }
           },
           "metadata": {},
-          "type": "number"
+          "type": "number | null | undefined"
+        },
+        {
+          "name": "hide-empty-evaluations",
+          "description": "Whether to hide evaluations without a written review in the list or not",
+          "sourceRange": {
+            "start": {
+              "line": 167,
+              "column": 12
+            },
+            "end": {
+              "line": 170,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
         }
       ],
       "events": [],
@@ -538,25 +536,74 @@
         "selectors": []
       },
       "slots": [],
-      "tagname": "mammooc-course-evaluation"
+      "tagname": "mammooc-course-evaluation",
+      "mixins": [
+        "MammoocLocalizeMixin"
+      ]
     },
     {
-      "description": "An element providing a form for the evaluation of a course.\n\nExample:\n\n    <mammooc-course-evaluation-form></mammooc-course-evaluation-form>",
+      "description": "## `mammooc-course-evaluation-form`\n\nAn element providing a form for the evaluation of a course.",
       "summary": "",
-      "path": "src/mammooc-course-evaluation-form.js",
+      "path": "src/elements/mammooc-course-evaluation-form.js",
       "properties": [
         {
+          "name": "language",
+          "type": "string | null | undefined",
+          "description": "The language to use for display",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
+            "start": {
+              "line": 17,
+              "column": 12
+            },
+            "end": {
+              "line": 35,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          },
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
+          "name": "resources",
+          "type": "Object | null | undefined",
+          "description": "A dictionary containing the translations for various languages",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
+            "start": {
+              "line": 37,
+              "column": 12
+            },
+            "end": {
+              "line": 111,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Object"
+            }
+          },
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
           "name": "provider",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "The provider of the course, e.g. \"openHPI\"",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 128,
+              "line": 121,
               "column": 12
             },
             "end": {
-              "line": 130,
+              "line": 123,
               "column": 13
             }
           },
@@ -568,16 +615,16 @@
         },
         {
           "name": "courseId",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "The ID of the course in the provider's system",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 136,
+              "line": 125,
               "column": 12
             },
             "end": {
-              "line": 138,
+              "line": 127,
               "column": 13
             }
           },
@@ -589,16 +636,16 @@
         },
         {
           "name": "loggedIn",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "A boolean stating whether the user is logged in on mammooc",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 144,
+              "line": 129,
               "column": 12
             },
             "end": {
-              "line": 148,
+              "line": 133,
               "column": 13
             }
           },
@@ -617,11 +664,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 150,
+              "line": 134,
               "column": 12
             },
             "end": {
-              "line": 153,
+              "line": 137,
               "column": 13
             }
           },
@@ -635,16 +682,16 @@
       ],
       "methods": [
         {
-          "name": "ready",
+          "name": "connectedCallback",
           "description": "",
-          "privacy": "protected",
+          "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 162,
+              "line": 146,
               "column": 4
             },
             "end": {
-              "line": 173,
+              "line": 157,
               "column": 5
             }
           },
@@ -660,11 +707,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 175,
+              "line": 159,
               "column": 4
             },
             "end": {
-              "line": 178,
+              "line": 166,
               "column": 5
             }
           },
@@ -680,11 +727,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 180,
+              "line": 168,
               "column": 4
             },
             "end": {
-              "line": 185,
+              "line": 173,
               "column": 5
             }
           },
@@ -700,11 +747,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 187,
+              "line": 175,
               "column": 4
             },
             "end": {
-              "line": 192,
+              "line": 180,
               "column": 5
             }
           },
@@ -720,11 +767,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 194,
+              "line": 182,
               "column": 4
             },
             "end": {
-              "line": 212,
+              "line": 200,
               "column": 5
             }
           },
@@ -737,11 +784,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 214,
+              "line": 202,
               "column": 4
             },
             "end": {
-              "line": 238,
+              "line": 224,
               "column": 5
             }
           },
@@ -757,11 +804,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 240,
+              "line": 226,
               "column": 4
             },
             "end": {
-              "line": 242,
+              "line": 228,
               "column": 5
             }
           },
@@ -781,11 +828,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 244,
+              "line": 230,
               "column": 4
             },
             "end": {
-              "line": 261,
+              "line": 247,
               "column": 5
             }
           },
@@ -801,15 +848,20 @@
         }
       ],
       "staticMethods": [],
-      "demos": [],
+      "demos": [
+        {
+          "url": "demo/mammooc-course-evaluation-form.html",
+          "description": ""
+        }
+      ],
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 29,
+          "line": 26,
           "column": 0
         },
         "end": {
-          "line": 262,
+          "line": 248,
           "column": 1
         }
       },
@@ -818,52 +870,88 @@
       "name": "MammoocCourseEvaluationForm",
       "attributes": [
         {
-          "name": "provider",
-          "description": "The provider of the course, e.g. \"openHPI\"",
+          "name": "language",
+          "description": "The language to use for display",
           "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
             "start": {
-              "line": 128,
+              "line": 17,
               "column": 12
             },
             "end": {
-              "line": 130,
+              "line": 35,
               "column": 13
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined",
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
+          "name": "resources",
+          "description": "A dictionary containing the translations for various languages",
+          "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
+            "start": {
+              "line": 37,
+              "column": 12
+            },
+            "end": {
+              "line": 111,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "Object | null | undefined",
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
+          "name": "provider",
+          "description": "The provider of the course, e.g. \"openHPI\"",
+          "sourceRange": {
+            "start": {
+              "line": 121,
+              "column": 12
+            },
+            "end": {
+              "line": 123,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
         },
         {
           "name": "course-id",
           "description": "The ID of the course in the provider's system",
           "sourceRange": {
             "start": {
-              "line": 136,
+              "line": 125,
               "column": 12
             },
             "end": {
-              "line": 138,
+              "line": 127,
               "column": 13
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "logged-in",
           "description": "A boolean stating whether the user is logged in on mammooc",
           "sourceRange": {
             "start": {
-              "line": 144,
+              "line": 129,
               "column": 12
             },
             "end": {
-              "line": 148,
+              "line": 133,
               "column": 13
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         }
       ],
       "events": [],
@@ -872,25 +960,271 @@
         "selectors": []
       },
       "slots": [],
-      "tagname": "mammooc-course-evaluation-form"
+      "tagname": "mammooc-course-evaluation-form",
+      "mixins": [
+        "MammoocLocalizeMixin"
+      ]
     },
     {
-      "description": "An element providing a rating widget for [mammooc.org](https://mammooc.org/), the platform for managing and evaluating MOOCs.\n\nExample:\n\n    <mammooc-rating-widget provider=\"openHPI\" course-id=\"2\">\n    </mammooc-rating-widget>\n\nThe element consists of three smaller elements: one displaying the overall rating by other users, one displaying detailed evaluations by other users, and one form allowing the user to submit an evaluation for the course.\n\nAll of these can be disabled with the attributes `disable-rating`, `disable-evaluations` and `disable-evaluation-form`.\n\n### Styling\n\n`<mammooc-rating-widget>` provides the following custom properties and mixins\nfor styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--mammooc-rating-widget-primary-color` | The primary color used for filled stars and highlights | #ffac33\n`--mammooc-rating-widget-secondary-color` | The secondary color used for unfilled stars and secondary text | #ccd6dd\n`--mammooc-rating-widget-background-color` | Background color of the entire widget | #fff",
+      "description": "## `mammooc-cumulative-rating`\n\nAn element providing an overall rating.",
       "summary": "",
-      "path": "src/mammooc-rating-widget.js",
+      "path": "src/elements/mammooc-cumulative-rating.js",
       "properties": [
         {
+          "name": "language",
+          "type": "string | null | undefined",
+          "description": "The language to use for display",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
+            "start": {
+              "line": 17,
+              "column": 12
+            },
+            "end": {
+              "line": 35,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          },
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
+          "name": "resources",
+          "type": "Object | null | undefined",
+          "description": "A dictionary containing the translations for various languages",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
+            "start": {
+              "line": 37,
+              "column": 12
+            },
+            "end": {
+              "line": 111,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Object"
+            }
+          },
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
+          "name": "cumulativeRating",
+          "type": "number | null | undefined",
+          "description": "The average rating for the course",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 46,
+              "column": 12
+            },
+            "end": {
+              "line": 48,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Number"
+            }
+          }
+        },
+        {
+          "name": "ratingCount",
+          "type": "number | null | undefined",
+          "description": "The number of ratings for the course",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 50,
+              "column": 12
+            },
+            "end": {
+              "line": 52,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Number"
+            }
+          }
+        }
+      ],
+      "methods": [],
+      "staticMethods": [],
+      "demos": [
+        {
+          "url": "demo/mammooc-cumulative-rating.html",
+          "description": ""
+        }
+      ],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 16,
+          "column": 0
+        },
+        "end": {
+          "line": 59,
+          "column": 1
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "MammoocCumulativeRating",
+      "attributes": [
+        {
+          "name": "language",
+          "description": "The language to use for display",
+          "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
+            "start": {
+              "line": 17,
+              "column": 12
+            },
+            "end": {
+              "line": 35,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined",
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
+          "name": "resources",
+          "description": "A dictionary containing the translations for various languages",
+          "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
+            "start": {
+              "line": 37,
+              "column": 12
+            },
+            "end": {
+              "line": 111,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "Object | null | undefined",
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
+          "name": "cumulative-rating",
+          "description": "The average rating for the course",
+          "sourceRange": {
+            "start": {
+              "line": 46,
+              "column": 12
+            },
+            "end": {
+              "line": 48,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "number | null | undefined"
+        },
+        {
+          "name": "rating-count",
+          "description": "The number of ratings for the course",
+          "sourceRange": {
+            "start": {
+              "line": 50,
+              "column": 12
+            },
+            "end": {
+              "line": 52,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "number | null | undefined"
+        }
+      ],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "mammooc-cumulative-rating",
+      "mixins": [
+        "MammoocLocalizeMixin"
+      ]
+    },
+    {
+      "description": "## `<mammooc-rating-widget>`\n\nAn element providing a rating widget for [mammooc.org](https://mammooc.org/), the platform for managing and evaluating MOOCs.\n\n### Example:\n\n``` html\n  <mammooc-rating-widget provider=\"openHPI\" course-id=\"2\">\n  </mammooc-rating-widget>\n```\n\nThe element consists of three smaller elements: one displaying the overall rating by other users, one displaying detailed evaluations by other users, and one form allowing the user to submit an evaluation for the course.\n\nAll of these can be disabled with the attributes `disable-rating`, `disable-evaluations` and `disable-evaluation-form`.\n\n### Styling\n\n`<mammooc-rating-widget>` provides the following custom properties and mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--mammooc-rating-widget-primary-color` | The primary color used for filled stars and highlights | #ffac33\n`--mammooc-rating-widget-secondary-color` | The secondary color used for unfilled stars and secondary text | #ccd6dd\n`--mammooc-rating-widget-background-color` | Background color of the entire widget | #fff",
+      "summary": "",
+      "path": "src/elements/mammooc-rating-widget.js",
+      "properties": [
+        {
+          "name": "language",
+          "type": "string | null | undefined",
+          "description": "The language to use for display",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
+            "start": {
+              "line": 17,
+              "column": 12
+            },
+            "end": {
+              "line": 35,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          },
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
+          "name": "resources",
+          "type": "Object | null | undefined",
+          "description": "A dictionary containing the translations for various languages",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
+            "start": {
+              "line": 37,
+              "column": 12
+            },
+            "end": {
+              "line": 111,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Object"
+            }
+          },
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
           "name": "provider",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "The provider of the course, e.g. \"openHPI\"",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 123,
+              "line": 121,
               "column": 12
             },
             "end": {
-              "line": 125,
+              "line": 123,
               "column": 13
             }
           },
@@ -902,16 +1236,16 @@
         },
         {
           "name": "courseId",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "The ID of the course in the provider's system",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 131,
+              "line": 125,
               "column": 12
             },
             "end": {
-              "line": 133,
+              "line": 127,
               "column": 13
             }
           },
@@ -923,8 +1257,52 @@
         },
         {
           "name": "disableEvaluationForm",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Disable the form allowing a user to submit an evaluation for the course",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 129,
+              "column": 12
+            },
+            "end": {
+              "line": 132,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "disableEvaluations",
+          "type": "boolean | null | undefined",
+          "description": "Disable the component showing the detailed evaluations by other users",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 134,
+              "column": 12
+            },
+            "end": {
+              "line": 137,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "disableRating",
+          "type": "boolean | null | undefined",
+          "description": "Disable the component showing the overall rating by other users",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -944,39 +1322,17 @@
           "defaultValue": "false"
         },
         {
-          "name": "disableEvaluations",
-          "type": "boolean",
-          "description": "Disable the component showing the detailed evaluations by other users",
+          "name": "hideEmptyEvaluations",
+          "type": "boolean | null | undefined",
+          "description": "Whether to hide evaluations without a written review in the list or not",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 148,
+              "line": 144,
               "column": 12
             },
             "end": {
-              "line": 151,
-              "column": 13
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "attributeType": "Boolean"
-            }
-          },
-          "defaultValue": "false"
-        },
-        {
-          "name": "disableRating",
-          "type": "boolean",
-          "description": "Disable the component showing the overall rating by other users",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 157,
-              "column": 12
-            },
-            "end": {
-              "line": 160,
+              "line": 147,
               "column": 13
             }
           },
@@ -994,11 +1350,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 162,
+              "line": 148,
               "column": 12
             },
             "end": {
-              "line": 162,
+              "line": 148,
               "column": 37
             }
           },
@@ -1015,11 +1371,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 163,
+              "line": 149,
               "column": 12
             },
             "end": {
-              "line": 166,
+              "line": 152,
               "column": 13
             }
           },
@@ -1037,11 +1393,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 168,
+              "line": 153,
               "column": 12
             },
             "end": {
-              "line": 170,
+              "line": 155,
               "column": 13
             }
           },
@@ -1059,11 +1415,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 179,
+              "line": 163,
               "column": 4
             },
             "end": {
-              "line": 181,
+              "line": 165,
               "column": 5
             }
           },
@@ -1079,11 +1435,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 183,
+              "line": 167,
               "column": 4
             },
             "end": {
-              "line": 185,
+              "line": 169,
               "column": 5
             }
           },
@@ -1099,11 +1455,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 187,
+              "line": 171,
               "column": 4
             },
             "end": {
-              "line": 189,
+              "line": 173,
               "column": 5
             }
           },
@@ -1123,11 +1479,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 191,
+              "line": 175,
               "column": 4
             },
             "end": {
-              "line": 198,
+              "line": 180,
               "column": 5
             }
           },
@@ -1145,18 +1501,18 @@
       "staticMethods": [],
       "demos": [
         {
-          "url": "demo/index.html",
+          "url": "demo/mammooc-rating-widget/index.html",
           "description": ""
         }
       ],
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 44,
+          "line": 43,
           "column": 0
         },
         "end": {
-          "line": 199,
+          "line": 181,
           "column": 1
         }
       },
@@ -1165,40 +1521,108 @@
       "name": "MammoocRatingWidget",
       "attributes": [
         {
-          "name": "provider",
-          "description": "The provider of the course, e.g. \"openHPI\"",
+          "name": "language",
+          "description": "The language to use for display",
           "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
             "start": {
-              "line": 123,
+              "line": 17,
               "column": 12
             },
             "end": {
-              "line": 125,
+              "line": 35,
               "column": 13
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined",
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
+          "name": "resources",
+          "description": "A dictionary containing the translations for various languages",
+          "sourceRange": {
+            "file": "../mixins/mammooc-localize-mixin.js",
+            "start": {
+              "line": 37,
+              "column": 12
+            },
+            "end": {
+              "line": 111,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "Object | null | undefined",
+          "inheritedFrom": "MammoocLocalizeMixin"
+        },
+        {
+          "name": "provider",
+          "description": "The provider of the course, e.g. \"openHPI\"",
+          "sourceRange": {
+            "start": {
+              "line": 121,
+              "column": 12
+            },
+            "end": {
+              "line": 123,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
         },
         {
           "name": "course-id",
           "description": "The ID of the course in the provider's system",
           "sourceRange": {
             "start": {
-              "line": 131,
+              "line": 125,
               "column": 12
             },
             "end": {
-              "line": 133,
+              "line": 127,
               "column": 13
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "disable-evaluation-form",
           "description": "Disable the form allowing a user to submit an evaluation for the course",
+          "sourceRange": {
+            "start": {
+              "line": 129,
+              "column": 12
+            },
+            "end": {
+              "line": 132,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "disable-evaluations",
+          "description": "Disable the component showing the detailed evaluations by other users",
+          "sourceRange": {
+            "start": {
+              "line": 134,
+              "column": 12
+            },
+            "end": {
+              "line": 137,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "disable-rating",
+          "description": "Disable the component showing the overall rating by other users",
           "sourceRange": {
             "start": {
               "line": 139,
@@ -1210,39 +1634,23 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
-          "name": "disable-evaluations",
-          "description": "Disable the component showing the detailed evaluations by other users",
+          "name": "hide-empty-evaluations",
+          "description": "Whether to hide evaluations without a written review in the list or not",
           "sourceRange": {
             "start": {
-              "line": 148,
+              "line": 144,
               "column": 12
             },
             "end": {
-              "line": 151,
+              "line": 147,
               "column": 13
             }
           },
           "metadata": {},
-          "type": "boolean"
-        },
-        {
-          "name": "disable-rating",
-          "description": "Disable the component showing the overall rating by other users",
-          "sourceRange": {
-            "start": {
-              "line": 157,
-              "column": 12
-            },
-            "end": {
-              "line": 160,
-              "column": 13
-            }
-          },
-          "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         }
       ],
       "events": [],
@@ -1251,31 +1659,117 @@
         "selectors": []
       },
       "slots": [],
-      "tagname": "mammooc-rating-widget"
+      "tagname": "mammooc-rating-widget",
+      "mixins": [
+        "MammoocLocalizeMixin"
+      ]
     }
   ],
-  "classes": [
+  "mixins": [
     {
-      "description": "",
+      "description": "Mixin that acts as base class for all mammooc elements to provide localization",
       "summary": "",
-      "path": "src/mammooc-localize-behavior.js",
-      "properties": [],
+      "path": "src/mixins/mammooc-localize-mixin.js",
+      "properties": [
+        {
+          "name": "language",
+          "type": "string | null | undefined",
+          "description": "The language to use for display",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 17,
+              "column": 12
+            },
+            "end": {
+              "line": 35,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "resources",
+          "type": "Object | null | undefined",
+          "description": "A dictionary containing the translations for various languages",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 37,
+              "column": 12
+            },
+            "end": {
+              "line": 111,
+              "column": 13
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Object"
+            }
+          }
+        }
+      ],
       "methods": [],
       "staticMethods": [],
       "demos": [],
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 3,
-          "column": 0
+          "line": 11,
+          "column": 7
         },
         "end": {
-          "line": 103,
-          "column": 1
+          "line": 114,
+          "column": 2
         }
       },
       "privacy": "public",
-      "name": "MammoocLocalizeBehaviorImpl"
+      "name": "MammoocLocalizeMixin",
+      "attributes": [
+        {
+          "name": "language",
+          "description": "The language to use for display",
+          "sourceRange": {
+            "start": {
+              "line": 17,
+              "column": 12
+            },
+            "end": {
+              "line": 35,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "resources",
+          "description": "A dictionary containing the translations for various languages",
+          "sourceRange": {
+            "start": {
+              "line": 37,
+              "column": 12
+            },
+            "end": {
+              "line": 111,
+              "column": 13
+            }
+          },
+          "metadata": {},
+          "type": "Object | null | undefined"
+        }
+      ],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": []
     }
   ]
 }

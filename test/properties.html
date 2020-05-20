@@ -1,42 +1,54 @@
 <!doctype html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
+    <meta content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" name="viewport">
+
+    <title>properties test</title>
+
     <script src="../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../../wct-browser-legacy/browser.js"></script>
-    <!-- import the element to test -->
-    <script type="module" src="../src/mammooc-rating-widget.js"></script>
-  </head>
-  <body>
-      <test-fixture id="values">
-        <template>
-          <mammooc-rating-widget provider="test-provider" course-id="42" disable-rating disable-evaluations disable-evaluation-form>
-          </mammooc-rating-widget>
-        </template>
-      </test-fixture>
-    <script type="module">
-      import '../src/mammooc-rating-widget.js';
-      suite('<mammooc-rating-widget>', function() {
+    <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+    <script src="../../@polymer/iron-test-helpers/mock-interactions.js" type="module"></script>
+
+    <script src="../src/all-imports.js" type="module"></script>
+</head>
+<body>
+<test-fixture id="values">
+    <template>
+        <mammooc-rating-widget course-id="42" disable-evaluation-form disable-evaluations disable-rating provider="test-provider">
+        </mammooc-rating-widget>
+    </template>
+</test-fixture>
+<script type="module">
+    suite('<mammooc-rating-widget>', function () {
         let valuesFixture;
-        setup(function() {
-          valuesFixture = fixture('values');
+        setup(function () {
+            valuesFixture = fixture('values');
         });
-        test('defines the "provider" property', function() {
-          assert.equal(valuesFixture.provider, 'test-provider');
+
+        test('defines the "provider" property', function () {
+            assert.equal(valuesFixture.provider, 'test-provider');
         });
-        test('defines the "courseId" property', function() {
-          assert.equal(valuesFixture.courseId, '42');
+
+        test('defines the "courseId" property', function () {
+            assert.equal(valuesFixture.courseId, '42');
         });
-        test('defines the "disableRating" property', function() {
-          assert.equal(valuesFixture.disableRating, true);
+
+        test('defines the "disableRating" property', function () {
+            assert.equal(valuesFixture.disableRating, true);
         });
-        test('defines the "disableEvaluations" property', function() {
-          assert.equal(valuesFixture.disableEvaluations, true);
+
+        test('defines the "disableEvaluations" property', function () {
+            assert.equal(valuesFixture.disableEvaluations, true);
         });
-        test('defines the "disableEvaluationForm" property', function() {
-          assert.equal(valuesFixture.disableEvaluationForm, true);
+
+        test('defines the "disableEvaluationForm" property', function () {
+            assert.equal(valuesFixture.disableEvaluationForm, true);
         });
-      });
-    </script>
-  </body>
+    });
+</script>
+</body>
 </html>
