@@ -1,44 +1,54 @@
 <!doctype html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
+    <meta content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" name="viewport">
+
+    <title>form test</title>
+
     <script src="../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../../wct-browser-legacy/browser.js"></script>
-    <!-- import the element to test -->
-    <script type="module" src="../src/mammooc-rating-widget.js"></script>
-  </head>
-  <body>
-      <test-fixture id="values">
-        <template>
-          <mammooc-rating-widget provider="test-provider" course-id="42">
-          </mammooc-rating-widget>
-        </template>
-      </test-fixture>
-    <script type="module">
-      import '../src/mammooc-rating-widget.js';
-      suite('<mammooc-rating-widget>', function() {
+    <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+    <script src="../../@polymer/iron-test-helpers/mock-interactions.js" type="module"></script>
+
+    <script src="../src/all-imports.js" type="module"></script>
+</head>
+<body>
+<test-fixture id="values">
+    <template>
+        <mammooc-rating-widget course-id="42" provider="test-provider">
+        </mammooc-rating-widget>
+    </template>
+</test-fixture>
+
+<script type="module">
+    suite('<mammooc-rating-widget>', function () {
         let valuesFixture;
         let server;
         let responseHeaders = {
-          json: { 'Content-Type': 'application/json' }
+            json: { 'Content-Type': 'application/json' }
         };
-        setup(function() {
-          valuesFixture = fixture('values');
+        setup(function () {
+            valuesFixture = fixture('values');
 
-          server = sinon.fakeServer.create();
-          server.respondWith(
-            'POST',
-            /\/form\/handler.*/, [
-              200,
-              responseHeaders.json,
-              '{"success":true}'
-            ]
-          );
+            server = sinon.fakeServer.create();
+            server.respondWith(
+                'POST',
+                /\/form\/handler.*/, [
+                    200,
+                    responseHeaders.json,
+                    '{"success":true}'
+                ]
+            );
 
         });
-        teardown(function() {
-          server.restore();
+
+        teardown(function () {
+            server.restore();
         });
+
         /*test('submitting the form sends the correct data', function(done) {
           flush(function() {
             // Set form data
@@ -68,7 +78,7 @@
             server.respond();
           });
         });*/
-      });
-    </script>
-  </body>
+    });
+</script>
+</body>
 </html>

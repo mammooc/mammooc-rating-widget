@@ -1,71 +1,67 @@
-
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
-import '@polymer/polymer/lib/elements/dom-if.js';
-import { flush } from '@polymer/polymer/lib/utils/flush.js';
-import '@webcomponents/shadycss/entrypoints/apply-shim.js';
-import 'flexible-rating/flexible-rating.js';
 import '@polymer/iron-form/iron-form.js';
-import '@polymer/paper-styles/typography.js';
-import '@polymer/paper-input/paper-textarea.js';
+import '@polymer/iron-jsonp-library/iron-jsonp-library.js';
 import '@polymer/paper-button/paper-button.js';
+import '@polymer/paper-checkbox/paper-checkbox.js';
+import '@polymer/paper-input/paper-textarea.js';
 import '@polymer/paper-radio-button/paper-radio-button.js';
 import '@polymer/paper-radio-group/paper-radio-group.js';
-import '@polymer/paper-checkbox/paper-checkbox.js';
+import '@polymer/paper-styles/typography.js';
 import '@polymer/paper-toast/paper-toast.js';
-import { IronJsonpLibraryBehavior } from '@polymer/iron-jsonp-library/iron-jsonp-library.js';
-import { MammoocLocalizeBehavior } from './mammooc-localize-behavior.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
+import '@polymer/polymer/lib/elements/custom-style.js';
+import '@polymer/polymer/lib/elements/dom-if.js';
+import 'flexible-rating/flexible-rating.js';
+import { MammoocLocalizeMixin } from '../mixins/mammooc-localize-mixin.js';
+import { PolymerElement, html } from '@polymer/polymer';
+import { flush } from '@polymer/polymer/lib/utils/flush.js';
 
 /**
-An element providing a form for the evaluation of a course.
-
-Example:
-
-    <mammooc-course-evaluation-form></mammooc-course-evaluation-form>
-
-@element mammooc-course-evaluation-form
-*/
-class MammoocCourseEvaluationForm extends mixinBehaviors([
-    MammoocLocalizeBehavior,
-    IronJsonpLibraryBehavior
-], PolymerElement) {
+ * ## `mammooc-course-evaluation-form`
+ *
+ * An element providing a form for the evaluation of a course.
+ *
+ * @polymer
+ * @customElement
+ * @appliesMixin MammoocLocalizeMixin
+ * @demo demo/mammooc-course-evaluation-form.html
+ */
+class MammoocCourseEvaluationForm extends MammoocLocalizeMixin(PolymerElement) {
     static get template() {
         return html`
-        <style>
-            :host {
-                    --iron-icon-height: 40px;
-                    --iron-icon-width: 40px;
-                    --primary-color: var(--mammooc-rating-widget-primary-color, #ffac33);
-            }
-
-            .heading {
-                @apply --paper-font-headline;
-            }
-
-            .submit-button {
-                float: right;
-            }
-
-            #form img {
-                float: left;
-                width: 80px;
-                height: 80px;
-                border-radius: 50%;
-                margin-right: 5px;
-                border: 1px solid var(--mammooc-rating-widget-secondary-color, #9999);
-            }
-
-            #form .description {
-                overflow: auto;
-            }
-        </style>
+        <custom-style> <!-- custom-style tag is required as Polyfill for otherwise unsupported browsers, such as IE 11 -->
+            <style include="paper-material-styles">
+                :host {
+                        --iron-icon-height: 40px;
+                        --iron-icon-width: 40px;
+                        --primary-color: var(--mammooc-rating-widget-primary-color, #ffac33);
+                }
+    
+                .heading {
+                    @apply --paper-font-headline;
+                }
+    
+                .submit-button {
+                    float: right;
+                }
+    
+                #form img {
+                    float: left;
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                    margin-right: 5px;
+                    border: 1px solid var(--mammooc-rating-widget-secondary-color, #999);
+                }
+    
+                #form .description {
+                    overflow: auto;
+                }
+            </style>
+        </custom-style>
 
         <!-- Library for loading the data from mammooc -->
         <iron-jsonp-library id="evaluationRequest" library-url="{{_generateUrl(provider, courseId)}}" notify-event="api-load">
         </iron-jsonp-library>
-        <!-- local DOM goes here -->
+
         <div class="heading">
             {{localize("yourrating")}}
         </div>
@@ -122,32 +118,20 @@ class MammoocCourseEvaluationForm extends mixinBehaviors([
 
     static get properties() {
         return {
-          /**
-           *    The provider of the course, e.g. "openHPI"
-           *    @type {string}
-           */
+            /** The provider of the course, e.g. "openHPI" */
             provider: {
                 type: String
             },
-
-          /**
-           *   The ID of the course in the provider's system
-           *   @type {string}
-           */
+            /** The ID of the course in the provider's system */
             courseId: {
                 type: String
             },
-
-          /**
-           *   A boolean stating whether the user is logged in on mammooc
-           *   @type {boolean}
-           */
+            /** A boolean stating whether the user is logged in on mammooc */
             loggedIn: {
                 type: Boolean,
                 value: false,
                 readOnly: true
             },
-
             _tries: {
                 type: Number,
                 value: 0
@@ -160,21 +144,25 @@ class MammoocCourseEvaluationForm extends mixinBehaviors([
         ];
     }
 
-    ready() {
+    connectedCallback() {
+        super.connectedCallback();
         this.addEventListener('api-load', this._apiLoaded.bind(this));
         this.addEventListener('post-sent', this._postSent.bind(this));
-      // Every time the window gets focus, send a new request in case of changes on mammooc
-      // _tries is needed because the jsonp library won't resend if the url is the same
+        // Every time the window gets focus, send a new request in case of changes on mammooc
+        // _tries is needed because the jsonp library won't resend if the url is the same
         let that = this;
         window.onfocus = function() {
             that.$.evaluationRequest.libraryUrl = that._generateUrl(that.provider, that.courseId) + '&try=' + that._tries;
             that._tries += 1;
         };
-        super.ready();
     }
 
     _postSent() {
-        this.getRootNode().host.updateEvaluations();
+        const embeddingHost = this.getRootNode().host;
+        // If this element is embedded as part of the mammooc-rating-widget, trigger an update of listed evaluations.
+        if (embeddingHost !== undefined) {
+            embeddingHost.updateEvaluations();
+        }
         this.$.successToast.open();
     }
 
@@ -193,7 +181,7 @@ class MammoocCourseEvaluationForm extends mixinBehaviors([
     }
 
     _serializeFormData() {
-      /* eslint-disable camelcase */
+        /* eslint-disable camelcase */
         const formData = this.$.form.serializeForm();
         let newFormData = {};
 
@@ -209,7 +197,7 @@ class MammoocCourseEvaluationForm extends mixinBehaviors([
         newFormData.provider = this.provider;
 
         return newFormData;
-      /* eslint-enable camelcase */
+        /* eslint-enable camelcase */
     }
 
     _nativeSubmit() {
@@ -221,18 +209,16 @@ class MammoocCourseEvaluationForm extends mixinBehaviors([
         }
 
         if (form.validate()) {
-          // For each element the iron-form wants to submit, create a hidden
-          // input in the submission form.
+            // For each element the iron-form wants to submit, create a hidden
+            // input in the submission form.
             const serializedItems = this._serializeFormData();
 
-            for (const name in serializedItems) {
-                if (serializedItems.hasOwnProperty(name)) {
-                    let input = document.createElement('input');
-                    input.hidden = true;
-                    input.name = name;
-                    input.value = serializedItems[name];
-                    nativeForm.appendChild(input);
-                }
+            for (const name of serializedItems) {
+                let input = document.createElement('input');
+                input.hidden = true;
+                input.name = name;
+                input.value = serializedItems[name];
+                nativeForm.appendChild(input);
             }
             nativeForm.submit();
         }

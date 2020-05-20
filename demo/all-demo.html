@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" name="viewport">
+
+    <title>Build demo</title>
+
+    <script src="../build/es5/polyfills-ie.js"></script>
+    <script src="../build/es5/custom-elements-es5-adapter.js"></script>
+    <script src="../build/es5/webcomponents-bundle.js"></script>
+
+    <script>
+        // eslint-disable-next-line no-var
+        var script = document.createElement('script');
+        if (location.href.indexOf('es5') > -1) {
+            script.src = '../build/es5/mammooc-rating-widget.js';
+        } else {
+            script.src = '../build/es6/mammooc-rating-widget.js';
+        }
+        // Never import the script as an ES6 module. The integration of Plotly.js into the
+        // same bundle file prevents that as a top-level `this` is undefined inside a module
+        document.head.appendChild(script);
+    </script>
+
+    <style>
+        /* Look nice and similar to the Polymer demo pages */
+        body {
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: 14px;
+        }
+
+        pre {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+<div class="vertical-section-container centered">
+    <h1>all-imports demo for <a href="?type=es6">ES6</a> (default) or <a href="?type=es5">ES5</a></h1>
+    <div>
+        This page uses the JavaScript file located in the
+        <pre>build</pre>
+        folder. You might need to create these with
+        <pre>npm run bundle</pre>
+        first. <span id="current_es_version"></span>
+    </div>
+
+    <span>
+        Ensure you are signed in on <a href="https://mammooc-dev.herokuapp.com/">mammooc-dev on Heroku</a>. <br/>
+        <p>
+            You might use these seed credentials: <br/>
+            username: <code>max@example.com</code> <br/>
+            password: <code>12345678</code>
+        </p>
+    </span>
+
+    <h3>mammooc-cumulative-rating</h3>
+    <mammooc-cumulative-rating cumulative-rating="3.6" rating-count="1337">
+    </mammooc-cumulative-rating>
+
+
+    <h3>mammooc-course-evaluation</h3>
+    <mammooc-course-evaluation provider="open_mammooc" course-id="1" per-page="3" rating-count="9">
+    </mammooc-course-evaluation>
+
+
+    <h3>mammooc-course-evaluation-form</h3>
+    <mammooc-course-evaluation-form provider="open_mammooc" course-id="1">
+    </mammooc-course-evaluation-form>
+
+
+    <h3>mammooc-rating-widget</h3>
+
+    <h4>The default element</h4>
+    <mammooc-rating-widget course-id="1" provider="open_mammooc"></mammooc-rating-widget>
+
+    <h4>An element without the form</h4>
+    <mammooc-rating-widget course-id="1" disable-evaluation-form="" provider="open_mammooc"></mammooc-rating-widget>
+
+    <h4>An element only showing the overall rating</h4>
+    <mammooc-rating-widget course-id="1" disable-evaluation-form="" disable-evaluations="" provider="open_mammooc"></mammooc-rating-widget>
+
+    <h4>An element with custom styling</h4>
+    <custom-style> <!-- custom-style tag is required as Polyfill for otherwise unsupported browsers, such as IE 11 -->
+        <style>
+            mammooc-rating-widget.customStyling {
+                --mammooc-rating-widget-primary-color: #5F8C1C;
+                --mammooc-rating-widget-secondary-color: #999;
+                --mammooc-rating-widget-background-color: #eee;
+            }
+        </style>
+    </custom-style>
+    <mammooc-rating-widget class="customStyling" course-id="1" provider="open_mammooc"></mammooc-rating-widget>
+</div>
+
+<script>
+    // eslint-disable-next-line no-var
+    var version = document.querySelector('#current_es_version');
+    if (location.href.indexOf('es5') > -1) {
+        version.innerHTML = 'You\'re currently using <b>ES5</b> syntax.';
+    } else {
+        version.innerHTML = 'You\'re currently using <b>ES6</b> syntax.';
+    }
+</script>
+
+</body>
+
+</html>

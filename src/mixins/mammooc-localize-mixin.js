@@ -1,12 +1,23 @@
-import IntlMessageFormat from 'intl-messageformat';
 import { AppLocalizeBehavior } from '@polymer/app-localize-behavior/app-localize-behavior.js';
+import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
 
-class MammoocLocalizeBehaviorImpl {
+/**
+ * Mixin that acts as base class for all mammooc elements to provide localization
+ *
+ * @polymer
+ * @mixinFunction
+ * @param  {PolymerElement | Function} BaseClass The base class to extend.
+ * @return {Function}                            The extended base class.
+ */
+export const MammoocLocalizeMixin = (BaseClass) => class extends mixinBehaviors([
+    AppLocalizeBehavior
+], BaseClass) {
     static get properties() {
         return {
+            /** The language to use for display */
             language: {
                 type: String,
-                value () {
+                value() {
                     let lang = document.documentElement.lang || 'en';
                     const availableLanguages = ['en', 'de', 'fr', 'zh'];
 
@@ -23,10 +34,10 @@ class MammoocLocalizeBehaviorImpl {
                     return lang;
                 }
             },
-
+            /** A dictionary containing the translations for various languages */
             resources: {
                 type: Object,
-                value () {
+                value() {
                     return {
                         'en': {
                             'noevaluations': 'No evaluations yet',
@@ -101,10 +112,4 @@ class MammoocLocalizeBehaviorImpl {
             }
         };
     }
-}
-
-if (window.IntlMessageFormat === undefined) {
-    window.IntlMessageFormat = IntlMessageFormat;
-}
-
-export const MammoocLocalizeBehavior = [AppLocalizeBehavior, MammoocLocalizeBehaviorImpl];
+};
