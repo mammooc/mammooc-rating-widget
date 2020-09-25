@@ -213,11 +213,11 @@ class MammoocCourseEvaluationForm extends MammoocLocalizeMixin(PolymerElement) {
             // input in the submission form.
             const serializedItems = this._serializeFormData();
 
-            for (const name of serializedItems) {
+            for (const [name, value] of Object.entries(serializedItems)) {
                 let input = document.createElement('input');
                 input.hidden = true;
                 input.name = name;
-                input.value = serializedItems[name];
+                input.value = value;
                 nativeForm.appendChild(input);
             }
             nativeForm.submit();
