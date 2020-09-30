@@ -188,7 +188,7 @@ class MammoocCourseEvaluationForm extends MammoocLocalizeMixin(PolymerElement) {
         if (formData.description !== undefined && formData.description !== null && formData.description !== '') {
             newFormData.description = formData.description;
         }
-        newFormData.rating = formData.stars;
+        newFormData.rating = this.shadowRoot.querySelector('#stars').value;
         newFormData.rated_anonymously = formData.anonymously === 'on';
 
         newFormData.course_status = this.shadowRoot.querySelector('#status').selected;
