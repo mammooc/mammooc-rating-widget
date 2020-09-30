@@ -6,7 +6,7 @@
   },
   "homepage": "https://github.com/mammooc/mammooc-rating-widget#readme",
   "name": "mammooc-rating-widget",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "main": "src/all-imports.js",
   "bugs": {
     "url": "https://github.com/mammooc/mammooc-rating-widget/issues"
