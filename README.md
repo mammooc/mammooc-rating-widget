@@ -4,7 +4,7 @@ https://mammooc.github.io/mammooc-rating-widget/
 
 Feel free to contribute to the project!
 
-[![Build Status](https://travis-ci.org/mammooc/mammooc-rating-widget.svg?branch=master)](https://travis-ci.org/mammooc/mammooc-rating-widget)
+[![Build Status](https://travis-ci.com/mammooc/mammooc-rating-widget.svg?branch=master)](https://travis-ci.com/mammooc/mammooc-rating-widget)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/mammooc.svg)](https://saucelabs.com/u/mammooc)
 
